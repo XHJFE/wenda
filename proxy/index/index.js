@@ -1,7 +1,10 @@
 const proxy = require('../base_proxy');
 const {
     FIND_TYPE_ALL,
-    GET_PROBLEM_ASK_LIST
+    GET_PROBLEM_ASK_LIST,
+    GET_PROMBLEM_FOCUS,
+    GET_BELONGER_BY_PAGE,
+    SAVE_PROBLEM_ASK
 } = require('../base_url');
 const headers = {
     "Content-Type": "application/json;charset=UTF-8",
@@ -59,9 +62,54 @@ async function getNewQuestion(param = {}) {
     return data;
 }
 
+/**
+ * 获取关注的问题列表
+ */
+async function getPromblemFocus() {
+
+}
+
+/**
+ * 获取经纪人列表
+ * @param {Number} page 当前请求页数
+ * @param {String} name 当前搜索经纪人名称
+ */
+async function getBelongerByPage(page, name) {
+    return await proxy({
+        uri: GET_BELONGER_BY_PAGE,
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            name,
+            page,
+            pagesize: 5
+        })
+    });
+}
+
+/**
+ * 新增/编辑 提问
+ * @param {String} problemTitle 问题标题
+ * @param {String} problemContent 问题内容
+ * @param {String} questionerId 问题id
+ * @param {String} questionerName 提问人名称
+ * @param {String} problemLabelId 分类id
+ * @param {Array} listProblemInvited 邀请者列表
+ */
+async function saveProblemAsk(param) {
+    return await proxy({
+        uri: GET_BELONGER_BY_PAGE,
+        method: 'POST',
+        headers,
+        body: JSON.stringify(param)
+    });
+}
+
 
 
 module.exports = {
     getClassData,
-    getNewQuestion
+    getNewQuestion,
+    getBelongerByPage,
+    saveProblemAsk
 };

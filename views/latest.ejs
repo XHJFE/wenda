@@ -42,6 +42,8 @@
 })  %>
 <!-- 搜索栏 -->
 <% include include/search %>
+<!-- 搜索栏 -->
+<% include include/login %>
 
 <!--面包屑导航 -->
 <div class="breadcrumb">
@@ -114,11 +116,12 @@
 
           <!---热门回答---->
          <div class="remenhuida_right">
-             <p class="right_title"><span>热门</span>回答<i></i></p>
+             <!-- <%= JSON.stringify(hotQuestion) %> -->
+             <p class="right_title"><span>热门</span>问答<i></i></p>
              <div class="remenhuida_right_content">
-                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
-                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
-                 <a href="###"><span>美国热门税一般为多少？</span><i>1200个回答</i></a>                
+                 <% hotQuestion.forEach(item => { %>
+                 <a href="###"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+                 <% }) %>
              </div>
          </div>
 
@@ -126,17 +129,18 @@
             <div class="remenhuida_right">
                  <p class="right_title"><span>最新</span>回答<i></i></p>
                  <div class="remenhuida_right_content">
-                     <a href="###"><span>美国热门税一般为多少美国热门税一般为多少美国热门税一般为多少美国热门税一般为多少？</span><i>1220个回答</i></a>
-                     <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
-                     <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>                
+                    <% hotQuestion.forEach(item => { %>
+                        <a href="###"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+                    <% }) %>            
                  </div>
              </div>
     </div>
 
 </div>
+<div id="xh_kj_login"></div>
 </body>
 <script>
-    require(['pager'], function(pager) {
+    require(['pager', 'pc_login_reg'], function(pager, login) {
         var p = new pager({
             total: "<%= questionList.totalElements %>",
             pageno: Number("<%= questionList.number %>") + 1,
@@ -145,6 +149,10 @@
             useGoto: false
         });
         $('#pager').after(p.get());
+
+        login.login(function() {
+            console.log('登陆成功')
+        })
     })
     /**
      * 关注
