@@ -1,0 +1,36 @@
+
+/*工具栏样式*/
+.liulanjilvlibiao{background:#D0E1F5;}
+.liulanjilvlibiao{  pointer-events: auto; position: absolute;  top: -40px; right: 185px; background: #000; filter:alpha(opacity:70); opacity:0.7; 
+ pointer-events: auto; width:0px; overflow:hidden; transition: width 1.5s;		-moz-transition: width 1.5s; 
+-webkit-transition: width 1.5s;
+-o-transition: width 1.5s;
+transition-delay: 0.3s;
+-moz-transition-delay: 0.3s; 
+-webkit-transition-delay: 0.3s;
+-o-transition-delay: 0.3s;}
+.side ul li#yijiandaohan:hover .liulanjilvlibiao{ width: 320px;overflow:hidden;	}
+.side ul li#yijiandaohan:hover .aisj{width: 17px;}
+.liulanjilvbiao_nav ul li{ height:130px; width: 290px; margin-left: 10px; margin-right: 10px; padding-top: 30px; color: #fff; border-bottom: 1px #4d4d4d solid;}
+.liulanjilvbiao_nav_little{ width: 270px; height: 50px; padding-left: 20px; background: url(_files/image/yuanjiaodian.png) 5px 7px no-repeat;}
+.liulanjilvbiao_nav_little a {color:#fff;}
+.fanyuan_jicu_xianq{ width: 270px; height: 30px; padding-left: 20px; margin-top: 10px;}
+.fanyuan_jicu_xianq .fanyuan_geju{ float: left; font-size: 12px;}
+.fanyuan_jicu_xianq .fanyuan_jiage{ float: right;}
+.fanyuan_jicu_xianq .fanyuan_jiage span{color: #fc5300; font-size: 16px;} 
+.aisj{ background: url(_files/image/heijiantou_07.png) no-repeat; width: 0px;  height: 24px; right: 168px; 	top: 15px; position: absolute;  z-index: 999;  filter:alpha(opacity:83); opacity:0.83; transition: width 0.3s;-moz-transition: width 0.3s; /* Firefox 4 */	
+-webkit-transition: width 0.3s; -o-transition: width 0.3s;}
+
+    #zhangshangxhjdiv{position:absolute;width:54px;height:54px;top:0;right:0;transition:all 0.3s;background:#E5E5E5;opacity:0.8;filter:Alpha(opacity=80);color:#fff;font:14px/54px "微软雅黑";overflow:hidden;}
+    #zhangshangxhjimg{position: absolute;top: -60px;right: 157px;display: none;}
+	.side{height:432px;}
+    .side{position:fixed;width:54px;height:432px;right:20px;bottom:15px;z-index:100; border:1px solid #dddddd;}
+	.side> ul> li{width:54px;height:54px;float:left;position:relative;}
+	.side ul li .sidebox{position:absolute;width:54px;height:54px;top:0;right:0;transition:all 0.3s;background:#E5E5E5;opacity:0.8;filter:Alpha(opacity=80);color:#fff;font:14px/54px "微软雅黑";overflow:hidden;}
+	.side ul li .sidetop{width:54px;height:54px;line-height:54px;display:inline-block;background:#E5E5E5;opacity:0.8;filter:Alpha(opacity=80);transition:all 0.3s;}
+	.side ul li .sidetop:hover{background:#3ac862;opacity:1;filter:Alpha(opacity=100);}
+	#weixinsaosao{position:absolute;width:54px;height:54px;top:0;right:0;transition:all 0.3s;background:#E5E5E5;opacity:0.8;filter:Alpha(opacity=80);color:#fff;font:14px/54px "微软雅黑";overflow:hidden;}
+	.side ul li img{float:left;}
+	#weixinerwei{ position:absolute; top:-60px; right:157px; display:none;}
+    img {max-width:5000px; }
+    .liulanjilvbiao_nav_little { font-size:14px;}

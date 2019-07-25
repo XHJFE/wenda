@@ -1,0 +1,95 @@
+
+<div class="header">
+    <div>
+        <span><a href="http://www.xhj.com/"><img src="../images/logo.png" class="img01 "/></a></span>
+        <span class="font14 place place01"><img src="../images/sy12.png"/><i><%= currentCity.cityName %></i></span> 
+        <div class="narbar pull-right narbar01">
+            <ul class="list-unstyled list-inline listxinfang">
+                <li class="tabs active"><a href="/">首页</a></li>
+                <li class="tabs">
+                    <a href="/xinfang/">问答动态</a>
+                    <div class="wd_nav">
+                        <a href="###"><span>我要提问</span></a>
+                        <a href="###"><span>精选回答</span></a>
+                    </div>
+                </li>
+                <li class="tabs"><a href="/">我的回答</a></li>         
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- 城市选择 -->
+<div class="overlayBg"></div>
+<div class="city-change bounceIn animated">
+  <span class="close"></span>
+  <div class="title">选择城市
+    <span class="city-tab">
+      <span class="code1">热门城市:</span>
+      <a href="http://www.xhj.com/" title="长沙房产网">长沙</a>
+      <a href="http://cs.xhj.com/" title="株洲房产网">株洲</a>
+      <a href="http://xt.xhj.com/" title="湘潭房产网">湘潭</a>
+      </span>
+  </div>
+  <div class="title-line"></div>
+  <div class="fc-main clear">
+      <div class="fl citys-l">
+          <!-- <%= JSON.stringify(city) %> -->
+          <ul>
+              <%
+              Object.keys(city).map(function (zimu, zimu_index) {
+              if(zimu_index % 2 == 0){
+              %>
+              <li class="clear">
+                  <span class="code-title fl"><%= zimu %></span>
+                  <div class="city-enum fl">
+                      <%
+                      city[zimu].map(function (cn) {
+                      %>
+                      <a href="<%= cn.domain %>" title="<%= cn.title %>"><%= cn.name %></a>
+                      <% }); %>
+                  </div>
+              </li>
+              <%
+              }
+              %>
+              <% }); %>
+          </ul>
+      </div>
+      <div class="fl citys-r">
+          <ul>
+              <%
+              Object.keys(city).map(function (zimu, zimu_index) {
+              if(zimu_index % 2 == 1){
+              %>
+              <li class="clear">
+                  <span class="code-title fl"><%= zimu %></span>
+                  <div class="city-enum fl">
+                      <%
+                      city[zimu].map(function (cn) {
+                      %>
+                      <a href="<%= cn.domain %>" title="<%= cn.title %>"><%= cn.name %></a>
+                      <% }); %>
+                  </div>
+              </li>
+              <%
+              }
+              %>
+              <% }); %>
+          </ul>
+      </div>
+  </div>
+</div>
+
+
+<script>
+    require(['jquery'], function($) {
+        //城市切换
+        $('.place').click(function () {
+            $('.city-change, .overlayBg').show();
+        })
+        $('.close').click(function () {
+            $('.city-change, .overlayBg').hide();
+        })    
+    });
+</script>

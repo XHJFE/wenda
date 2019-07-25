@@ -1,0 +1,30 @@
+ .zx_first { border:none;}
+    .tt_list { padding-left: 220px;padding-right:0px;}
+    .tt_list > span { left:0px;}
+    .lpxq_tab { margin-bottom:5px;}
+    div.lit_wrap,.zx_first > .lit_wrap:last-child  { border-bottom:1px dashed #e2e2e2;}
+    .fenye { padding-bottom: 25px; padding-top: 5px; }
+
+    .lp_tab { height:45px;background-color:#f5f5f5;margin-top:5px;padding:5px;margin-bottom:3px;}
+    .lp_tab > a { font-size:16px;color:#fff;width:130px;height:35px;text-align:center;line-height:35px;display:inline-block;margin-right:10px;background-color:#bcbcbc;}
+    .lp_tab > a.active { background-color:#2badd7 ;}
+    .share { width: 55px; position: relative; top: 5px; }
+    .zx_news { margin-top: 15px; margin-bottom: 15px;}
+    .zx_t { padding-top:5px;}
+    .tt_list { padding-bottom:21px;}
+    .right_b { display:block;margin-bottom:15px;}
+    .xq_xq { width:1200px;margin:auto;border-bottom:none;}
+    .yuhua { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; position:relative;left:-5px;}
+    .fen_xian { margin-top:8px;}
+    .xq_xq > p { padding-top:0px;}
+    .right_b > img { width:270px;height:115px;}
+
+    /*轮播图*/
+    #myNiceCarousel {min-width:910px;width:910px;margin-top:20px;}
+    .carousel-caption { height:40px;padding:0px;}
+    .carousel-caption > p { margin-bottom:0px;height:40px;line-height:40px;color:#fff;font-size:16px;text-align:left;padding:0px;padding-left:15px;}
+    .carousel-indicators { margin-bottom:0px;}
+    .carousel-indicators { position: absolute; bottom: 10px; right: 30px; z-index: 15; width: 60%; padding-left: 0; margin-left: 0; text-align: right; list-style: none; left: auto; }
+    .carousel-indicators > li { display: inline-block; text-indent: -999px; cursor: pointer; border-radius: 0px; -moz-border-radius: 0px; -webkit-border-radius: 0px; background-color: rgba(255,255,255,0.5); width: 20px; height: 5px; border: none; margin: 0px; margin-right: 6px; }
+    .carousel-indicators>li.active { background-color: rgba(255,255,255,1); width: 20px; height: 5px; }
+    .carousel-inner > .item > img {width:910px;height:250px;display:block;}

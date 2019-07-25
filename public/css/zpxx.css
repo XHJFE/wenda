@@ -1,0 +1,55 @@
+/** 头部样式 begin **/
+.header{ background:url(../images/top_bg.jpg) repeat-x left top;}
+
+.top{ width:1200px; margin:0 auto; height:41px;}
+
+.top_r{ line-height:40px;}
+.top_r a{ color:#F00;}
+
+.kfrx li{ float:left; margin-left:20px; display:inline; line-height:40px;}
+.dis{ display:none;}
+
+
+.content{ background: #f2f2f2; padding-top:15px;}
+
+.main{ width:1200px; margin:0 auto; padding-bottom:40px;}
+
+.main_l{ width:200px; background-color:#EEECED;}
+.main_l li{ border-left:5px solid #DEDEDE; border-right: 1px solid #E7E7E7; line-height:50px; height:50px; font-size:16px; text-align:center;}
+.main_l li.btn{ cursor:pointer; border-left:5px solid #2ccb5c;}
+.main_l li a{height: 48px; width: 195px; color: #666; font-size: 16px; display: block; border-bottom: 1px solid #E0DEDF; border-top: 1px solid #fff; background: #EEECED;}
+.main_l li:hover{ cursor:pointer; border-left:5px solid #feaa03 ;}
+.main_l li.b{ border-bottom:0;}
+.main_l li:hover,.main_l li.btn{ background-color:#fff;color:#666;border-right:1px solid #fff;border-left: 5px solid #2ccb5c;}
+.main_l li a:hover,.main_l li.btn a{height:48px;background:#fff;border-bottom:1px solid #e2dedf;border-top: 1px solid #f9f7f8;}
+
+.mian_r{ width:936px; background-color:#FFF; padding:20px;}
+
+.zwmc{ border-bottom:1px solid #e2e2e2; padding-bottom:30px; margin-bottom:30px;}
+.zwmc span{ font-size:40px; line-height:60px; display:block; padding-bottom:5px;}
+.zwmc p{ font-size:24px; line-height:30px; color:#999;}
+.zwmc p font{ color:#fe4a00; margin-right:50px;}
+
+.gwaq li{ margin-bottom:10px;}
+.gwaq li span{ float:left; width:88px; line-height:30px;}
+.gwaq li font{ float:left; line-height:30px; color:#666; width:834px;}
+.gwaq li font b{ font-weight:normal; color:#fe4a00;}
+.gwaq li font b.r{ margin-left:70px;}
+
+
+/** 关于新环境房屋网 **/
+.nrjj font{ display:block; text-indent:2em; line-height:30px; color:#666;font-size:16px;}
+.nrjj font.title{color:#333;}
+.nrjj font .spot{display:inline-block;width:5px;height:5px;background:#666;border-radius:100%;vertical-align:middle;margin:-5px 15px 0 0;}
+.nrjj span{ display:block; line-height:30px; margin-top:30px; font-size:18px;}
+.nrjj font.pad20{padding-left:20px;}
+
+/** 地域支持 **/
+.dyzc li{ float:left; width:464px; margin-bottom:30px;}
+.dyzc li span{ display:block; background:url(../images/icon.jpg) no-repeat left center; line-height:30px; padding-left:15px; font-size:18px; font-weight:bold;}
+.dyzc li font{ display:block; line-height:30px; color:#666; margin-left:15px;}
+
+
+/** 客服热线 **/
+.kfrx{ line-height:30px; color:#666; }
+.kfrx font{ color:#fe4a00; font-size:30px;}

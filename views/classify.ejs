@@ -1,0 +1,60 @@
+﻿
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="zh-CN">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7)]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>【长沙楼盘_长沙新房_长沙楼盘价格】—新环境房屋网</title>
+<meta http-equiv="Cache-Control" content="no-transform"/>
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
+<meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
+<link href="../css/list.css" rel="stylesheet" />
+<link href="../css/wendas.css" rel="stylesheet" />
+<!--[if lt IE 9]>
+  <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
+  <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
+<![endif]-->
+
+<% include include/cssjs %>
+
+</head>
+
+<body>
+<!-- 顶部导航栏 -->
+<% include include/nav %>
+<!-- 顶部菜单栏 -->
+<%- include('include/header', {city: city, currentCity: currentCity})  %>
+<!-- 搜索栏 -->
+<% include include/search %>
+
+  
+
+<div class="wrap wrap_two">
+    <p class="title">问答分类</p>
+    <div class="wendafenlei_list_wrap">
+        <% classData.forEach(item => { %>
+        <div class="wendafenlei_list active">
+            <p><%= item.typeName %></p>
+            <div class="fenlei_right">
+                <% item.labels.forEach(child => { %>
+                <a href="###"><span><%= child.labelName%></span></a>
+                <% }) %>
+            </div>
+        </div>
+        <% }) %>
+    </div>
+
+</div>
+
+</body>
+</html>

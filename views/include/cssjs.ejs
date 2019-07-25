@@ -1,0 +1,12 @@
+<link rel="dns-prefetch" href="https://xhjcom.oss-cn-shenzhen.aliyuncs.com">
+<script src="https://xhjcom.oss-cn-shenzhen.aliyuncs.com/dist/r.js"></script>
+<script>
+    require.config({
+        baseUrl: 'http://192.168.1.82:3000/modules/',
+//        baseUrl: 'https://cdnsz.xhj.com/dist/',
+        urlArgs: function () {
+            return '?t=' + Math.ceil(Date.now() / 1800000)
+        },
+        waitSeconds: 15
+    });
+</script>

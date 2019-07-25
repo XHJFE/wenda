@@ -1,0 +1,41 @@
+ /*下架*/
+    .ewm .heading > span.xiajia { background-color:#d2d2d2;border:1px solid #d2d2d2;}
+    .yxj { display:inline-block;width:130px;height:35px;line-height:35px;text-align:center;color:#fff;position:absolute;top:0px;left:0px;background-color:rgba(0,0,0,0.5);}
+    .xiajia_img .tw_right > p > .hong { color:#666;}
+    .xiajia_img .yy_dh { padding:0px;text-align:center;line-height:60px;font-size:16px;color:#999;}
+    .xiajia_img .yy_dh >span> i { color:#f7892a;}
+    .xiajia_img .yy_dh > img { margin-right:20px;position:relative;top:-3px;}
+    .xj_qu {border:1px solid #d2d2d2;padding-bottom:10px;}
+    .xj_qu > p { text-align:center;padding-top:10px;}
+    .xj_qu a { padding:0px 25px;}
+    .xj_qu a > span { font-size:14px;color:#666;border-bottom:1px solid #fff;}
+    .xj_qu a:hover > span { color:#24b73d;border-bottom:1px solid #24b73d;}
+    .xiajia_img .tw_right > p { margin-bottom:18px;}
+    .xiajia_img .tw_right > .border { margin-bottom:0px;}
+
+    /*房源列表*/
+     /*列表*/
+    .xq_fy { height:160px;padding:15px 0px;}    
+    .xq_fy .media-object { width:190px;height:130px;}
+    .xq_fy .media { padding-left:210px;}
+    .lp_wrap .media-body > p.yihao { font-size:14px;}
+    .yihao > .mxh { font-size:14px;color:#999;font-weight:normal;}
+    .xq_fy .lp_yue > .lp_jia { color:#333;font-size:16px;}
+    .lp_yue > .rg { color:#f7892a;}
+    .xq_fy .lp_yue { padding-right:10px;}
+    .lp_yue > .lp_jia { padding-left:0px;text-align:right;}
+    .xq_fy  .media-body > p {padding-bottom:15px;font-size:14px;color:#999;}
+    .lp_wrap .media-body > .heading { font-size:20px;color:#333;font-weight:normal;padding-bottom:12px;}
+    .lp_yue > .lp_jia { padding-top:23px;}
+    .xq_fy .media-body > p.yihao { color:#666;font-size:16px;}
+    .xq_fy .lp_jia > span { font-size:30px;}
+    .lp_yue > .rg { background-color:transparent;text-align:right;color:#333;}
+    .xq_fy .gxsj {font-size:12px;color:#999;padding-top:18px; }
+    .xq_fy .lp_yue > .lp_jia {margin-bottom:0px; }
+     .xq_fy  .lp_yue > .rg { height:28px;line-height:28px;}
+    .lpxq_tab { margin-bottom:20px;margin-top:20px;}
+    .fang_tj .news_wrap { border:none;padding-bottom:0px;}
+    .fang_tj { border:1px solid #d2d2d2;}
+    .fang_tj > .news_wrap:last-child .lp_wrap { border:none;}
+    .fang_tj .news_wrap:hover { background-color:#f5f5f5;}
+    #peitao { margin-bottom:25px;}

@@ -1,0 +1,57 @@
+ /*查看大图*/
+    /*查看大图弹窗*/
+    .fz_pics{ width:500px; margin-left:0px;}
+    .fz_pic_ts>img{max-width:760px;max-height:515px;width:680px;height:510px;}
+    .fz_pic_bs{ width: 900px; height:80px; padding-top: 0px; position: relative;overflow:hidden;margin-top:15px;}
+    .fz_pic_bs li{ float:left; cursor:pointer; position:relative; width:140px;}
+    .fz_pic_bs li.active .bian{ width:92px; height:62px; position:absolute; left:0; top:0px; z-index:11;border:2px solid #989898;}
+    .fz_pic_bs ul { position:absolute;top:0px;z-index:10;width:1000px;}
+    .fz_pic_bs p.pic-lefts{ background:url(../../images/newHouse/nh012.png) no-repeat; left:0px;}
+    .fz_pic_bs p.pic-rights{ background:url(../../images/newHouse/nh013.png) no-repeat; right:0px;}
+    .fz_pic_bs p{ z-index:10; background: #000; position: absolute; top:0px; width: 20px; height: 85px; cursor: pointer;}
+    .fz_pic_bs > div {width:825px;margin:auto;position:relative;height:85px; }
+    .fz_pic_bs li > i { display:none;}
+    .fz_pic_bs li.active>i { display:inline-block;top:0px;left:0px;z-index:10;position:absolute;}
+    .fz_pic_bs li > .xiaoguo {height:28px;line-height:28px;color:#fff;text-align:center;display:inline-block;width:92px;background-color:rgba(0,0,0,0.5);position:absolute;bottom:0px;left:0px;font-size:14px; }
+    .fz_pic_ts { padding:10px;border:1px solid #e2e2e2;width:900px;height:570px;text-align:center;position:relative;}
+    .fz_pic_ts > span  {color:#333;font-size:18px;padding-left:10px; display:block;text-align:left;padding-bottom:10px;}
+    .leftss {width:42px;height:80px;background:url(../../images/newHouse/nh0010.png) no-repeat;cursor:pointer;position:absolute;top:250px;left:20px;margin-bottom:0px; }
+    .rightss {width:42px;height:80px;background:url(../../images/newHouse/nh011.png) no-repeat;cursor:pointer;position:absolute;top:250px;right:20px;margin-bottom:0px;  }
+
+    .bigimg { width:100%;height:732px;position:fixed;top:50px;left:0;z-index:101;top:50%;margin-top:-366px;display:none;}
+    .bigimg > .fz_pics { width:1200px;margin:auto;height:707px;background-color:#000;position:relative;}
+    .bigimg .fz_pic_ts>img{ width:860px;height:585px;max-height:585px;max-width:860px;}
+    .bigimg .fz_pic_ts { height:605px;border:none;cursor:pointer;padding-top:20px;}
+    .bigimg .fz_pic_bs p.pic-lefts{ background:url(../../images/newHouse/nh037.png) no-repeat; left:0px;}
+    .bigimg .fz_pic_bs p.pic-rights{ background:url(../../images/newHouse/nh038.png) no-repeat; right:0px;}
+    .bigimg  .leftss {width:28px;height:52px;background:url(../../images/newHouse/nh040.png) no-repeat;cursor:pointer;position:absolute;top:250px;left:40px;margin-bottom:0px;display:none; }
+    .bigimg  .rightss {width:28px;height:52px;background:url(../../images/newHouse/nh039.png) no-repeat;cursor:pointer;position:absolute;top:250px;right:40px;margin-bottom:0px;display:none; }
+    .fz_pic_ts:hover > .leftss { display:block;}
+    .fz_pic_ts:hover > .rightss { display:block;}
+    .bigimg .fz_pic_bs li { width:113px;}
+    .bigimg .fz_pic_bs { width:860px;margin-left:20px;height:71px;}
+    .bigimg .fz_pic_bs > div { width:780px;height:71px;}
+    .bigimg .fz_pic_bs p { height:71px;width:22px;}
+    .bigimg .fz_pic_bs li > span { display:none;}
+    .bigimg .fz_pic_bs li.active > span {height:71px;width:101px;display:inline-block;border:2px solid #f60;position:absolute;top:0px;left:0px; }
+
+    .big_content { width:300px;background-color:#fff;padding:0px 15px;position:absolute;top:0px;right:0px;height:707px;}
+    .big_content>.meixihu {font-size:24px;color:#000;padding-top:40px;margin-bottom:10px; }
+    .big_content > .dhh { font-size:19px;color:#24b73d;border-bottom:1px dashed #e2e2e2;padding-bottom:5px;margin-bottom:15px;}
+    .big_content > ul > li { height:45px;line-height:42px;border:1px solid #e2e2e2;padding-left:20px;font-size:16px;color:#999;margin-bottom:13px;cursor:pointer;position:relative;}
+    .big_content > ul > li > span { display:none;}
+    .big_content > ul > li.active { border:1px solid #fff;color:#24b73d;}
+    .big_content > ul > li.active > span {position:absolute;display:inline-block;top:0px;left:-10px; }
+    .big_content > .cancel {position:absolute;top:-23px;right:-15px;cursor:pointer; }
+
+    .ckdt { width: 100%; height: 100%; position: fixed; top: 0px; left: 0; z-index: 100001; padding-top: 50px; overflow: auto; display:none;}
+    .bigimg { width: 100%; height: 732px; position: relative; top: 0px; left: 0; display:block;margin-top:0px;}
+    
+    
+     /* 详情查看大图所加样式*/
+    .ckdt07 .c_c { position:absolute;top:-25px;right:-15px;}
+    .ckdt07 > .bigimg > .fz_pics { width:900px;background-color:#fff;}
+    .ckdt07>.bigimg .fz_pic_bs > div { overflow:hidden;}
+    
+    .bigimg .fz_pic_ts>img { height: 573px;max-height: 573px;}
+	.bigimg .fz_pic_bs p { height: 67px;}

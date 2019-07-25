@@ -1,0 +1,138 @@
+﻿
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="zh-CN">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7)]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>【长沙楼盘_长沙新房_长沙楼盘价格】—新环境房屋网</title>
+<meta http-equiv="Cache-Control" content="no-transform"/>
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
+<meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
+<link href="../css/list.css" rel="stylesheet" />
+<link href="../css/wendas.css" rel="stylesheet" />
+<!--[if lt IE 9]>
+  <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
+  <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
+<![endif]-->
+
+<% include include/cssjs %>
+</head>
+
+<body>
+
+<!-- 顶部导航栏 -->
+<%- include('include/nav', {menus: menus}) %>
+<!-- 顶部菜单栏 -->
+<%- include('include/header', {city: city, currentCity: currentCity})  %>
+<!-- 搜索栏 -->
+<% include include/search %>
+
+<div class="wrap wrap_one">
+    <!---问答分类---->
+    <div class="fendafenlei_wrap">
+    <p class="title">问答分类</p>
+   <div class="fenlei_type">
+       <% classData.forEach(item => {%>
+            <div class="fenlei_list_wrap" >
+                <p class="title"><%= item.typeName %></p>
+                <div class="fenlei_list">
+					<% item.labels.forEach(child => { %>
+						<a href="###"><span><%= child.labelName %></span></a>
+					<% }) %>
+                </div>
+            </div>
+       <% }) %>
+       
+
+       <a href="/classify" target="_blank" class="more_type"><span>更多分类</span><img src="../images/wd_fl.png" /></a>
+
+   </div>
+    </div>
+
+
+<!---右侧栏---->
+<div class="right_content">
+    <!--今日头条----->
+    <div class="jinritoutiao_wrap">
+        <p class="title"><img src="../images/wd_tt.png"/></p>
+        <div class="toutiao_content_wrap">
+            <a href="###"><img src="http://fpoimg.com/420x252"/></a>
+            <div class="toutiao_wrap">
+                <a href="###" class="zhu_content">
+                    <p class="title">在纽约买房都需要什么手续, 1000平米的房产</p>
+                    <p class="content" id="content">昨天，中消协公布了今年第一季度的投诉情况，房屋家居领域被指存在虚假宣传、误导消费者、延期交房等问期等问题，2016房地产业“营改增”最新政策解读与应对策略5月1日起.....</p>
+                </a>
+                <a href="###" class="title"><i></i><span>在纽约买房都需要什么手续, 1000m2 的房产, 成交额都什价位?</span></a>
+                <a href="###" class="title"><i></i><span>在纽约买房都需要什么手续, 成交额都什么价位?</span></a>
+                <a href="###" class="title"><i></i><span>在纽约买房都需要什么手续, 成交额都什么价位?</span></a>
+            </div>
+
+
+
+        </div>
+
+
+        <div class="more_wrap">
+            <span><img src="../images/wd_fjx.png"/></span>
+            <a href="###"><i>查看</i><span>更多>></span></a>
+        </div>
+    </div>
+
+
+    <!--最新问题----->
+    <div class="zuixinwenti_wrap">
+        <p class="title">最新问题</p>
+
+        <div class="wenda_content wenda_content_common">
+            <% newQuestion.content.forEach(item => { %>
+                <div class="wd_content">
+                    <a href="###" class="<%= item.img ? 'img_detail': ''  %>">
+                        <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
+                        <p class="title"><%= item.problemTitle %></p>
+                        <p class="name"><%= item.questionerName %></p>
+                        <% if (item.newProblemAnswer) { %>
+                            <p class="content"><%= item.newProblemAnswer.answerContent %></p>
+                        <% } %>
+
+                        <% if (item.img) {%>
+                        <span class="img">
+                            <img src="<%= item.img %>"/>
+                        </span>
+                        <% } %>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+
+</div>
+<script>
+    require(['jquery'], function($) {
+        $(function(){
+            //详情
+            var len = 80; 
+            var ctn = document.getElementById("content"); 
+            var content = ctn.innerHTML;                  
+            var span = document.createElement("span"); 
+            var i = document.createElement("i");           
+            span.innerHTML = content.substring(0, len);
+            i.innerHTML = content.length > len ? "... [详情]" : "";              
+            ctn.innerHTML = "";
+            ctn.appendChild(span);
+            ctn.appendChild(i);
+        })
+    })
+    
+</script>
+</body>
+</html>

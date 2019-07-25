@@ -1,0 +1,76 @@
+body ,.heiti{ font-family: "微软雅黑","Microsoft YaHei",Helvetica,Arial,Tahoma;}
+
+
+/*---------- 判断浏览器版本样式 ----------*/
+#upgrade-browser { position: absolute; top: 0; left: 0; z-index: 100; width: 100%; height: 100%; display:none;}
+.overlay { display:block; position:absolute; top:0; left:0; width:100%; height:100%; background-color:black; z-index:100; -moz-opacity:0.8; opacity:.80; filter:alpha(opacity=80); }
+.browsers { display:block; position:absolute; top:50%; left:50%; width:670px; height:300px; margin: -170px 0 0 -350px; padding:20px; border:20px solid #5a9bdd; background-color:#fff; z-index:110; overflow:auto; }
+.browsers p { font-size: 16px; text-align: center;}
+.browsers div { width: 420px; height: 170px; margin:0 auto;}
+.browsers a { display:block; float: left; width: 100px; height:20px; margin:20px; padding-top:110px; background:url(../images/browser.jpg) no-repeat; color:#58954E; text-align: center; }
+.browsers a:hover { text-decoration:underline; }
+.browsers .br1 { background-position:0 0; }
+.browsers .br2 { background-position:-100px 0; }
+.browsers .br4 { background-position:right 0;}
+.browsers span { color: #c30; cursor: pointer;}
+ h3 { font-size:16px;text-align:center;}
+ #upgrade-browser h4 {font-size:15px;text-align:center; }
+
+
+    .widths { width: 1080px; margin: auto; }
+    .licai_width { width:100%;min-width:1080px;display:block;}
+    .widths >.text-center { font-size:28px;color:#333;padding-top:18px;padding-bottom:23px;}
+    .widths > .text-center > p { margin:0px 15px;display:inline-block;}
+    .dk_wrap { padding-left:330px;padding-right:210px;position:relative;border:1px solid #d2d2d2;padding-top:20px;padding-bottom:20px;margin-bottom:50px;background-color:#fff;}
+    .dai_left { position:absolute;top:5px;left:5px;}
+    .dk_wrap > .sq { position:absolute;right:20px;top:35px;display:inline-block;width:125px;height:35px;line-height:35px;text-align:center;}
+    .dk_wrap > .sq > span { color:#fff;font-size:18px;}
+    .cheng { background-color:#ffc273;}
+    .lan {background-color:#90bfeb; }
+    .lv { background-color:#88dce5;}
+    .dk_wrap > p { font-size:18px;color:#333;margin-bottom:0px;}
+    .reds { color: #f00; }
+    .p_first { padding-bottom:10px;}
+
+    .jr_wrap { background-color:#ecf1f7;overflow:hidden;margin-bottom:25px;}
+    .jr_wrap .dk_wrap { border:none;}
+    .jr_wrap .dai_left { display:inline-block;height:105px;width:285px;line-height:105px;text-align:center;top:0px;left:0px;}
+    .liucheng>p {display:inline-block;margin-bottom:0px;text-align:center;font-size:20px;color:#333;padding-left:30px;padding-right:37px;position:relative;top:19px; }
+    .liucheng > .jt { padding-right:38px;}
+    .huoban > a { margin-right:14px;}
+    .huoban { padding-top:10px;}
+    .hezuo { padding-top:30px;padding-bottom:35px;border-bottom:1px solid #d2d2d2;margin-bottom:20px;}
+
+    .dk_wrap >a.cheng:hover { background-color:#ffb04d;}
+    .dk_wrap >a.lan:hover { background-color:#5ea5e7;}
+    .dk_wrap >a.lv:hover {background-color:#50ced7; }
+
+    /*弹出层代码*/
+    .sq_modal { width:700px;height:480px;background-color:#fff;position:fixed;left:50%;margin-left:-350px;top:50%;margin-top:-240px;z-index:3;display:none;}
+    .back_model { position:fixed;top:0px;left:0px;right:0px;bottom:0px;background-color:rgba(0,0,0,0.3);z-index:2;}
+    .sq_modal > .text-center { font-size:28px;color:#333;height:65px;line-height:65px;border-bottom:1px solid #d2d2d2;position:relative;margin-bottom:20px;}
+    .cancel { position:absolute;top:0px;right:0px;display:inline-block;width:38px;height:38px;line-height:38px;cursor:pointer;}
+    .cancel>img { vertical-align:top;}
+    .lc { text-align:center;}
+    .lc > a { display:inline-block;}
+    .lc > a > p { margin-bottom:0px;color:#333;font-size:20px;padding-top:10px;}
+    .lc > .jt { padding-left:33px;padding-right:33px;position:relative;top:-63px;}
+    .ts { font-size:16px;color:#999;text-align:center;padding-top:28px;margin-bottom:25px;}
+
+    form { font-size:18px;color:#333;}
+    label {font-weight:normal; }
+    form input { width:280px;outline:none;border:1px solid #d2d2d2;padding:6px 10px;margin-bottom:20px;}
+    form .reds { position:relative;top:3px;}
+    .sq_bm ,.check_bm { display: block; height: 70px; background-color: #24b73d; color: #fff; font-size: 16px; line-height: 75px; text-align: center; position:absolute; bottom:0px;left:0px;width:100%;}
+    .sanjiao { position:absolute;top:0px;left:50%;margin-left:-15px;}
+    .sq_bm > span,.check_bm>span { font-size:20px;color:#fff;padding:4px 80px;border:1px solid rgba(255,255,255,0.2);padding-top:3px;padding-bottom:5px;}
+
+     /*申请成功弹出层代码*/
+    .bm_cg { padding-top: 60px; }
+    .bm_cg { background-color: #fff; text-align: center; width: 500px; height: 305px; position: fixed; top: 50%; left: 50%; z-index: 101; margin-left: -250px; margin-top: -153px; }
+    .bm_cg > .cancel { position: absolute; top: 0px; right: 0px; cursor: pointer; }
+    .gongxi { font-size: 24px; color: #ff6600; padding-top: 20px; padding-bottom: 35px; }
+    .check_bm > span { border:none;}
+
+    .back_model {background-color: rgba(0,0,0,0.6);}
+    .sq_bm > span:hover {background-color:#0ea227; }

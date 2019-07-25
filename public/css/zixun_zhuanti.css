@@ -1,0 +1,33 @@
+ .zttj { padding-top:13px;padding-bottom:20px;}
+    .zt_left{ width:720px;height:345px;overflow: hidden;}
+    .zt_wrap { position:relative;margin-bottom:10px;}
+    .zx_right { position:absolute;top:-5px;right:0px;width:460px;}
+    .zx_right > a { width:220px;display:inline-block;}
+    .zx_right > a img { width:220px;height:90px;}
+    .zx_titles { color:#000;font-size:16px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}
+    .zx_content { font-size:14px;color:#818181;}
+    .zx_right > a > p { margin-bottom:5px;}
+    .zx_right > a:hover > .zx_titles { color:#2badd7;}    
+    .xians { display:block;height:1px;background-color:#e2e2e2;margin-bottom:5px;margin-top:3px;}
+
+    /*轮播图*/
+    #myNiceCarousel {min-width:720px;width:720px;}
+    .carousel-caption { height:40px;padding:0px;}
+    .carousel-caption > p { margin-bottom:0px;height:40px;line-height:40px;color:#fff;font-size:16px;text-align:left;padding:0px;padding-left:15px;}
+    .carousel-indicators { margin-bottom:0px;}
+    .carousel-indicators { position: absolute; bottom: 10px; right: 30px; z-index: 15; width: 60%; padding-left: 0; margin-left: 0; text-align: right; list-style: none; left: auto; }
+    .carousel-indicators > li { display: inline-block; text-indent: -999px; cursor: pointer; border-radius: 0px; -moz-border-radius: 0px; -webkit-border-radius: 0px; background-color: rgba(255,255,255,0.5); width: 20px; height: 5px; border: none; margin: 0px; margin-right: 6px; }
+    .carousel-indicators>li.active { background-color: rgba(255,255,255,1); width: 20px; height: 5px; }
+    .carousel-inner > .item > img { width:720px;height:346px;display:block;}
+
+    .zx_first { width:590px;display:inline-block;margin-bottom:20px;}
+    .hot_news { width:400px;}
+    .zx_title { font-size:20px;color:#000;padding-right:20px;}
+    .zx_title > a { font-size:14px;color:#8b8b8b;}
+    .zx_title > a:hover { color:#2badd7;}
+    .hot_zx_wrap {padding-bottom:10px;}
+    .hot_zx > .dot { width:3px;height:3px;}
+    .fen_xian { margin-top:0px;}
+    .hot_zx > span { font-size:14px;}
+    .hot_zx { height:30px;line-height:30px;}
+    .hot_zx > .dot { top:-14px;}

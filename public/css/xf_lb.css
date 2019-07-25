@@ -1,0 +1,141 @@
+.Search_clu{height: 50px; padding: 10px 310px;}
+.Search_clu_input{ position: relative;}
+.Search_clu_input_text{ border: 1px #c9c9c9 solid; padding: 5px; color: #a1a1a1; width: 370px; height: 30px;}
+.Search_clu_btn{ list-style:none; border:1px #2badd7 solid;background: #2badd7; width: 83px; height: 30px; line-height: 30px;  text-align: center; color: #fff; font-size: 14px;}
+.Search_clu_Map_btn{list-style:none; border:1px #2badd7 solid;background: #2badd7;width: 113px; height: 30px; line-height: 30px; padding-left: 20px; margin-left: 10px; background: url(/web/images/Map_icon.png) no-repeat 18px #2badd7; text-align: center; color: #fff; font-size: 14px;}
+.address_chu{ font-size: 16px; color: #666666; line-height: 50px; padding-left: 30px; background: url(/web/images/dizhi.jpg) 10px center no-repeat;}
+.screen_chu{ border: 1px #e5e5e5 solid;}
+.screen_chu ul{ padding: 20px;}
+.screen_chu ul li{ font-size: 14px;}
+.screena_chu{ border: 1px #e5e5e5 solid; border-top: 0;}
+ol, ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.cztj_c li {
+    display: block;
+    line-height: 34px;
+    padding-left: 30px;
+    width: 1036px;
+}
+.cztj_c li span {
+    margin-right: 10px;
+}
+.cztj_c li a.act {
+    color: #2badd7;
+    font-weight: bold;
+}
+.cztj_c li a {
+    margin-right: 20px;
+    white-space: nowrap;
+}
+.cztj_c .sqqb{width: 925px}
+.cztj_c li a:hover{ font-weight:bold;}
+.cztj_c li .text2,.cztj_c li .text3{ border:1px solid #c9c9c9; width:40px; height:18px; line-height:18px; padding:0 5px;}
+.cztj_c li .text2{ margin-left:20px;}
+.cztj_c li .text3{ margin-right:10px;}
+.cztj_c li.sx{ border-bottom:1px solid #f4f4f4; border-top:1px solid #f4f4f4; height:50px; line-height:50px; margin-top:10px; width:1170px;}
+.cztj_c li.sx .select{ width:80px; height:20px; border:1px solid #c9c9c9; margin-left:10px; font-size:12px;}
+.cztj_c li .myform1,.cztj_c li .myform2{ float:right; margin-right:60px;}
+.cztj_c li .anniu{float:right; margin-right:85px;}
+.cztj_c li .anniu2{float:right; margin-right:25px; }
+.cztj_c li .anniu3{float:right; margin-right:25px;}
+.cztj_c li  .btn1{ border:1px solid #c9c9c9; width:56px; height:20px; line-height: 20px;}
+.cztj_b{ border-top:1px solid #f4f4f4;}
+.cztj_b li{ float:left; line-height:49px; font-size:12px;}
+.cztj_b li.l{ border-right:1px solid #d8d8d8; padding-right:10px; margin:0 16px 0 20px;}
+.cztj_b li a.bg{ background:url(../images/icon7.jpg) no-repeat left center; padding-left:15px;}
+.cztj_b li a.bg2{ background:url(../images/saixuan.png) no-repeat left center; padding-left:15px; margin:0 30px 0 20px;}
+.cztj_b li a.bg3{ background:url(../images/icon9.jpg) no-repeat right center; border:1px solid #49db61; height:30px; line-height:30px; display:inline-block; padding:0 30px 0 3px;}
+.cztj_b li.r{ float:right; margin-right:15px;}
+.cztj_b li.r a.bg4{ background:url(../images/icon10.png) no-repeat 7px center; width:32px; height:36px; line-height:36px; border:1px solid #c9c9c9; border-right:0; display:inline-block; padding-left:40px;}
+.cztj_b li.r a.bg5{ background:url(../images/icon11.png) no-repeat 7px center; width:32px; height:36px; line-height:36px; border:1px solid #dfdfdf; display:inline-block; padding-left:40px; background-color:#f4f4f4; color:#666;}
+.cztj_b li.r a.bg5:hover{ color:#F00;}
+.fl{float:left;_display: inline;} 
+.widths900{ width: 900px; float: left;}
+.lp_yue > a{ margin-left: 10px;}
+.lp_yue > .lp_jia{padding-left: 0px;}
+.lp_yue > .rg{ width: 180px; height: 40px; line-height: 40px; background: #ff6600; font-size: 16px; text-align: center;}
+.lp_yue > .rg01{ width: 180px; height: 40px; line-height: 40px; margin-bottom: 45px;}
+.width270{ width: 270px; float: right;}
+.entrust_box{ height: 118px; width: 268px; border:1px #d2d2d2 solid; margin-top: 10px;}
+.entrust_box_hread{width: 100%; border-bottom: 2px #eaeaea solid; height: 44px; padding: 0 10px;}
+.entrust_box_hread span{float: left; color: #333333; font-size: 16px; line-height: 44px;}
+.entrust_box_hread font{float: right; color: #999999; font-size: 14px; line-height: 44px;}
+.entrust_box_center{ padding: 20px 30px;}
+.buy_hous_btn{ width: 90px; height: 39px; background: #2badd7; border-radius: 5px; border: 0; float: left; color: #fff;}
+.Real_hous_btn{ width: 90px; height: 39px; background: #2badd7; border-radius: 5px; border: 0; float: right; color: #fff;}
+.advertisement{ width: 270px; height: 340px; margin-top: 20px;}
+.Latest_concessions{ width: 268px; border:1px #d2d2d2 solid; margin-top: 10px;}
+.Latest_concessions_center{ padding: 10px 10px;}
+.Latest_concessions_c_center{ width: 100%;}
+.Latest_concessions_c_center span{ float: left; color: #f85360; font-size: 14px;}
+.Latest_concessions_c_center font{ float: right; color: #999999; font-size: 14px;}
+.Latest_concessions_center p{margin-bottom: 0px; line-height: 30px;}
+.Latest_concessions_center p span{color: #999999; font-size: 14px;}
+.Latest_concessions_center ul li{ border-bottom: 1px #dfdfdf dashed; padding-bottom: 10px;}
+.More_concess_btn{margin-left: 20px; margin-top: 10px; width: 200px; height: 40px; border:1px #e6e6e6 solid; border-radius: 5px; text-align: center; line-height: 40px; background: #fff; }
+.Latest_concessions_img{ width: 90px; height: 65px; float: left;}
+.Latest_concessions_neiron{ float: left; margin-left: 10px;}
+.Latest_concessions_little{color: #333333; font-size: 16px;}
+.Latest_concessions_quyu{ color: #999999; font-size: 14px;}
+.Latest_concessions_quyu span{color: #2badd7;}
+.Latest_concessions_center2 {
+    padding: 10px 10px;
+}
+.Latest_concessions_center2 ul li{border-bottom: 1px #dfdfdf solid; padding-bottom: 10px; margin-bottom: 10px;}
+.Characteristic_property_img{width: 223px; height: 180px;}
+.Latest_concessions_money{ color: #999999;}
+.Latest_concessions_money span{ color: #f15145; font-size: 14px;}
+.Characteristic_property{ border-bottom: 1px #d3d3d3 solid; padding-bottom: 20px;}
+.Characteristic_property ul li{ margin-right: 20px; float: left;}
+.Characteristic_property ul li:last-child{ margin-right: 0px;}
+
+.suoasahdbw{
+	display: none;
+	position: relative;
+	top:-1px;
+	left:0;
+} 
+#ui2{border: 1px solid rgb(221, 221, 221);
+  z-index: 99999;
+  width: 370px;
+  top:1px;
+  position: absolute;
+  display: block;
+  background: rgb(255, 255, 255); float:none;}
+#ui2 li{ line-height:30px; display:block; font-size:12px; float:none;cursor: pointer;}
+#ui2 li:hover{background-color: #eee;}
+#ui2 li font{ float:right;color:#999; margin-right:10px;}
+
+/*团购楼盘css*/
+.average_price{position: absolute; right: 10px; top: 15px;}
+.average_price p.lp_jia span{ color: #f85360;}
+.pr{position: relative;}
+.slogan_png{ background: url(../images/bianjiao_png_06.png);width: 478px; height: 54px; margin-top: 25px; margin-bottom: 20px; padding-left:25px ;}
+.margin_left10{ margin-right:10px !important;}
+.margin_left00{ margin-right:0px !important;}
+.slogan_png > span{color: #ffffff; font-size: 22px; line-height: 54px;}
+.Discount_btn{ width: 125px; height: 42px; color: #2badd7; font-size: 18px; line-height: 42px; background: #fff100; border: 0px; border-radius: 5px; float: right; margin-right:40px ; margin-top: 6px;}
+.sj_tubiao{ padding-left: 25px; background: url(../images/time_btn.png) no-repeat; background-size:20px; color: #000;}
+.time_jidian > font{color: #666666; font-size: 14px; background: url(../images/index002.png) no-repeat  1px center; background-size:20px; padding-left: 25px; float: right;}
+.time_jidian {    height: 30px;    line-height: 30px;}
+.time_jidian > font > i{color: #f85360;}
+.Group_purchase_Hotline{ padding: 5px; border: 1px #d2d2d2 solid; margin-top: 10px;}
+.Group_purchase_Hotline_img{ width: 62px; height: 53px; margin-right: 10px; float: left;}
+.Group_purchase_Hotline_label{ float: left;}
+.Group_purchase_Hotline_label p{ margin-bottom: 0px;}
+.Group_purchase_Hotline_wenzi{color: #333333; font-size: 16px;}
+.Group_purchase_Hotline_wenzi1{ color: #999999; font-size: 22px;}
+.top00{top: 0px !important;}
+.carousel-indicators>li{background-color: rgba(0,0,0,0.3);}
+.color000{ color: #000 !important;}
+.color000 span{ color: #000 !important;}
+.Real_estate_price{font-size: 16px; color: #000000; margin-bottom: 0px !important;}
+.Real_estate_price1{font-size: 16px; color: #000000; margin-bottom: 0px !important;}
+.Real_estate_price span{ color: #f85360; font-size: 24px;}
+.Real_estate_price1 span{ color: #2badd7; font-size: 24px;}
+.Latest_concessions_Specificat{color: #999999; font-size: 14px;}
+.Latest_concessions_Specificat > span{color: #ff0000;}
+.text_bod{font-weight: bold;}

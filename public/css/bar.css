@@ -1,0 +1,36 @@
+﻿
+/*右侧浮动工具栏*/
+ .fix-right { position:fixed;top:0px;bottom:0px;width:40px;right:0px;background-color:#fff;z-index:1000;box-shadow:-2px 0px 5px rgba(0,0,0,0.2);-webkit-box-shadow:-2px 0px 5px rgba(0,0,0,0.2);-moz-box-shadow:-2px 0px 5px rgba(0,0,0,0.2);}
+    .fix_wrap { height:376px;position:absolute;top:50%;margin-top:-188px;right:0px;}
+    .fix_wrap > ul > li { height:40px;line-height:40px;position: relative;margin:8px 0px; }
+    .fix_wrap > ul > li > a { display:block;width:40px;height:40px;line-height:40px;}
+    .fix_wrap > ul > li > span { position: absolute; right: 48px; top: 0; display: block; padding: 0 14px; line-height: 40px; color: #fff; font-size: 12px; background: #2badd7;opacity:0;transition:right 0.3s ease;-webkit-transition:right 0.3s ease;-moz-transition:right 0.3s ease;-o-transition:right 0.3s ease;height:0px;overflow:hidden;}
+    .fix_wrap > ul > .sell > span ,.fix_wrap > ul > .xhj_app> span { top:-27px;}
+      
+    .fix_wrap > ul > li:hover > span { right:40px;opacity:1;height:auto;overflow:visible;}
+    .fix_wrap > ul > li:hover { background-color:#7e7e7e;}
+    
+     .fix_wrap > ul > li > span > i { position: absolute; right: 0; top: 50%; width: 0; height: 0; margin: -5px -10px 0 0; font-size: 0; border: 5px solid; border-color: transparent transparent transparent #2badd7; overflow: hidden; }
+    .fix_wrap > ul > .phone > span , .fix_wrap > ul > .right_dizhi > span, .fix_wrap > ul > .right_kefu > span,.fix_wrap > ul > .right_shoucang > span,.fix_wrap > ul > .right_liulan > span{  white-space: nowrap;}
+    .fix_wrap > ul > .right_liulan:hover > span {line-height:25px;padding-top:8px;padding-bottom:8px; }
+    .fix_wrap > ul > .phone > a { background:url(../image/right01.png) no-repeat center center;}
+    .fix_wrap > ul > .sell > a { background:url(../image/right02.png) no-repeat center center;}
+    .fix_wrap > ul > .xhj_app > a { background:url(../image/right03.png) no-repeat center center;}
+    .fix_wrap > ul > .right_dizhi > a { background:url(../image/right04.png) no-repeat center center;}
+    .fix_wrap > ul > .right_kefu> a { background:url(../image/right05.png) no-repeat center center;}
+    .fix_wrap > ul > .right_shoucang> a { background:url(../image/right06.png) no-repeat center center;}
+    .fix_wrap > ul > .right_liulan> a { background:url(../image/right07.png) no-repeat center center;}
+    .fix_wrap > ul > .right_top> a { background:url(../image/right08.png) no-repeat center center;}
+
+     .fix_wrap > ul > .phone:hover > a { background:url(../image/right001.png) no-repeat center center;}
+    .fix_wrap > ul > .sell:hover > a { background:url(../image/right002.png) no-repeat center center;}
+    .fix_wrap > ul > .xhj_app:hover > a { background:url(../image/right003.png) no-repeat center center;}
+    .fix_wrap > ul > .right_dizhi:hover > a { background:url(../image/right004.png) no-repeat center center;}
+    .fix_wrap > ul > .right_kefu:hover> a { background:url(../image/right005.png) no-repeat center center;}
+    .fix_wrap > ul > .right_shoucang:hover> a { background:url(../image/right006.png) no-repeat center center;}
+    .fix_wrap > ul > .right_liulan:hover> a { background:url(../image/right007.png) no-repeat center center;}
+    .fix_wrap > ul > .right_top:hover> a { background:url(../image/right008.png) no-repeat center center;}
+
+    .fix_wrap > ul > .sell > span > i,  .fix_wrap > ul > .xhj_app > span > i {border-color: transparent transparent transparent #fff; }
+    .fix_wrap > ul > .sell > span, .fix_wrap > ul > .xhj_app > span { background-color:#fff;}
+    .fix-right {border-left/*\**/: 1px solid #e2e2e2/*\**/ } 
