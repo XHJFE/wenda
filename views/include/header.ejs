@@ -5,15 +5,15 @@
         <span class="font14 place place01"><img src="../images/sy12.png"/><i><%= currentCity.cityName %></i></span> 
         <div class="narbar pull-right narbar01">
             <ul class="list-unstyled list-inline listxinfang">
-                <li class="tabs active"><a href="/">首页</a></li>
-                <li class="tabs">
-                    <a href="/xinfang/">问答动态</a>
+                <li class="tabs <%= active === 'home' ? 'active' : '' %>"><a href="/">首页</a></li>
+                <li class="tabs <%= active === 'dynamic' ? 'active' : '' %>">
+                    <a href="/latest">问答动态</a>
                     <div class="wd_nav">
                         <a href="###"><span>我要提问</span></a>
                         <a href="###"><span>精选回答</span></a>
                     </div>
                 </li>
-                <li class="tabs"><a href="/">我的回答</a></li>         
+                <li class="tabs <%= active === 'ask' ? 'active' : '' %>"><a href="/">我的回答</a></li>         
             </ul>
         </div>
     </div>

@@ -23,6 +23,7 @@
 <!--[if lt IE 9]>
   <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
   <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
+  
 <![endif]-->
 
 <% include include/cssjs %>
@@ -33,7 +34,11 @@
 <!-- 顶部导航栏 -->
 <%- include('include/nav', {menus: menus}) %>
 <!-- 顶部菜单栏 -->
-<%- include('include/header', {city: city, currentCity: currentCity})  %>
+<%- include('include/header', {
+    city: city, 
+    currentCity: currentCity,
+    active: 'home'
+})  %>
 <!-- 搜索栏 -->
 <% include include/search %>
 
@@ -53,9 +58,7 @@
             </div>
        <% }) %>
        
-
        <a href="/classify" target="_blank" class="more_type"><span>更多分类</span><img src="../images/wd_fl.png" /></a>
-
    </div>
     </div>
 
@@ -84,7 +87,7 @@
 
         <div class="more_wrap">
             <span><img src="../images/wd_fjx.png"/></span>
-            <a href="###"><i>查看</i><span>更多>></span></a>
+            <a href="/latest"><i>查看</i><span>更多>></span></a>
         </div>
     </div>
 
@@ -117,19 +120,27 @@
 
 </div>
 <script>
-    require(['jquery'], function($) {
+    require(['jquery', 'swiper'], function($, swiper) {
+
         $(function(){
-            //详情
-            var len = 80; 
-            var ctn = document.getElementById("content"); 
-            var content = ctn.innerHTML;                  
-            var span = document.createElement("span"); 
-            var i = document.createElement("i");           
-            span.innerHTML = content.substring(0, len);
-            i.innerHTML = content.length > len ? "... [详情]" : "";              
-            ctn.innerHTML = "";
-            ctn.appendChild(span);
-            ctn.appendChild(i);
+            (function(){
+                //详情
+                var len = 80; 
+                var ctn = document.getElementById("content"); 
+                var content = ctn.innerHTML;                  
+                var span = document.createElement("span"); 
+                var i = document.createElement("i");           
+                span.innerHTML = content.substring(0, len);
+                i.innerHTML = content.length > len ? "... [详情]" : "";              
+                ctn.innerHTML = "";
+                ctn.appendChild(span);
+                ctn.appendChild(i);
+            })()
+
+            console.log(swiper)
+            
+
+
         })
     })
     

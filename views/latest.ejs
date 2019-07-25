@@ -1,0 +1,192 @@
+﻿
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="zh-CN">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7)]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>【长沙楼盘_长沙新房_长沙楼盘价格】—新环境房屋网</title>
+<meta http-equiv="Cache-Control" content="no-transform"/>
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
+<meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
+<link href="../css/list.css" rel="stylesheet" />
+<link href="../css/wendas.css" rel="stylesheet" />
+<!--[if lt IE 9]>
+  <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
+  <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
+<![endif]-->
+
+
+<% include include/cssjs %>
+
+</head>
+
+<body>
+    
+<!-- 顶部导航栏 -->
+<%- include('include/nav', {menus: menus}) %>
+<!-- 顶部菜单栏 -->
+<%- include('include/header', {
+    city: city, 
+    currentCity: currentCity,
+    active: 'dynamic'
+})  %>
+<!-- 搜索栏 -->
+<% include include/search %>
+
+<!--面包屑导航 -->
+<div class="breadcrumb">
+    <div class="breadcrumb_content">
+        <a href="/"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
+        <a href="#"><span>问答动态</span></a>
+    </div>
+</div>
+
+<div class="wddt_big_wrap">
+    <div class="wddt_content_wrap">
+        <p class="title">最新问题
+            <!-- <span class="dt_shaixuan"><i class="active">最新</i><i>热度</i></span> -->
+        </p>
+        
+        <div class="wenda_content">
+            <% questionList.content.forEach(item => { %>
+            <div class="wd_content">
+               <!------------------右边有图片的时候就在这里加个img_detail类名---->
+               <a href="###" class="<%= item.img ? 'img_detail': ''  %>">
+                   <p class="title"><%= item.problemTitle %></p>
+                   <p class="name"><%= item.questionerName %></p>
+                   <% if (item.newProblemAnswer) { %>
+                    <p class="content"><%= item.newProblemAnswer.answerContent %></p>
+                    <% } %>
+                   <p class="huida"><span><%= item.answerNum %>条回答</span></p>
+                   <% if (item.img) {%>
+                    <span class="img">
+                        <img src="<%= item.img %>"/>
+                    </span>
+                    <% } %>
+               </a>
+
+               
+               <span class="guanzhu active" onclick="addFocus('<%= item.problemAskId %>')">关注</span>
+               <span class="guanzhu" onclick="removeFocus('<%= item.problemAskId %>')">取消关注</span>
+           </div>
+           <% }) %>
+           <!---分页---->
+            <div class="pager" id="pager"></div>
+        </div>
+    </div>
+        
+    <!---右侧内容---->
+    <div class="wytw_right_wrap">
+        <p class="title"><img src="../images/wytw_img.png"/></p>
+        <div class="wytw_content">
+        <a href="###"><img src="../images/wd_01.png"/><span>我提出的问题</span></a>
+        <a href="###"><img src="../images/wd_02.png"/><span>我回答的问题</span></a>
+        <a href="###"><img src="../images/wd_03.png"/><span>我的关注</span></a>
+        </div>
+
+        <!---问答分类---->
+        <div class="wendafenlei_right">
+            <p class="right_title"><span>问答</span>分类<i></i></p>
+
+            <% classData.forEach(item => { %>
+            <div class="fenlei_list_wrap">
+               <p class="title"><%= item.typeName %></p>
+               <div class="fenlei_list">
+                   <% item.labels.forEach(child => { %>
+                   <a href="###"><span><%= child.labelName %></span></a>
+                   <% }) %>
+                </div>
+              </div>
+            <% }) %>
+            <a href="/classify" target="_blank" class="gdfl_btn"><span>更多分类</span><img src="../images/wd_04.png"/></a>
+        </div>
+
+
+          <!---热门回答---->
+         <div class="remenhuida_right">
+             <p class="right_title"><span>热门</span>回答<i></i></p>
+             <div class="remenhuida_right_content">
+                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
+                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
+                 <a href="###"><span>美国热门税一般为多少？</span><i>1200个回答</i></a>                
+             </div>
+         </div>
+
+            <!---最新回答---->
+            <div class="remenhuida_right">
+                 <p class="right_title"><span>最新</span>回答<i></i></p>
+                 <div class="remenhuida_right_content">
+                     <a href="###"><span>美国热门税一般为多少美国热门税一般为多少美国热门税一般为多少美国热门税一般为多少？</span><i>1220个回答</i></a>
+                     <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
+                     <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>                
+                 </div>
+             </div>
+    </div>
+
+</div>
+</body>
+<script>
+    require(['pager'], function(pager) {
+        var p = new pager({
+            total: "<%= questionList.totalElements %>",
+            pageno: Number("<%= questionList.number %>") + 1,
+            pagesize: "<%= questionList.size %>",
+            view: 2,
+            useGoto: false
+        });
+        $('#pager').after(p.get());
+    })
+    /**
+     * 关注
+     * @param {String} askId 问题id 
+     */
+     function addFocus(askId) {
+        $.ajax({
+            url: '/addFocus/',
+            type: 'POST',
+            data: {
+                askId: askId
+            },
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        })
+    }
+
+    /**
+     * 取消关注
+     * @param {String} askId 问题id 
+     */
+     function removeFocus(askId) {
+        $.ajax({
+            url: '/removeFocus/',
+            type: 'POST',
+            data: {
+                askId: askId
+            },
+            success: function(data) {
+                console.log(data)
+            },
+            error: function(data) {
+                console.log(data)
+            }
+        })
+    }
+
+
+
+</script>
+</html>

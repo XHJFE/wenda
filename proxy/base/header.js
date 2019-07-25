@@ -1,7 +1,8 @@
-let proxy = require('../base_proxy');
-let util = require('../../lib/util');
-let config = require('../../config.json');
-let env = config.env;
+const proxy = require('../base_proxy');
+const {
+    SITE_CHALLEL,
+    CITY
+} = require('../base_url');
 
 /**
  * 获取菜单
@@ -10,7 +11,7 @@ let env = config.env;
  */
 async function getMenus(cityId) {
     let data = await proxy({
-        uri: config.proxy_server_url[env] + '/web/channel/siteChannel/' + cityId,
+        uri: SITE_CHALLEL + cityId,
         method: 'GET',
         headers: {
             "Content-Type": "application/json;charset=UTF-8",
@@ -26,7 +27,7 @@ async function getMenus(cityId) {
  */
 async function getCity() {
     let data = await proxy({
-        uri: config.proxy_server_url[env] + '/web/city/findSort',
+        uri: CITY,
         method: 'GET',
         headers: {
             "Content-Type": "application/json;charset=UTF-8",
