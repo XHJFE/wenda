@@ -21,13 +21,15 @@ module.exports = {
     // 关注问题
     ADD_FOCUS: config.base_server_url[env] + `/web/problemAsk/addFocus/`,
     // 取消关注问题
-    REMOVE_FOCUS: config.base_server_url[env] + `/web/problemAsk/removeFocus`,
+    REMOVE_FOCUS: config.base_server_url[env] + `/web/problemAsk/removeFocus/`,
     // 关注的问题列表
-    GET_PROMBLEM_FOCUS: config.base_server_url[env] + `/web/problemAsk/getProblemFocus`,
+    GET_PROMBLEM_FOCUS: config.base_server_url[env] + `/web/problemAsk/getProblemFocus/`,
     // 获取经纪人列表
-    GET_BELONGER_BY_PAGE: config.base_server_url[env] + `/web/problemAsk/getBelongerByPage`,
+    GET_BELONGER_BY_PAGE: config.base_server_url[env] + `/web/problemAsk/getBelongerByPage/`,
     // 提问
-    SAVE_PROBLEM_ASK: config.base_server_url[env] + `/web/problemAsk/saveProblemAsk`,
+    SAVE_PROBLEM_ASK: config.base_server_url[env] + `/web/problemAsk/saveProblemAsk/`,
+    // 查询标签
+    FIND_LABEL_ALL: config.base_server_url[env] + `/web/problemType/findLabelAll/`,
     // 图片上传
     UPLOAD_PIC: 'http://bms.xhj.com/file/upload'
 }

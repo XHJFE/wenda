@@ -18,7 +18,6 @@ async function getADPIC(name) {
     });
     return data;
 }
-
 /**
  * 关注问题
  * @param {String | Number} userId 当前用户id

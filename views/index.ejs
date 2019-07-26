@@ -69,15 +69,18 @@
     <div class="jinritoutiao_wrap">
         <p class="title"><img src="../images/wd_tt.png"/></p>
         <div class="toutiao_content_wrap">
-            <a href="###"><img src="http://fpoimg.com/420x252"/></a>
+            <a href="###">
+                <img src="<%= hotQuestion[0].img || '../images/wd_banner.jpg' %>"/>
+                <p class="title"><%= hotQuestion[0].problemTitle %></p>
+            </a>
             <div class="toutiao_wrap">
                 <a href="###" class="zhu_content">
-                    <p class="title">在纽约买房都需要什么手续, 1000平米的房产</p>
-                    <p class="content" id="content">昨天，中消协公布了今年第一季度的投诉情况，房屋家居领域被指存在虚假宣传、误导消费者、延期交房等问期等问题，2016房地产业“营改增”最新政策解读与应对策略5月1日起.....</p>
+                    <p class="title"><%= hotQuestion[1].problemTitle %></p>
+                    <p class="content" id="content"><%= hotQuestion[1].problemContent %></p>
                 </a>
-                <a href="###" class="title"><i></i><span>在纽约买房都需要什么手续, 1000m2 的房产, 成交额都什价位?</span></a>
-                <a href="###" class="title"><i></i><span>在纽约买房都需要什么手续, 成交额都什么价位?</span></a>
-                <a href="###" class="title"><i></i><span>在纽约买房都需要什么手续, 成交额都什么价位?</span></a>
+                <% for(var i = 2, len = hotQuestion.length; i < len; i++){ %>
+                <a href="###" class="title"><i></i><span><%= hotQuestion[i].problemTitle %></span></a>
+                <% } %>
             </div>
 
 
@@ -136,11 +139,6 @@
                 ctn.appendChild(span);
                 ctn.appendChild(i);
             })()
-
-            console.log(swiper)
-            
-
-
         })
     })
     

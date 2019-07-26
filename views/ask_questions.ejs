@@ -18,7 +18,10 @@
 <meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
 <meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
 <link href="../css/list.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/component-chosen.css">
 <link href="../css/wendas.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/dialog.css">
+
 <link rel="stylesheet" href="../css/wangEditor.min.css">
 <!--[if lt IE 9]>
   <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
@@ -33,19 +36,17 @@
 <%- include('include/nav', {menus: menus}) %>
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
-    city: city, 
-    currentCity: currentCity,
-    active: ''
-})  %>
-<!-- 搜索栏 -->
-<% include include/search %>
+	city: city, 
+	currentCity: currentCity,
+	active: ''
+}) %>
 <!-- 搜索栏 -->
 <% include include/login %>
 
 <!--面包屑导航-->
 <div class="breadcrumb">
     <div class="breadcrumb_content">
-        <a href="###"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
+        <a href="/"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
         <a href="###"><span>我的提问</span></a>
     </div>
 </div>
@@ -56,7 +57,11 @@
     <!--左侧---->
     <div class="left_wrap  wodetiwen_wrap">
         <p class='title'>请简单描述你的问题</p>
-        <input type="text" placeholder="请输入您的问题50字以内" maxlength="50"/>
+		<input 
+			type="text" 
+			placeholder="请输入您的问题50字以内" 
+			maxlength="50"
+			id="title"/>
         <p class='title'>问题补充</p>
 
         <!--富文本-->
@@ -67,16 +72,28 @@
 
         <p class='title'>问题类别</p>
         <div class="wentileibie_wrap">
-            <input type="text" placeholder="请输入您的问题50字以内" maxlength="50"/>
-            <a href="###"><img src="../images/wd_08.png"/></a>
-        </div>
+			<select 
+				id="optgroup" 
+				class="form-control form-control-chosen" 
+				data-placeholder="请输入" 
+				style="display: none;"
+				multiple>
+				<% allBabel.forEach(item => { %>
+				<option value="<%= item.labelId %>"><%= item.labelName %></option>		
+				<% }) %>		 
+			</select>
+	  </div>
         <div class="yaoqingzuoda">
             <p>
             <img src="../images/wd_09.png"/>
             <span>邀请作答<i>（非必选）</i></span>
             </p>
-            <a href="###"><span>提交回答</span></a>
-        </div>
+			<a href="javascript:void(0);" onclick="submit()"><span>提交回答</span></a>
+			
+			<!-- 被邀请人列表 -->
+			<div class="jinfjiren_number">
+			</div>
+		</div>
 
     </div>
 
@@ -137,7 +154,7 @@
          <span class="hp_btn" onclick="getBelongerList()"><i class="sx_img"></i>换一批</span>
      </div> 
     <div class="yaoqingjingjiren_wrap" id="agent">
-		<% belongerList.content.forEach(item => { %>
+		<% belongerList.content.forEach((item, index) => { %>
         <div class="zuoda_list">
             <span><img src="<%= item.portrait %>"/></span>
             <p class="name"><span><%= item.name %></span><i><%= item.levelName %></i></p>
@@ -146,7 +163,13 @@
 					<%= index > 0 ? '、' : '' %> <%= child %>
 				<% }) %>
 			</p>
-            <a href="###"><span>邀请作答</span></a>
+			<a 
+				href="javascript:void(0);" 
+				onclick="invitation('<%= item.belongerId %>', '<%= item.name %>', '<%= index %>')"
+				class="invitate"
+				data-id="<%= item.belongerId %>">
+				<span>邀请作答</span>
+			</a>
 		</div>
 		<% }) %>
 
@@ -155,7 +178,11 @@
 </div>
 
 <script>
-	require(['jquery', 'wang_editor'], function($, wangEditor) {
+	var dialog = null,
+		login = null;
+	require(['jquery', 'wang_editor', 'plupload', 'chosen.jquery', 'dialog', 'pc_login_reg'], function($, wangEditor, plupload, chosen, d, l) {
+		dialog = d
+		login = l
 		$(function () {
 			//加精
 			// $('.switch_btn').click(function () {
@@ -189,6 +216,8 @@
 			//邀请作答
 			$('.yaoqingzuoda>p').click(function () {
 				$('.back_model,.yaoqingzuoda_model').show();
+				
+				
 			})
 			$('.back_model,.close_btn').click(function () {
 				$('.back_model,.yaoqingzuoda_model,.huida_model').hide();
@@ -198,24 +227,84 @@
 				ab += 360;
 				$('.hp_btn>i').css('transform', 'rotate(' + ab + 'deg)');                       
 			})
+
+			//问题类别选择
+			$('.form-control-chosen').chosen({
+				allow_single_deselect: true,
+				max_selected_options: 3,
+				width: '100%',
+			}).change(function(data) {
+				console.log(data)
+			})
 			//提交审核
 			// $('.yaoqingzuoda > a').click(function () {
 			// 	$('.back_model,.huida_model').show();
 			// })
-			var w = new wangEditor('#editor')
-			w.customConfig.menus = [
+			initEditor(wangEditor)
+
+			// 删除选中的邀请人
+			$(document).on('click', '.removeInvitate', function(){
+				var index = $(this).parent().index()
+				var id = $(this).parent().attr('data-id')
+				var list = $('.invitate')
+				$.each(list, function(index, item) {
+					if ($(item).attr('data-id') === id) {
+						$(item).removeAttr('disabled')
+					}
+				})
+				invitedList.splice(index, 1)
+				$(this).parent().remove()
+				
+			})
+			
+			
+		});
+	})
+	
+	// 邀请人页数
+	var page = 1
+	// 编辑器实例对象
+	var w = null
+	// 已邀请人列表
+	var invitedList = []
+
+	/**
+	 * 初始化富文本编辑器
+	 */
+	function initEditor(wangEditor) {
+		w = new wangEditor('#editor')
+		w.customConfig = {
+			menus: [
 				'bold',
 				'italic',
 				'underline',
 				'undo',
 				'image', 
-			]
-			w.customConfig.uploadImgShowBase64 = true   // 使用 base64 保存图片
-			w.create()
-		});
-	})
-	
-	var page = 1
+			],
+			zIndex: 50,
+			uploadImgServer: 'http://bms.xhj.com/file/upload',
+			uploadImgShowBase64: true,
+			showLinkImg: false,
+			uploadFileName: 'file',
+			uploadImgHooks: {
+				fail: function(xhr, editor, result) {
+					editor.uploadImg.insertLinkImg(result)
+				}
+			},
+			customAlert: function (info) {
+				return
+			},
+			onchange: function() {
+				var text = w.txt.text()
+				var html = w.txt.html()
+				if (text.length > 300) {
+					console.log(html)
+				}
+			}
+		}
+		w.create()
+	}
+
 	/**
 	 * 获取经纪人列表
 	 */
@@ -228,23 +317,30 @@
 			},
 			method: 'POST',
 			success: function(data) {
-				page++
+				page++;
 				if (data.status == 1) {
-					var res = data.data
-					var content = res.content
-					var htmlStr = ''
+					var res = data.data;
+					var content = res.content;
+					var htmlStr = '';
 					if (res.last) {
-						page = 0
+						page = 0;
 					}
 					$.each(content, function(index, item) {
-						htmlStr += '<div class="zuoda_list">' +
+						var disabled = '';
+						for (var i = 0, len = invitedList.length; i < len; i++) {
+							if (item.belongerId === invitedList[i].inviteeId) {
+								disabled = 'disabled';
+								break;
+							}
+						}
+						htmlStr += '<div class="zuoda_list" data-id="'+item.belongerId+'">' +
 							'<span><img src="'+ item.portrait +'"/></span>' +
 							'<p class="name"><span>'+ item.name +'</span><i>'+ item.levelName +'</i></p>'+
 							'<p class="quyu">'+ (item.fwlp && item.fwlp.length > 0 ? item.fwlp.join('、') : '--') +'</p>' +
-							'<a href="###"><span>邀请作答</span></a>'+
-						'</div>'
+							'<a data-id="'+item.belongerId+'" href="javascript:void(0);" class="invitate" onclick="invitation(\''+item.belongerId+'\', \''+item.name+'\', '+index+')" '+ disabled +'><span>邀请作答</span></a>'+
+						'</div>';
 					})
-					$('#agent').html(htmlStr)
+					$('#agent').html(htmlStr);
 
 				}
 			},
@@ -258,16 +354,87 @@
 	 * 通过名字搜索经纪人列表
 	 */
 	function searchBelongerList() {
-		page = 0
-		
-		var name = $('#agentValue').val()
+		page = 0;
+		var name = $('#agentValue').val();
 		if (name) {
-			$('.hp_btn').hide()
+			$('.hp_btn').hide();
 		} else {
-			$('.hp_btn').show()
+			$('.hp_btn').show();
 		}
+		getBelongerList(name);
+	}
+
+	/**
+	 * 邀请作答
+	 * @param {String} id 当前被邀请人员
+	 * @param {String} name 当前被邀请人名字
+	 */
+	function invitation(id, name, index) {
+		var item = $('.invitate').eq(index);
+		if (item.attr('disabled')) {
+			return;
+		}
+		invitedList.push({
+			inviteeId: id,
+			inviteeName: name
+		});
+		item.attr('disabled', true);
+		var html = '<span data-id="'+ id +'">'+ name +'<i class="removeInvitate"></i></span>';
+		$('.jinfjiren_number').append(html);
 		
-		getBelongerList(name)
+	}
+
+	/**
+	 * 提交回答
+	 */
+	function submit() {
+		var title = $('#title').val();
+		var content = w.txt.html();
+		if (!title) {
+			var d = dialog({
+				title: '温馨提示',
+				content: '请输入问题标题'
+			});
+			d.showModal();
+			return
+		}
+		if (!w.txt.text()) {
+			var d = dialog({
+				title: '温馨提示',
+				content: '请输入问题内容'
+			});
+			d.showModal();
+			return
+		}
+
+		var optionNodes = $('.form-control-chosen').get(0).selectedOptions
+		var tags = []
+		$.each(optionNodes, function(index, item) {
+			tags.push($(item).val()) 
+		})
+		$.ajax({
+			url: '/askQuestions',
+			method: 'POST',
+			data: {
+				problemTitle: title,
+				problemContent: content,
+				problemLabelId: tags.join(','),
+				listProblemInvited: JSON.stringify(invitedList)
+			},
+			success: function(data) {
+				console.log(data)
+				if (data.status == 1) {
+					window.location.href = '/latest'
+				} else if (data.status == '506') {
+					login.login(function() {
+						console.log('登陆成功')
+					})
+				}
+			},
+			error: function() {
+
+			}
+		})
 
 	}
 </script>

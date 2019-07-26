@@ -3,10 +3,12 @@ const {
     removeFocus
 } = require('../proxy/base/index');
 const {
-    getBelongerByPage
+    getBelongerByPage,
+    saveProblemAsk
 } = require('../proxy/index/index')
 
 module.exports = (router) => {
+    router
     /**
      * 关注
      */
@@ -35,6 +37,24 @@ module.exports = (router) => {
         getBelongerByPage(req.body.page, req.body.name).then(data => {
             res.send(JSON.parse(data))
         })
+    })
+
+    /**
+     * 提问
+     */
+    router.post('/askQuestions', function(req, res) {
+        if (global.user.isLogin) {
+            saveProblemAsk(req.body).then(data => {
+                console.log(data)
+                res.send(JSON.parse(data))
+            })
+        } else {
+            res.send({
+                status: 506,
+                message: '请登录'
+            })
+        }
+        
     })
 
 }

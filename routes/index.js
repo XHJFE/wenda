@@ -6,6 +6,7 @@ const classifyController = require('../controller/classify');
 const latestController = require('../controller/latest')
 const answerController = require('../controller/answer')
 const askQuestionsController = require('../controller/ask_questions')
+const searchResultController = require('../controller/search_result')
 const settings = require('../settings.json');
 const { getStringInImg, delHtmlTag } = require('../lib/util');
 
@@ -25,6 +26,25 @@ const questionFormat = (arr) => {
     return arr
 }
 
+const updateUserInfo = (req, res, next) => {
+    let {
+        xh_userId,
+        xh_userName
+    } = req.cookies
+    let isLogin = xh_userId ? true : false 
+    global.user = {
+        xh_userId,
+        xh_userName,
+        isLogin
+    }
+    next()
+}
+
+router.get('*',updateUserInfo)
+
+
+router.post('*', updateUserInfo)
+ 
 /**
  * 首页
  */
@@ -35,19 +55,23 @@ router.get('/',  (req, res, next) => {
             newQuestion,
             menus,
             city,
-            adPic
+            hotQuestion
         } = data;
         newQuestion.data.content = questionFormat(newQuestion.data.content)
+        hotQuestion.data.content = questionFormat(hotQuestion.data.content)
         res.render('index', {
             classData: classData.data,
             newQuestion: newQuestion.data,
-            adPic,
+            hotQuestion: hotQuestion.data.content,
             city,
             menus,
             currentCity: settings
         })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
+        })
     })
-    
 });
 
 /**
@@ -65,6 +89,10 @@ router.get('/classify',  (req, res, next) => {
             city,
             menus,
             currentCity: settings
+        })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
         })
     })
 });
@@ -92,6 +120,10 @@ router.get('/latest',  (req, res, next) => {
             hotQuestion: hotQuestion.data.content,
             newAsk: newAsk.data.content
         })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
+        })
     })
 });
 
@@ -109,6 +141,10 @@ router.get('/answer', (req, res) => {
             menus,
             currentCity: settings,
         })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
+        })
     })
 })
 
@@ -120,19 +156,52 @@ router.get('/ask_questions', (req, res) => {
         let {
             menus,
             city,
-            belongerList
+            belongerList,
+            allBabel
         } = data
-        console.log(belongerList)
         res.render('ask_questions', {
             city,
             menus,
+            allBabel: allBabel.data,
             currentCity: settings,
             belongerList: belongerList.data
+        })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
         })
     })
 })
 
+/**
+ * 搜索结果
+ */
+router.get('/search_result', (req, res) => {
+    searchResultController(req.query.keyword).then(data => {
+        let {
+            menus,
+            city,
+            question, 
+            hotQuestion, 
+            newAsk,
+            classData
+        } = data
+        question.data.content = questionFormat(question.data.content)
+        res.render('search_result', {
+            city,
+            menus,
+            currentCity: settings,
+            classData: classData.data,
+            question: question.data,
+            hotQuestion: hotQuestion.data.content,
+            newAsk: newAsk.data.content
+        })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
+        })
+    })
+})
 
 apiRouter(router)
-
 module.exports = router;

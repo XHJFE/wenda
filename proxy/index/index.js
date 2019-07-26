@@ -4,7 +4,8 @@ const {
     GET_PROBLEM_ASK_LIST,
     GET_PROMBLEM_FOCUS,
     GET_BELONGER_BY_PAGE,
-    SAVE_PROBLEM_ASK
+    SAVE_PROBLEM_ASK,
+    FIND_LABEL_ALL
 } = require('../base_url');
 const headers = {
     "Content-Type": "application/json;charset=UTF-8",
@@ -66,7 +67,7 @@ async function getNewQuestion(param = {}) {
  * 获取关注的问题列表
  */
 async function getPromblemFocus() {
-
+    
 }
 
 /**
@@ -97,11 +98,31 @@ async function getBelongerByPage(page, name) {
  * @param {Array} listProblemInvited 邀请者列表
  */
 async function saveProblemAsk(param) {
+    let {
+        listProblemInvited,
+        ...other
+    } = param
     return await proxy({
-        uri: GET_BELONGER_BY_PAGE,
+        uri: SAVE_PROBLEM_ASK,
         method: 'POST',
         headers,
-        body: JSON.stringify(param)
+        body: JSON.stringify({
+            ...other,
+            listProblemInvited: JSON.parse(listProblemInvited),
+            questionerId: global.user.xh_userId,
+            questionerName: global.user.xh_userName
+        })
+    });
+}
+
+/**
+ * 查询所有问答标签
+ */
+async function findLabelAll() {
+    return await proxy({
+        uri: FIND_LABEL_ALL,
+        method: 'get',
+        headers
     });
 }
 
@@ -111,5 +132,6 @@ module.exports = {
     getClassData,
     getNewQuestion,
     getBelongerByPage,
-    saveProblemAsk
+    saveProblemAsk,
+    findLabelAll
 };

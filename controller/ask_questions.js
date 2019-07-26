@@ -1,4 +1,7 @@
-const proxyIndex = require('../proxy/index/index');
+const {
+    getBelongerByPage,
+    findLabelAll
+} = require('../proxy/index/index');
 const util = require('../lib/util');
 const { getCityAndMenus } = require('./base');
 
@@ -6,10 +9,11 @@ const { getCityAndMenus } = require('./base');
 module.exports = (param) => {
     // 公用导航栏和城市数据
     const baseData = getCityAndMenus();
-    const keys = ['belongerList', ...baseData.keys];
-    const belongerList = proxyIndex.getBelongerByPage(param)
+    const keys = ['belongerList', 'allBabel', ...baseData.keys];
+    const belongerList = getBelongerByPage(param)
+    const allBabel = findLabelAll()
     return new Promise((resolve, reject) => {
-        Promise.all([belongerList, ...baseData.values]).then(result => {
+        Promise.all([belongerList, allBabel, ...baseData.values]).then(result => {
             resolve(util.getResult(keys, result));
         }).catch(e => {
             reject(e);
