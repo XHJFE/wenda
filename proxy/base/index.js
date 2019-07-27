@@ -1,23 +1,9 @@
 const proxy = require('../base_proxy');
 const {
-    ADPIC,
     HEADER,
     ADD_FOCUS,
     REMOVE_FOCUS
 } = require('../base_url')
-/**
- * 获取广告图
- * @param {String} name 当前广告使用页面
- * @returns {Promise.<*>}
- */
-async function getADPIC(name) {
-    let data = await proxy({
-        uri: ADPIC + encodeURI(name),
-        method: 'GET',
-        headers: HEADER
-    });
-    return data;
-}
 /**
  * 关注问题
  * @param {String | Number} userId 当前用户id
@@ -47,7 +33,6 @@ async function removeFocus(userId, askId) {
 }
 
 module.exports = {
-    getADPIC,
     addFocus,
     removeFocus
 }

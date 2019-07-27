@@ -6,9 +6,9 @@ const util = require('../lib/util');
 const { getCityAndMenus } = require('./base');
 
 
-module.exports = (param) => {
+module.exports = (req, param) => {
     // 公用导航栏和城市数据
-    const baseData = getCityAndMenus();
+    const baseData = getCityAndMenus(req.cookies.siteid);
     const keys = ['belongerList', 'allBabel', ...baseData.keys];
     const belongerList = getBelongerByPage(param)
     const allBabel = findLabelAll()

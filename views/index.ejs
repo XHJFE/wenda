@@ -36,8 +36,9 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCity: currentCity,
-    active: 'home'
+    currentCityId: currentCityId,
+    active: 'home',
+    search: false
 })  %>
 <!-- 搜索栏 -->
 <% include include/search %>
@@ -52,7 +53,7 @@
                 <p class="title"><%= item.typeName %></p>
                 <div class="fenlei_list">
 					<% item.labels.forEach(child => { %>
-						<a href="###"><span><%= child.labelName %></span></a>
+						<a href="/search_result?labelName=<%= child.labelName %>"><span><%= child.labelName %></span></a>
 					<% }) %>
                 </div>
             </div>
@@ -69,17 +70,17 @@
     <div class="jinritoutiao_wrap">
         <p class="title"><img src="../images/wd_tt.png"/></p>
         <div class="toutiao_content_wrap">
-            <a href="###">
+            <a href="/questions_info/<%= hotQuestion[0].problemAskId %>">
                 <img src="<%= hotQuestion[0].img || '../images/wd_banner.jpg' %>"/>
                 <p class="title"><%= hotQuestion[0].problemTitle %></p>
             </a>
             <div class="toutiao_wrap">
-                <a href="###" class="zhu_content">
+                <a href="/questions_info/<%= hotQuestion[1].problemAskId %>" class="zhu_content">
                     <p class="title"><%= hotQuestion[1].problemTitle %></p>
                     <p class="content" id="content"><%= hotQuestion[1].problemContent %></p>
                 </a>
                 <% for(var i = 2, len = hotQuestion.length; i < len; i++){ %>
-                <a href="###" class="title"><i></i><span><%= hotQuestion[i].problemTitle %></span></a>
+                <a href="/questions_info/<%= hotQuestion[i].problemAskId %>" class="title"><i></i><span><%= hotQuestion[i].problemTitle %></span></a>
                 <% } %>
             </div>
 
@@ -100,14 +101,15 @@
         <p class="title">最新问题</p>
 
         <div class="wenda_content wenda_content_common">
+            
             <% newQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="###" class="<%= item.img ? 'img_detail': ''  %>">
+                    <a href="/questions_info/<%= item.problemAskId %>" class="<%= item.img ? 'img_detail': ''  %>">
                         <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
-                            <p class="content"><%= item.newProblemAnswer.answerContent %></p>
+                            <p data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>" class="content answer"><%= item.newProblemAnswer.answerContent %></p>
                         <% } %>
 
                         <% if (item.img) {%>
@@ -139,6 +141,11 @@
                 ctn.appendChild(span);
                 ctn.appendChild(i);
             })()
+            $('.answer').click(function(){
+                var url = $(this).attr('data-url')
+                window.location.href = url
+                return false
+            })
         })
     })
     

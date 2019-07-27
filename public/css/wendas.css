@@ -221,6 +221,8 @@ i {font-style:normal; }
     .gzwt_wrap > a { display: inline-block; width: 165px; height: 58px; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; text-align: center; line-height: 58px; font-size: 18px; }
     .gzwt_wrap > a.gzwt_btn { background-color:#2BADD7;}
     .gzwt_wrap > a.gzwt_btn > span { color:#fff;}
+    .gzwt_wrap > a.gzwt_btn.no { background-color:#e9f4f8; border: 1px solid #d0e3ea;}
+    .gzwt_wrap > a.gzwt_btn.no > span { color: #5094ad;}
     .gzwt_wrap > a.xhd_btn { border:1px solid #84C8DE;float:right;}
     .gzwt_wrap > a.xhd_btn > span { color:#2BADD7;}
 
@@ -231,7 +233,7 @@ i {font-style:normal; }
     .wddtxq_wrap> .content>a {font-size:14px;color:#2BADD7; }
     .wddtxq_wrap> .title_da { font-size:16px;color:#333;padding-top:13px;padding-bottom:13px;}
     .wddtxq_wrap .huida { border-bottom:1px solid #EDF1E9;padding-bottom:15px;}
-    .wddtxq_wrap .huida > span { display: inline-block; font-size: 12px; color: #B0B3B4; padding-left: 20px; background: url(img/wd_14.png) no-repeat left center; }
+    .wddtxq_wrap .huida > span { display: inline-block; font-size: 12px; color: #B0B3B4; padding-left: 20px; background: url(../images/wd_14.png) no-repeat left center; }
     .wddtxq_wrap .huida > i { color:#B0B3B4;font-size:12px;display:inline-block;float:right;}
     .wddtxq_wrap .fuwenben { width:100%;height:158px;}
     .wddtxq_wrap .fuwenben > img { width:100%;height:100%;}
@@ -246,7 +248,7 @@ i {font-style:normal; }
    
     /*评论*/
     .xiangqingpinglun_wrap >.title  {font-size:16px;color:#333;font-weight:bold; }
-    .xiangqingpinglun_wrap > .title > i { background: url(img/wd_15.png) no-repeat; background-size: 100% 100%; width: 720px; height: 9px;float:right; margin-top: 6px;}
+    .xiangqingpinglun_wrap > .title > i { background: url(../images/wd_15.png) no-repeat; background-size: 100% 100%; width: 720px; height: 9px;float:right; margin-top: 6px;}
     .xiangqingpinglun_list { border-bottom:1px solid #DCDCDC;padding-top:25px;}
     .xiangqingpinglun_list > a { display:block;padding-left:48px;position:relative;margin-bottom:9px;}
     .xiangqingpinglun_list > .head > span {display:inline-block;height:38px;width:38px;position:absolute;top:0px;left:0px; }
@@ -290,3 +292,6 @@ i {font-style:normal; }
 
     .toutiao_content_wrap >a> .title {position:absolute;bottom:10px;left:0px;width:100%;padding:0px 20px;line-height:42px;font-size:30px;color:#fff; max-height:84px;overflow:hidden;}
     .toutiao_wrap{height: 250px;}
+
+    .right_wrap.active { float:none;position:fixed;top:0px;left:50%;height:1px;width:1200px;margin-left:-600px;}
+    .right_wrap.active .remenhuida_right { width:350px;float:right;}

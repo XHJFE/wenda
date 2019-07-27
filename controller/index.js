@@ -5,9 +5,9 @@ const {
     getADPIC
  } = require('./base');
 
-module.exports = () => {
+module.exports = (req) => {
     // 公用导航栏和城市数据
-    const baseData = getCityAndMenus()
+    const baseData = getCityAndMenus(req.cookies.siteid)
     let keys = ['classData', 'newQuestion', 'hotQuestion', ...baseData.keys];
     // 获取分类数据
     let classData = proxyIndex.getClassData();

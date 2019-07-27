@@ -37,13 +37,6 @@ async function getCity() {
     return data;
 }
 
-/**
- * 获取用户id
- */
-async function getUserId(session) {
-    
-}
-
 module.exports = {
     getMenus,
     getCity

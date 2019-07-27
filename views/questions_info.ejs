@@ -1,0 +1,342 @@
+﻿
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="zh-CN">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7)]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>【长沙楼盘_长沙新房_长沙楼盘价格】—新环境房屋网</title>
+<meta http-equiv="Cache-Control" content="no-transform"/>
+<meta http-equiv="Cache-Control" content="no-siteapp"/>
+<meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
+<meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
+<link href="../css/list.css" rel="stylesheet" />
+<link href="../css/wendas.css" rel="stylesheet" />
+<link rel="stylesheet" href="../css/dialog.css">
+<!--[if lt IE 9]>
+  <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
+  <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
+<![endif]-->
+<% include include/cssjs %>
+
+</head>
+
+<body>
+<!-- 顶部导航栏 -->
+<%- include('include/nav', {menus: menus}) %>
+<!-- 顶部菜单栏 -->
+<%- include('include/header', {
+    city: city, 
+    currentCityId: currentCityId,
+    active: '',
+    search: true
+})  %>
+<!-- 搜索栏 -->
+<% include include/login %>
+
+<!--面包屑导航-->
+<div class="breadcrumb">
+    <div class="breadcrumb_content">
+        <a href="/"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
+        <a href="/latest"><span>问答动态</span></a>&nbsp;>
+        <a href="#"><span>问答详情</span></a>
+    </div>
+</div>
+
+
+<!--内容-->
+<div class="wrap">
+    <!--左侧---->
+    <div class="left_wrap  wddtxq_wrap">
+            <p class="title"><%= promblemInfo.problemTitle %></p>
+            <p class="bq">
+				<% promblemInfo.listLabelName.forEach(item => { %>
+				<span><%= item %></span>
+				<% }) %>
+			</p>
+            <p class="content" id="content"><%- promblemInfo.problemContent %></p>
+            <p class="huida"><span><%= promblemInfo.answerNum %>条回答</span><i><%= promblemInfo.questionerName %> <%= promblemInfo.createDate %>发布</i></p>
+                        
+           <div class="title_da"><%= userName %> 答： 
+			   <!-- <p class="niming"><i>匿名</i><span class="switch_btn"><i></i></span></p> -->
+			</div>
+
+			<% if (isLogin) { %>
+            <div class="fuwenben" id="editor"></div>
+			<% } %>
+
+        <!-- 未登录时富文本的状态-->
+        <% if (!isLogin) { %>
+        <div class="weidenglu_wrap">
+            <p class="wdl_text">
+              <a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a>
+              <i>后回答TA</i>
+            </p>
+        </div>
+        <% } %>
+
+            <div class="btns">              
+               <a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
+            </div>
+   
+           <!--评论-->
+           <div class="xiangqingpinglun_wrap">
+               <p class="title"><%= answerList.totalElements %>条评论<i></i></p>
+               <div class="xiangqingpinglun_content">
+				   <% answerList.content.forEach(item => { %>
+                   <div class="xiangqingpinglun_list">
+                       <a href="###" class="head">
+                           <span><img src="../images/wd_18.png"/></span>
+                           <p class="name"><%= item.answerPersonName %></p>
+                           <p class='time'>发布时间 <%= item.createDate %></p>
+                       </a>
+                       <div class="content"><%- item.answerContent %></div>
+				   </div>               
+				   <% }) %>
+				</div>
+				<% if (!answerList.last) {%>
+			   <a href="javascript:void(0);" onclick="loadMore('<%= promblemInfo.problemAskId %>')" class="more_btn"><span>加载更多&gt;&gt;</span></a>
+			   <% } %>
+           </div>
+    </div>
+
+
+
+    <!--右侧---->
+    <div class="right_wrap">
+         <!---热门回答---->
+         <div class="remenhuida_right">
+             <div class="gzwt_wrap">
+				<a href="javascript:void(0);" style="display: <%= promblemInfo.isFocus ? 'none' : 'inline-block' %>" onclick="addFocus('<%= promblemInfo.problemAskId %>')" class="gzwt_btn yes"><span>关注问题</span></a>
+				<a href="javascript:void(0);" style="display: <%= !promblemInfo.isFocus ? 'none' : 'inline-block' %>" onclick="removeFocus('<%= promblemInfo.problemAskId %>')" class="gzwt_btn no"><span>取消关注</span></a>
+				<a href="###" class="xhd_btn"><span>写回答</span></a>
+             </div>
+
+             <p class="right_title"><span>相关</span>问题<i></i></p>
+             <div class="remenhuida_right_content">
+                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
+                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
+                 <a href="###"><span>美国热门税一般为多少？</span><i>1200个回答</i></a>                
+             </div>
+         </div>
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+	var login = null
+	var dialog = null
+	var page = 0
+	var isLoad = false
+    require(['pc_login_reg', 'wang_editor', 'dialog'], function(l, wangEditor, d) {
+		login = l
+		dialog = d
+		$(function () {
+			//加精
+			$('.switch_btn').click(function () {
+				$(this).toggleClass('active');
+			})
+
+			//回答内容收展
+			var len = 110;
+			var ctn = document.getElementById("content");
+			var content = ctn.innerHTML;
+			var span = document.createElement("span");
+			var a = document.createElement("a");
+			span.innerHTML = content.substring(0, len);
+
+			a.innerHTML = content.length > len ? "展开全文<img src='../images/wd_11.png'/>" : "";
+			a.href = "javascript:void(0)";
+
+			a.onclick = function () {
+				if (a.innerHTML.indexOf("展开全文") ==0) {
+					a.innerHTML = "&nbsp;&nbsp;收起全文<img src='../images/wd_12.png'/>";
+					span.innerHTML = content;
+				} else {
+					a.innerHTML = "展开全文<img src='../images/wd_11.png'/>";
+					span.innerHTML = content.substring(0, len);
+				}
+			}
+			ctn.innerHTML = "";
+			ctn.appendChild(span);
+			ctn.appendChild(a);
+
+			//右侧悬浮
+			var tab_h = 152;
+			$(window).scroll(function () {
+				var height = $(document).scrollTop();
+				if (height >= tab_h) {
+					$('.right_wrap').addClass('active');
+				} else {
+					$('.right_wrap').removeClass('active');
+				}          
+			})
+
+			initEditor(wangEditor)
+		});
+	})
+
+	/**
+	 * 初始化富文本编辑器
+	 */
+	 function initEditor(wangEditor) {
+		w = new wangEditor('#editor')
+		w.customConfig = {
+			menus: [
+				'bold',
+				'italic',
+				'underline',
+				'undo',
+				'image', 
+			],
+			zIndex: 50,
+			uploadImgServer: 'http://bms.xhj.com/file/upload',
+			uploadImgShowBase64: true,
+			showLinkImg: false,
+			uploadFileName: 'file',
+			uploadImgHooks: {
+				fail: function(xhr, editor, result) {
+					editor.uploadImg.insertLinkImg(result)
+				}
+			},
+			customAlert: function (info) {
+				return
+			},
+			onchange: function() {
+				var text = w.txt.text()
+				var html = w.txt.html()
+				if (text.length > 300) {
+					console.log(html)
+				}
+			}
+		}
+		w.create()
+	}
+
+	/**
+	 * 回答问题
+	 * @param {String} id 当前问题id
+	 */
+	function answerQuestion(id) {
+		var content = w.txt.html();
+		if (!w.txt.text()) {
+			var d = dialog({
+				title: '温馨提示',
+				content: '请输入问题内容'
+			});
+			d.showModal();
+			return
+		}
+		$.ajax({
+			url: '/savePromblemAnswer',
+			method: 'POST',
+			data: {
+				problemAskId: id,
+				answerContent: content
+			},
+			success: function(data) {
+				if (data.status == 1) {
+					window.location.reload()
+				} else if (data.status == 506) {
+					login.login(function() {
+						answerQuestion(id)
+					})
+				}
+			}
+		})
+	}
+
+	/**
+	 * 加载更多
+	 * @param {String} id 当前问题id
+	 */
+	function loadMore(id) {
+		// 加载中不允许继续加载
+		if (isLoad) {
+			return
+		}
+		page++
+		isLoad = true
+		$.ajax({
+			url: '/answerList',
+			data: {
+				page: 1,
+				problemAskId: id
+			},
+			success: function(data) {
+				isLoad = false
+				if (data.status == 1) {
+					var res = data.data
+					var content = res.content
+					// 没有更多隐藏加载更多按钮
+					res.last && $('.more_btn').hide()
+					var html = ''
+					$.each(content, function(index, item) {
+						html += '<div class="xiangqingpinglun_list">'+
+							'<a href="###" class="head">'+
+								'<span><img src="../images/wd_18.png"/></span>'+
+								'<p class="name">'+item.answerPersonName+'</p>'+
+								'<p class="time">发布时间 '+item.createDate+'</p>'+
+							'</a>'+
+							'<div class="content">'+item.answerContent+'</div>'+
+						'</div>'
+					})
+					$('.xiangqingpinglun_content').append(html)
+				}
+			},
+			error: function(data) {
+				isLoad = false
+			}
+		})
+	}
+
+	/**
+	 * 关注问题
+	 * @param {String} id 当前问题id
+	 */
+	function addFocus(id) {
+		$.ajax({
+			url: '/addFocus',
+			method: 'POST',
+			data: {
+				askId: id
+			},
+			success: function(data) {
+				console.log($('.gzwt_btn.yes'))
+				$('.gzwt_btn.yes').hide()
+				$('.gzwt_btn.no').show()
+			}
+		})
+	}
+
+	/**
+	 * 取消关注
+	 * @param {String} id 当前问题id
+	 */
+	function removeFocus(id) {
+		$.ajax({
+			url: '/removeFocus',
+			method: 'POST',
+			data: {
+				askId: id
+			},
+			success: function(data) {
+				$('.gzwt_btn.yes').show()
+				$('.gzwt_btn.no').hide()
+			}
+		})
+	}
+
+</script>
+
+</body>
+</html>

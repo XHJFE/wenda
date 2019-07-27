@@ -35,8 +35,9 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCity: currentCity,
-    active: 'home'
+    currentCityId: currentCityId,
+    active: 'home',
+    search: false
 })  %>
 <!-- 搜索栏 -->
 <% include include/search %>

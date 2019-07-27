@@ -37,8 +37,9 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCity: currentCity,
-    active: ''
+    currentCityId: currentCityId,
+    active: '',
+    search: true
 })  %>
 <!-- 搜索栏 -->
 <% include include/login %>
@@ -54,7 +55,7 @@
 
 <div class="wddt_big_wrap">
     <div class="wddt_content_wrap">
-        <p class="title">为您找到1234条关于分类的问答</p>
+        <p class="title">为您找到<%= question.totalElements %>条<% if(isClass){ %> 关于分类的<% } %>问答</p>
         <div class="zuixinwenti_content">
           <% question.content.forEach(item => { %>
             <a href="###" class="zuixinwenti_list">
@@ -66,6 +67,13 @@
                 <% } %>
             </a>
             <% }) %>
+            <% if (!question.last) { %>
+            <a 
+                href="javascript:void(0)" 
+                class="more_btn">
+                <span>加载更多&gt;&gt;</span>
+            </a>
+            <% } %>
            </div>
     </div>
 
@@ -88,7 +96,7 @@
                <p class="title"><%= item.typeName %></p>
                <div class="fenlei_list">
                    <% item.labels.forEach(child => { %>
-                   <a href="###"><span><%= child.labelName %></span></a>
+                   <a href="/search_result?labelName=<%= child.labelName %>"><span><%= child.labelName %></span></a>
                    <% }) %>
                 </div>
               </div>

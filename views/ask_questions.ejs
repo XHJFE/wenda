@@ -37,8 +37,9 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
 	city: city, 
-	currentCity: currentCity,
-	active: ''
+	currentCityId: currentCityId,
+	active: '',
+	search: true
 }) %>
 <!-- 搜索栏 -->
 <% include include/login %>
@@ -343,9 +344,6 @@
 					$('#agent').html(htmlStr);
 
 				}
-			},
-			error: function(data) {
-
 			}
 		})
 	}
@@ -422,12 +420,19 @@
 				listProblemInvited: JSON.stringify(invitedList)
 			},
 			success: function(data) {
-				console.log(data)
 				if (data.status == 1) {
 					window.location.href = '/latest'
 				} else if (data.status == '506') {
 					login.login(function() {
-						console.log('登陆成功')
+						var d = dialog({
+							content: '登录成功',
+							quickClose: true
+						});
+						d.showModal();
+						setTimeout(function () {
+							d.close().remove();
+						}, 1000);
+						submit()
 					})
 				}
 			},

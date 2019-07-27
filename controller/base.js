@@ -1,12 +1,14 @@
 const proxyBase = require('../proxy/base/header');
-const proxyIndex = require('../proxy/base/index');
-const settings = require('../settings.json');
+const {
+    cityId
+} = require('../settings.json')
 /**
  * 获取城市和菜单栏数据
+ * @param {String} id 当前城市
  */
-const getCityAndMenus = () => {
+const getCityAndMenus = (id = cityId) => {
     // 获取菜单栏数据
-    let menus = proxyBase.getMenus(settings.cityId);
+    let menus = proxyBase.getMenus(id);
     // 获取城市数据
     let city = proxyBase.getCity();
     return {
@@ -15,15 +17,6 @@ const getCityAndMenus = () => {
     }  
 };
 
-/**
- * 获取广告位图片
- * @param {String} name 当前广告位使用页面
- */
-async function getADPIC(name) {
-    return proxyIndex.getADPIC(name)
-}
-
 module.exports = {
-    getCityAndMenus,
-    getADPIC
+    getCityAndMenus
 }

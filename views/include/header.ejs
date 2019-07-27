@@ -2,7 +2,7 @@
 <div class="header">
     <div>
         <span><a href="http://www.xhj.com/"><img src="../images/logo.png" class="img01 "/></a></span>
-        <span class="font14 place place01"><img src="../images/sy12.png"/><i><%= currentCity.cityName %></i></span> 
+        <span class="font14 place place01"><img src="../images/sy12.png"/><i id="cityName"></i></span> 
         <div class="narbar pull-right narbar01">
             <ul class="list-unstyled list-inline listxinfang">
                 <li class="tabs <%= active === 'home' ? 'active' : '' %>"><a href="/">首页</a></li>
@@ -12,10 +12,19 @@
                         <a href="/ask_questions"><span>我要提问</span></a>
                         <a href="###"><span>精选回答</span></a>
                     </div>
-                </li>
-                <li class="tabs <%= active === 'ask' ? 'active' : '' %>"><a href="/answer">我的回答</a></li>         
+                </li>        
             </ul>
         </div>
+        <!-- 搜索-->
+        <% if (search) { %>
+        <div class="sousuo_right_wrap">
+            <input 
+                type="text" 
+                placeholder="房产问题与疑问，一搜即答" 
+                id="searchInput"/>
+            <a href="javascript:void(0);" onclick="submitSearch()"><img src="../images/wd_06.png"/></a>
+        </div>
+        <% } %>
     </div>
 </div>
 
@@ -34,7 +43,6 @@
   <div class="title-line"></div>
   <div class="fc-main clear">
       <div class="fl citys-l">
-          <!-- <%= JSON.stringify(city) %> -->
           <ul>
               <%
               Object.keys(city).map(function (zimu, zimu_index) {
@@ -46,7 +54,7 @@
                       <%
                       city[zimu].map(function (cn) {
                       %>
-                      <a href="<%= cn.domain %>" title="<%= cn.title %>"><%= cn.name %></a>
+                      <a href="<%= cn.domain %>" class="cityName" title="<%= cn.title %>" data-id="<%= cn.cityId %>"><%= cn.name %></a>
                       <% }); %>
                   </div>
               </li>
@@ -68,7 +76,7 @@
                       <%
                       city[zimu].map(function (cn) {
                       %>
-                      <a href="<%= cn.domain %>" title="<%= cn.title %>"><%= cn.name %></a>
+                      <a href="<%= cn.domain %>" class="cityName" title="<%= cn.title %>" data-id="<%= cn.cityId %>"><%= cn.name %></a>
                       <% }); %>
                   </div>
               </li>
@@ -84,12 +92,31 @@
 
 <script>
     require(['jquery'], function($) {
-        //城市切换
-        $('.place').click(function () {
-            $('.city-change, .overlayBg').show();
+        $(function(){
+            var cityNames = $('.cityName')
+            var currentId = "<%= currentCityId %>"
+            $.each(cityNames, function(index, item) {
+                var id = $(item).attr('data-id')
+                if (currentId === id) {
+                    $('#cityName').html($(item).html())
+                }
+            })
+            //城市切换
+            $('.place').click(function () {
+                $('.city-change, .overlayBg').show();
+            })
+            $('.close').click(function () {
+                $('.city-change, .overlayBg').hide();
+            })    
         })
-        $('.close').click(function () {
-            $('.city-change, .overlayBg').hide();
-        })    
+        
     });
+
+    function submitSearch() {
+        var search = $('#searchInput').val()
+        if (!search) {
+            return
+        }
+        window.location.href = '/search_result?problemTitle='+search+''
+    }
 </script>

@@ -6,13 +6,11 @@ const util = require('../lib/util');
 const { getCityAndMenus } = require('./base');
 
 
-module.exports = (keyword) => {
+module.exports = (req, param) => {
     // 公用导航栏和城市数据
-    const baseData = getCityAndMenus();
+    const baseData = getCityAndMenus(req.cookies.siteid);
     const keys = ['question', 'hotQuestion', 'newAsk', 'classData', ...baseData.keys];
-    const question = getNewQuestion({
-        problemTitle: keyword
-    })
+    const question = getNewQuestion(param)
     const classData = getClassData()
     // 获取最热的数据
     let hotQuestion = getNewQuestion({

@@ -37,11 +37,10 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCity: currentCity,
-    active: 'dynamic'
+    currentCityId: currentCityId,
+    active: 'dynamic',
+    search: true
 })  %>
-<!-- 搜索栏 -->
-<% include include/search %>
 <!-- 搜索栏 -->
 <% include include/login %>
 
@@ -60,7 +59,7 @@
         </p>
         
         <div class="wenda_content">
-            <% questionList.content.forEach(item => { %>
+            <% questionList.content.forEach((item, index) => { %>
             <div class="wd_content">
                <!------------------右边有图片的时候就在这里加个img_detail类名---->
                <a href="###" class="<%= item.img ? 'img_detail': ''  %>">
@@ -77,9 +76,19 @@
                     <% } %>
                </a>
 
-               
-               <span class="guanzhu active" onclick="addFocus('<%= item.problemAskId %>')">关注</span>
-               <span class="guanzhu" onclick="removeFocus('<%= item.problemAskId %>')">取消关注</span>
+               <% if (item.isFocus) { %>
+                <span 
+                    class="guanzhu" 
+                    onclick="removeFocus('<%= item.problemAskId %>', '<%= index %>')">
+                    取消关注
+                </span>
+                <% } else { %>
+                <span 
+                    class="guanzhu active" 
+                    onclick="addFocus('<%= item.problemAskId %>', '<%= index %>')">
+                    关注
+                </span>
+                <% } %>
            </div>
            <% }) %>
            <!---分页---->
@@ -140,7 +149,9 @@
 <div id="xh_kj_login"></div>
 </body>
 <script>
-    require(['pager', 'pc_login_reg'], function(pager, login) {
+    var login = null
+    require(['pager', 'pc_login_reg'], function(pager, l) {
+        login = l
         var p = new pager({
             total: "<%= questionList.totalElements %>",
             pageno: Number("<%= questionList.number %>") + 1,
@@ -150,15 +161,13 @@
         });
         $('#pager').after(p.get());
 
-        login.login(function() {
-            console.log('登陆成功')
-        })
+        
     })
     /**
      * 关注
      * @param {String} askId 问题id 
      */
-     function addFocus(askId) {
+     function addFocus(askId, index) {
         $.ajax({
             url: '/addFocus/',
             type: 'POST',
@@ -166,10 +175,16 @@
                 askId: askId
             },
             success: function(data) {
-                console.log(data)
-            },
-            error: function(data) {
-                console.log(data)
+                if (data.status == 1) {
+                    var html = "<span class='guanzhu' onclick='removeFocus(\""+askId+"\", "+index+")'>取消关注</span>"
+                    $('.guanzhu').get(index).remove()
+                    $('.wd_content').eq(index).append(html)
+
+                } else if (data.status == 506) {
+                    login.login(function() {
+                        console.log('登陆成功')
+                    })
+                }
             }
         })
     }
@@ -178,7 +193,7 @@
      * 取消关注
      * @param {String} askId 问题id 
      */
-     function removeFocus(askId) {
+     function removeFocus(askId, index) {
         $.ajax({
             url: '/removeFocus/',
             type: 'POST',
@@ -186,11 +201,16 @@
                 askId: askId
             },
             success: function(data) {
-                console.log(data)
+                if (data.status == 1) {
+                    var html = "<span class='guanzhu active' onclick='addFocus(\""+askId+"\", "+index+")'>关注</span>"
+                    $('.guanzhu').get(index).remove()
+                    $('.wd_content').eq(index).append(html)
+                } else if (data.status == 506) {
+                    login.login(function() {
+                        console.log('登陆成功')
+                    })
+                }
             },
-            error: function(data) {
-                console.log(data)
-            }
         })
     }
 

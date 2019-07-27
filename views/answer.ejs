@@ -34,11 +34,10 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCity: currentCity,
-    active: 'ask'
+    currentCityId: currentCityId,
+    active: 'ask',
+    search: true
 })  %>
-<!-- 搜索栏 -->
-<% include include/search %>
 <!-- 搜索栏 -->
 <% include include/login %>
 
