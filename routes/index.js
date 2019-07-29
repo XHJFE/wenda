@@ -4,11 +4,11 @@ const apiRouter = require('./api');
 const indexController = require('../controller/index');
 const classifyController = require('../controller/classify');
 const latestController = require('../controller/latest');
-const answerController = require('../controller/answer');
 const askQuestionsController = require('../controller/ask_questions');
 const searchResultController = require('../controller/search_result');
 const questionsInfoController = require('../controller/questions_info');
 const personalAnswerController = require('../controller/personal_answer');
+const personalCenterController = require('../controller/personal_center');
 const {
     cityId
 } = require('../settings.json');
@@ -33,7 +33,7 @@ const questionFormat = (arr) => {
     }
     return arr
 }
- 
+
 /**
  * 首页
  */
@@ -133,27 +133,6 @@ router.get('/latest',  (req, res, next) => {
 });
 
 /**
- * 我的回答
- */
-router.get('/answer', (req, res) => {
-    answerController(req).then(data => {
-        let {
-            menus,
-            city
-        } = data
-        res.render('answer', {
-            city,
-            menus,
-            currentCityId: req.cookies.siteid || cityId,
-        })
-    }).catch((e) => {
-        res.render('error', {
-            message: JSON.stringify(e)
-        })
-    })
-})
-
-/**
  * 提问
  */
 router.get('/ask_questions', (req, res) => {
@@ -225,7 +204,8 @@ router.get('/questions_info/:id', (req, res) => {
             city,
             promblemInfo,
             answerList,
-            promblemFocusIds
+            promblemFocusIds,
+            alikeProbleAsk
         } = data
         promblemInfo.data.createDate = timestampToTime(promblemInfo.data.createDate)
 
@@ -250,11 +230,16 @@ router.get('/questions_info/:id', (req, res) => {
             promblemInfo: promblemInfo.data,
             isLogin: req.cookies.xh_userId,
             answerList: answerList.data,
-            userName: req.cookies.xh_userName
+            userName: req.cookies.xh_userName,
+            alikeProbleAsk: alikeProbleAsk.data
         }).catch((e) => {
             res.render('error', {
                 message: JSON.stringify(e)
             })
+        })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
         })
     })
 })
@@ -270,6 +255,7 @@ router.get('/personal_answer', (req, res) => {
             promblemAnswer,
             promblemInfo,
             promblemFocusIds,
+            alikeProbleAsk
         } = data
         promblemInfo.data.createDate = timestampToTime(promblemInfo.data.createDate)
         promblemAnswer.data.problemAnswer.createDate = timestampToTime(promblemAnswer.data.problemAnswer.createDate)
@@ -289,7 +275,73 @@ router.get('/personal_answer', (req, res) => {
             promblemAnswer: promblemAnswer.data.problemAnswer,
             promblemInfo: promblemInfo.data,
             isLogin: req.cookies.xh_userId,
-            userName: req.cookies.xh_userName
+            userName: req.cookies.xh_userName,
+            alikeProbleAsk: alikeProbleAsk.data,
+            isMine: req.cookies.xh_userId === promblemAnswer.data.problemAnswer.answerPersonId
+        })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
+        })
+    })
+})
+
+/**
+ * 个人中心
+ */
+router.get('/personal_center', (req, res) => {
+    const {
+        belonger_user_id
+    } = req.cookies
+    // 当前用户类型 1：经纪人 2：普通用户
+    let userType = belonger_user_id ? 1 : 2;
+    personalCenterController(req).then(data => {
+        let {
+            stayAnswerQuestion,
+            myQuestion,
+            personAnswer, 
+            focusPromblems
+        } = data
+
+        myQuestion.data.content = myQuestion.data.content.map(item => {
+            item.problemContent = delHtmlTag(item.problemContent);
+            if (item.newProblemAnswer) {
+                item.newProblemAnswer.answerContent = delHtmlTag(item.newProblemAnswer.answerContent)
+            }
+            return item
+        })
+
+        stayAnswerQuestion.data.content = stayAnswerQuestion.data.content.map(item => {
+            item.problemContent = delHtmlTag(item.problemContent);
+            return item;
+        })
+
+        personAnswer.data.content = personAnswer.data.content.map(item => {
+            item.problemAsk.problemContent = delHtmlTag(item.problemAsk.problemContent);
+            if (item.problemAsk.newProblemAnswer) {
+                item.problemAsk.newProblemAnswer.answerContent = delHtmlTag(item.problemAsk.newProblemAnswer.answerContent)
+            }
+            return item;
+        })
+
+        focusPromblems.data.content = focusPromblems.data.content.map(item => {
+            item.problemAsk.problemContent = delHtmlTag(item.problemAsk.problemContent);
+            if (item.problemAsk.newProblemAnswer) {
+                item.problemAsk.newProblemAnswer.answerContent = delHtmlTag(item.problemAsk.newProblemAnswer.answerContent)
+            }
+            return item
+        })
+        
+        res.render('personal_center', {
+            stayAnswerQuestion: stayAnswerQuestion.data,
+            myQuestion: myQuestion.data,
+            personAnswer: personAnswer.data, 
+            focusPromblems: focusPromblems.data,
+            userType
+        })
+    }).catch((e) => {
+        res.render('error', {
+            message: JSON.stringify(e)
         })
     })
     

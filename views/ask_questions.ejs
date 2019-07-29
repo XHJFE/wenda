@@ -44,13 +44,13 @@
 <!-- 搜索栏 -->
 <% include include/login %>
 
-<!--面包屑导航-->
-<div class="breadcrumb">
-    <div class="breadcrumb_content">
-        <a href="/"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
-        <a href="###"><span>我的提问</span></a>
-    </div>
-</div>
+<!-- 面包屑 -->
+<%- include('include/breadcrumb', {
+    list: [{
+        name: '我的提问',
+        url: '#'
+    }]
+}) %>
 
 
 <!--内容-->

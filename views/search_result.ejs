@@ -44,13 +44,13 @@
 <!-- 搜索栏 -->
 <% include include/login %>
 
-<!--   面包屑导航 -->
-<div class="breadcrumb">
-    <div class="breadcrumb_content">
-        <a href="/"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
-        <a href="###"><span>问答动态</span></a>
-    </div>
-</div>
+<!-- 面包屑 -->
+<%- include('include/breadcrumb', {
+    list: [{
+        name: '问答动态',
+        url: '#'
+    }]
+}) %>
 
 
 <div class="wddt_big_wrap">
@@ -58,12 +58,12 @@
         <p class="title">为您找到<%= question.totalElements %>条<% if(isClass){ %> 关于分类的<% } %>问答</p>
         <div class="zuixinwenti_content">
           <% question.content.forEach(item => { %>
-            <a href="###" class="zuixinwenti_list">
+            <a href="/questions_info/<%= item.problemAskId %>" class="zuixinwenti_list">
                 <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
                 <p class="title"><%= item.problemTitle %></p>
                 <p class="name"><%= item.questionerName %></p>
                 <% if (item.newProblemAnswer) { %>
-                    <p class="content"><%= item.newProblemAnswer.answerContent %></p>
+                    <p class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
                 <% } %>
             </a>
             <% }) %>
@@ -80,7 +80,11 @@
 
     <!---右侧内容---->
     <div class="wytw_right_wrap">
-        <p class="title"><img src="../images/wytw_img.png"/></p>
+        <p class="title">
+            <a href="/ask_questions" target="_blank">
+                <img src="../images/wytw_img.png"/>
+            </a>
+        </p>
         <div class="wytw_content">
         <a href="###"><img src="../images/wd_01.png"/><span>我提出的问题</span></a>
         <a href="###"><img src="../images/wd_02.png"/><span>我回答的问题</span></a>
@@ -111,7 +115,7 @@
              <p class="right_title"><span>热门</span>问答<i></i></p>
              <div class="remenhuida_right_content">
                  <% hotQuestion.forEach(item => { %>
-                 <a href="###"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+                 <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
                  <% }) %>
              </div>
          </div>
@@ -121,7 +125,7 @@
                  <p class="right_title"><span>最新</span>回答<i></i></p>
                  <div class="remenhuida_right_content">
                     <% hotQuestion.forEach(item => { %>
-                        <a href="###"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+                        <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
                     <% }) %>            
                  </div>
              </div>
@@ -130,4 +134,15 @@
 
 </div>
 </body>
+<script>
+    require(['jquery'], function($) {
+        $(function(){
+            $('.answer').click(function(){
+                var url = $(this).attr('data-url')
+                window.location.href = url
+                return false
+            })
+        })
+    })
+</script>
 </html>

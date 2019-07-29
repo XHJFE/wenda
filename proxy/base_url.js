@@ -19,15 +19,13 @@ module.exports = {
     ADD_FOCUS: config.base_server_url[env] + `/web/problemAsk/addFocus/`,
     // 取消关注问题
     REMOVE_FOCUS: config.base_server_url[env] + `/web/problemAsk/removeFocus/`,
-    // 关注的问题列表
-    GET_PROMBLEM_FOCUS: config.base_server_url[env] + `/web/problemAsk/getProblemFocus/`,
     // 获取经纪人列表
     GET_BELONGER_BY_PAGE: config.base_server_url[env] + `/web/problemAsk/getBelongerByPage/`,
     // 提问
     SAVE_PROBLEM_ASK: config.base_server_url[env] + `/web/problemAsk/saveProblemAsk/`,
     // 查询标签
     FIND_LABEL_ALL: config.base_server_url[env] + `/web/problemType/findLabelAll/`,
-    // 获取用户已关注的问题
+    // 获取用户已关注的问题id
     GET_FOCUS_ASK_IDS: config.base_server_url[env] + `/web/problemAsk/getFocusAskId/`,
     // 获取相关问题详情
     GET_PROMBLEM_ASK: config.base_server_url[env] + `/web/problemAsk/getProblemAsk/`,
@@ -41,4 +39,10 @@ module.exports = {
     GET_PROMBLEM_ANSWER: config.base_server_url[env] + `/web/problemAnswer/getProblemAnswer/`,
     // 获取相似问题
     GET_ALIKE_PROBLE_ASK: config.base_server_url[env] + `/web//problemAsk/getAlikeProbleAsk/`,
+    // 获取用户信息
+    FIND_BY_ID: config.proxy_server_url[env] + '/web/member/findById/',
+    // 我的关注
+    GET_PROMBLEM_FOCUS: config.base_server_url[env] + `/web/problemAsk/getProblemFocus/`,
+    // 我的回答
+    GET_PERSON_ANSWER: config.base_server_url[env] + `/web/problemAnswer/getProblemAskByAnswerPersonId/`,
 }

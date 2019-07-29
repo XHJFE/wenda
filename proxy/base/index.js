@@ -2,7 +2,8 @@ const proxy = require('../base_proxy');
 const {
     HEADER,
     ADD_FOCUS,
-    REMOVE_FOCUS
+    REMOVE_FOCUS,
+    FIND_BY_ID
 } = require('../base_url')
 /**
  * 关注问题
@@ -32,7 +33,21 @@ async function removeFocus(userId, askId) {
     return data;
 }
 
+/**
+ * 获取用户信息
+ * @param {String} userId 当前需要查询的用户id
+ */
+async function getUserInfo(userId) {
+    let data = await proxy({
+        uri: FIND_BY_ID + userId,
+        method: 'GET',
+        headers: HEADER
+    });
+    return data;
+}
+
 module.exports = {
     addFocus,
-    removeFocus
+    removeFocus,
+    getUserInfo
 }

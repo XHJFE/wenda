@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="zh-CN">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="zh-CN">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7)]><!-->
+<html lang="zh-CN">
+<!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>我的问答</title>
+<link href="../css/header_bottom.css" rel="stylesheet" />
+<link href="../css/huida.css" rel="stylesheet" />
+
+<!--[if lt IE 9]>
+	<script src="http://libs.furong.gov.cn/html5/html5.js"></script>
+	<script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
+<![endif]-->
+<style>
+    body{
+        min-width: auto;
+    }
+</style>
+
+<% include include/cssjs %>
+</head>
+<body>
+    <div class="right_content wenda_wrap">
+    <!---tab-->
+    <div class="wenda_tab">
+        <p class="active">我的问题</p>
+        <p>我的回答</p>
+        <p>我的关注</p>
+        <% if (userType == 1) { %>
+        <p>待回答</p>
+        <% } %>
+    </div>
+
+   <div class="wenda_content_wrap">
+        <!---我的问题--->
+        <div class="wenda_content">
+            <div class="myQuestion">
+                <% myQuestion.content.forEach(item => { %>
+                <div class="wd_content">
+                    <a href="/questions_info/<%= item.problemAskId %>">
+                        <p class="title"><%= item.problemTitle %></p>
+                        <p class="name"><%= item.questionerName %></p>
+                        <% if (item.newProblemAnswer) { %>
+                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></div>
+                        <% } %>
+                        <p class="huida"><span><%= item.answerNum %>条回答</span></p>
+                    </a>
+                </div>
+                <% }) %>
+            </div>
+            <% if (!myQuestion.last) { %>
+            <a href="javascript:void(0);" onclick="loadMore('/myQuestion', 'myQuestion', loadMyQuestion)" class="more_btn myQuestion_btn"><span>加载更多>></span></a>
+            <% } %>
+       </div>
+
+       <!---我的回答--->
+       <div class="wenda_content" style="display:none">
+            <div class="personAnswer">
+                <% personAnswer.content.forEach(item => { %>
+                <div class="wd_content">
+                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>">
+                        <p class="title"><%= item.problemAsk.problemTitle %></p>
+                        <p class="name"><%= item.problemAsk.questionerName %></p>
+                        <% if (item.problemAsk.newProblemAnswer) { %>
+                            <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
+                        <% } %>
+                        <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
+                    </a>
+                </div>
+                <% }) %>
+            </div>
+            <% if (!personAnswer.last) { %>
+            <a href="javascript:void(0);" onclick="loadMore('/myAnswer', 'personAnswer', loadPersonAnswer)" class="more_btn personAnswer_btn"><span>加载更多>></span></a>
+            <% } %>
+       </div>
+
+       
+
+       <!---我的关注--->
+       <div class="wenda_content" style="display:none">
+            <div class="focusPromblems">
+                <% focusPromblems.content.forEach(item => { %>
+                <div class="wd_content">
+                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>">
+                        <p class="title"><%= item.problemAsk.problemTitle %></p>
+                        <p class="name"><%= item.problemAsk.questionerName %></p>
+                        <% if (item.problemAsk.newProblemAnswer) { %>
+                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
+                        <% } %>
+                        <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
+                    </a>
+                    <span class="guanzhu" onclick="removeFocus('<%= item.problemAsk.problemAskId %>')">取消关注</span>
+                </div>
+                <% }) %>
+            </div>
+           <% if (!focusPromblems.last) { %>
+            <a href="javascript:void(0);" onclick="loadMore('/myFocus', 'focusPromblems', loadFocusPromblems)" class="more_btn focusPromblems_btn"><span>加载更多>></span></a>
+            <% } %>
+       </div>
+
+       <% if (userType == 1) { %>
+        <!---待回答--->
+       <div class="wenda_content" style="display:none">
+            <% stayAnswerQuestion.content.forEach(item => { %>
+                <%= JSON.stringify(item) %>
+           <div class="wd_content">
+               <a href="###" class="img_detail">
+                   <p class="title">长沙的520买房政策是什么？</p>
+                   <p class="name">张桂玉 Sonia Chang Harris</p>
+                   <div class="content">昨天，中消协公布了今年第一季度的投诉情况，房屋家居领域被指存在虚假宣传、误导消费者、虚假宣传改增”最新政改增”最新政策5月1策5月1日起...</div>
+                   <p class="huida"><span>633条回答</span></p>
+                   <span class="img"><img src="http://fpoimg.com/190x138"/></span>
+               </a>
+               <span class="guanzhu active">关注</span>
+           </div>
+           <% }) %>
+           <a href="###" class="more_btn"><span>加载更多>></span></a>
+       </div>
+       <% } %>
+
+
+   </div>
+
+
+
+    </div>
+</div>
+
+<script>
+    require(['jquery'], function($) {
+        $(function () {
+            //tab切换
+            $('.wenda_tab>p').click(function () {
+                $(this).addClass('active').siblings().removeClass('active');
+                var index = $(this).index();
+                $('.wenda_content').hide();
+                $('.wenda_content_wrap').find('.wenda_content').eq(index).show();
+            })
+
+            //关注
+            $('.guanzhu').click(function () {
+                $(this).toggleClass('active');
+                if ($(this).hasClass('active')) {
+                    $(this).html('关注');
+                } else {
+                    $(this).html('取消关注');
+                }
+            })
+
+            
+            $('.answer').click(function(){
+                var url = $(this).attr('data-url')
+                window.location.href = url
+                return false
+            })
+
+            ///回答的展开收起效果
+            $('.contents').each(function () {
+                var content = $(this).html();
+                var length = content.length;
+                var htmls = content.substring(0, 100);
+                if (length > 100) {
+                    var i = $('<i class="sz"><i>').html('...展开');
+                    i.append('<img src="../images/zk_01.png">');
+                    var htmls = content.substring(0, 100);                              
+                    $(this).html('');
+                    var span=$('<span></span>').html(htmls);
+                    $(this).append(span);
+                    $(this).append(i);
+                } else {
+                    var i = $('<i class="sz"><i>').html('');              
+                    $(this).html('');
+                    var span = $('<span></span>').html(content);
+                    $(this).append(span);
+                    $(this).append(i);
+                }
+                $(this).on('click', '.sz', function () {
+                    var a = $(this).html().indexOf("展开");               
+                    if (a > 0) {
+                        $(this).html('&nbsp;收起');
+                        $(this).append('<img src="../images/zk_02.png">');
+                        $(this).parent('.contents').find('span').html(content);
+                    } else {
+                        $(this).html("... 展开");
+                        $(this).append('<img src="../images/zk_01.png">');
+                        $(this).parent('.contents').find('span').html(htmls);
+                    }
+                })
+            })
+        
+        });
+    })
+
+    var data = {
+        // 我的问题
+        myQuestion: {
+            page: 1,
+            load: false
+        },
+        // 我的关注
+        focusPromblems: {
+            page: 1,
+            load: false
+        },
+        // 我的回答
+        personAnswer: {
+            page: 1,
+            load: false
+        }
+    }
+
+    /**
+     * 公用加载更多函数
+     * @param {String} url 当前接口路径
+     * @param {String} name 当前类型名字
+     * @param {Function} cb 毁掉方法
+     */
+    function loadMore(url, name, cb) {
+        var param = data[name];
+        if (param.load) {
+            return
+        }
+        param.load = true;
+        $.ajax({
+            url: url,
+            data: {
+                page: param.page,
+                pageSize: 10
+            },
+            success: function(data) {
+                param.page++;
+                cb(data)
+            },
+            complete: function() {
+                param.load = false;
+            }
+        })
+    }
+
+    /**
+     * 我的问题加载更多
+     */
+    function loadMyQuestion(data) {
+        var res = data.data;
+        var content = res.content;
+        res.last && ($('.more_btn.myQuestion_btn').hide());
+        var html = ''
+        for (var i = 0, len = content.length; i < len; i++) {
+            var item = content[i];
+            html += '<div class="wd_content">'+
+                '<a href="#">'+
+                    '<p class="title">'+item.problemTitle+'</p>'+
+                    '<p class="name">'+item.questionerName+'</p>'+
+                    (item.newProblemAnswer ? ('<p class="content">'+item.newProblemAnswer.answerContent+'</p>') : '')+
+                    '<p class="huida"><span>'+item.answerNum+'条回答</span></p>'+
+                '</a>'+
+            '</div>';
+        }
+        $('.myQuestion').append(html)
+    }
+
+    /**
+     * 我的关注加载更多
+     */
+    function loadFocusPromblems(data) {
+        var res = data.data;
+        var content = res.content;
+        res.last && ($('.more_btn.focusPromblems_btn').hide());
+        var html = ''
+        for (var i = 0, len = content.length; i < len; i++) {
+            var item = content[i];
+            html += '<div class="wd_content">'+
+                '<a href="#">'+
+                    '<p class="title">'+item.problemAsk.problemTitle+'</p>'+
+                    '<p class="name">'+item.problemAsk.questionerName+'</p>'+
+                    (item.problemAsk.newProblemAnswer ? ('<p class="content">'+item.problemAsk.newProblemAnswer.answerContent+'</p>') : '')+
+                    '<p class="huida"><span>'+item.problemAsk.answerNum+'条回答</span></p>'+
+                '</a>'+
+                '<span class="guanzhu">取消关注</span>'+
+            '</div>';
+        }
+        $('.focusPromblems').append(html)
+    }
+
+    /**
+     * 我的回答加载更多
+     */
+    function loadPersonAnswer(data) {
+        var res = data.data;
+        var content = res.content;
+        res.last && ($('.more_btn.personAnswer_btn').hide());
+        var html = ''
+        for (var i = 0, len = content.length; i < len; i++) {
+            var item = content[i];
+            html += '<div class="wd_content">'+
+                '<a href="#">'+
+                    '<p class="title">'+item.problemAsk.problemTitle+'</p>'+
+                    '<p class="name">'+item.problemAsk.questionerName+'</p>'+
+                    (item.problemAsk.newProblemAnswer ? ('<p class="content">'+item.problemAsk.newProblemAnswer.answerContent+'</p>') : '')+
+                    '<p class="huida"><span>'+item.problemAsk.answerNum+'条回答</span></p>'+
+                '</a>'+
+            '</div>';
+        }
+        $('.personAnswer').append(html)
+    }
+
+    /**
+     * 取消关注
+     * @param {String} askId 需要取消的问题id
+     */
+    function removeFocus(askId) {
+        $.ajax({
+            url: '/removeFocus',
+            method: 'POST',
+            data: {
+                askId: askId
+            },
+            success: function() {
+                window.location.reload();
+            }
+        })
+    }
+</script>
+
+</body>
+</html>

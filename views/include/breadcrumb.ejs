@@ -1,0 +1,12 @@
+<!--面包屑导航-->
+<div class="breadcrumb">
+    <div class="breadcrumb_content">
+        <a href="/"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
+        <% list.forEach((item, index) => { %>
+            <% if (index > 0 ) { %>
+                &nbsp;>
+            <% } %>
+            <a href="item.url"><span><%= item.name %></span></a>
+        <% }) %>
+    </div>
+</div>

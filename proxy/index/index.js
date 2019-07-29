@@ -11,7 +11,9 @@ const {
     GET_PROMBLEM_ANSWER_LIST,
     UPDATE_VIEW_NUM,
     SAVE_PROBLEM_ANSWER,
-    GET_PROMBLEM_ANSWER
+    GET_PROMBLEM_ANSWER,
+    GET_ALIKE_PROBLE_ASK,
+    GET_PERSON_ANSWER
 } = require('../base_url');
 const settings = require('../../settings.json')
 const headers = {
@@ -35,8 +37,8 @@ async function getClassData() {
 /**
  * 获取最新问题
  * @param {Number} param.page 当前请求页数
- * @param {Number} param.pagesize 每页请求条数
- * @param {Number} param.audit 是否审核 1：审核 0：其他
+ * @param {Number} param.pageSize 每页请求条数
+ * @param {Number} param.audit 是否审核 1：审核 0：未审核
  * @param {String} param.sortViewNum 按浏览量排序
  * @param {String} param.sortUpdateDate 按更新时间排序
  * @param {String} param.inviteeId 邀请回答人id
@@ -44,25 +46,29 @@ async function getClassData() {
  * @param {String} param.problemContent 问题内容
  * @param {String} param.labelName 标签名称
  * @param {String} param.questionerId 提问人id
+ * @param {Boolean} param.isAll 是否查询全部
  * @returns Promise
  */
 async function getNewQuestion(param = {}) {
     let {
         page,
-        pagesize,
+        pageSize,
         audit,
+        isAll,
         ...other
     } = param;
     page = page ? page - 1 : 0
-    pagesize = pagesize || 20
+    pageSize = pageSize || 20
     audit = audit || 1
+    // 当前是查询所有问题
+    isAll && (audit = '')
     let data = await proxy({
         uri: GET_PROBLEM_ASK_LIST,
         method: 'POST',
         headers,
         body: JSON.stringify({
             page,
-            pagesize,
+            pageSize,
             audit,
             ...other
         })
@@ -103,7 +109,7 @@ async function getBelongerByPage(page, name) {
         body: JSON.stringify({
             name,
             page,
-            pagesize: 5
+            pageSize: 5
         })
     });
 }
@@ -133,7 +139,7 @@ async function saveProblemAsk(req, param) {
             listProblemInvited: JSON.parse(listProblemInvited),
             questionerId: req.cookies.xh_userId,
             questionerName: req.cookies.xh_userName,
-            cityId: cityId.cityId
+            cityId: req.cookies.siteid || settings.cityId
         })
     });
 }
@@ -209,6 +215,7 @@ async function  updateViewNum(askId) {
  * @param {String} answerContent 回答内容
  * @param {String} answerPersonId 回答者id
  * @param {String} answerPersonName 回答者名字
+ * @param {String} problemAnswerId 需要修改的回答id
  */
 async function savePromblemAnswer(param) {
     return await proxy({
@@ -231,6 +238,67 @@ async function getPromblemAnswer(id) {
     })
 }
 
+/**
+ * 获取相似问题
+ * @param {String} askId 问题id
+ * @returns Promise
+ */
+async function getAlikeProbleAsk(askId) {
+    return await proxy({
+        uri: GET_ALIKE_PROBLE_ASK + askId,
+        method: 'GET',
+        headers
+    })
+}
+
+/**
+ * 获取关注的问题
+ * @param {String | Number} page 当前请求页数
+ * @param {String | Number} pageSize 每页请求条数
+ * @param {String} userId 当前用户id
+ */
+async function getPromblemFocus(param){
+    let {
+        page,
+        pageSize,
+        userId
+    } = param
+    return await proxy({
+        uri: GET_PROMBLEM_FOCUS,
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            page: page || 0,
+            pageSize: pageSize || 10,
+            userId
+       })
+    })
+}
+
+/**
+ * 获取用户回答
+ * @param {String | Number} page 当前请求页数
+ * @param {String | Number} pageSize 每页请求条数
+ * @param {String} userId 当前用户id
+ */
+async function getPersonAnswer(param) {
+    let {
+        page,
+        pageSize,
+        userId
+    } = param
+    return await proxy({
+        uri: GET_PERSON_ANSWER,
+        method: 'POST',
+        headers,
+        body: JSON.stringify({
+            page: page || 0,
+            pageSize: pageSize || 10,
+            answerPersonId: userId
+       })
+    }) 
+}
+
 
 
 module.exports = {
@@ -244,5 +312,8 @@ module.exports = {
     getPromblemAnswerList,
     updateViewNum,
     savePromblemAnswer,
-    getPromblemAnswer
+    getPromblemAnswer,
+    getAlikeProbleAsk,
+    getPromblemFocus,
+    getPersonAnswer
 };

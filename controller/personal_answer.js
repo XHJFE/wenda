@@ -1,9 +1,9 @@
 const {
     getPromblemInfo,
-    getPromblemAnswerList,
     updateViewNum,
     getPromblemFocusIds,
-    getPromblemAnswer
+    getPromblemAnswer,
+    getAlikeProbleAsk
 } = require('../proxy/index/index');
 const util = require('../lib/util');
 const { getCityAndMenus } = require('./base');
@@ -16,11 +16,13 @@ module.exports = (req, param) => {
     const promblemAnswer = getPromblemAnswer(param.answerId)
     // 当前用户已关注的问题id
     const promblemFocusIds = getPromblemFocusIds(req.cookies.xh_userId)
+    // 获取相似问题
+    const alikeProbleAsk = getAlikeProbleAsk(param.id)
     // 浏览量+1
     const viewNum = updateViewNum(param.id)
-    const keys = ['promblemInfo', 'promblemFocusIds', 'viewNum', 'promblemAnswer', ...baseData.keys];
+    const keys = ['promblemInfo', 'promblemFocusIds', 'viewNum', 'promblemAnswer', 'alikeProbleAsk', ...baseData.keys];
     return new Promise((resolve, reject) => {
-        Promise.all([promblemInfo, promblemFocusIds, viewNum, promblemAnswer, ...baseData.values]).then(result => {
+        Promise.all([promblemInfo, promblemFocusIds, viewNum, promblemAnswer, alikeProbleAsk, ...baseData.values]).then(result => {
             resolve(util.getResult(keys, result));
         }).catch(e => {
             reject(e);

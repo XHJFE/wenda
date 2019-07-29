@@ -1,0 +1,26 @@
+﻿    .left_nav > .tabwd > a > i { background:url(../images/wd02.png) no-repeat;background-size:100%;color:#818181}
+    .left_nav > .tabwd.active > a > i { background:url(../images/wd01.png) no-repeat;background-size:100%;color:#818181}
+
+    .wenda_tab { font-size:0;border-bottom:1px solid #e2e2e2;}
+    .wenda_tab > p { display:inline-block;margin-right:30px;font-size:20px;color:#333;position:relative;height:60px;line-height:60px;cursor:pointer;}
+    .wenda_tab > p.active { color:#24B73D;}
+    .wenda_tab > p.active:after { content:'';display:block;width:100%;background-color:#24B73D;height:4px;position:absolute;bottom:-2px;left:0px;}
+    .wenda_wrap { background-color:#fff;padding:0px 22px;margin-top:30px;}
+
+    .wd_content { position:relative;}
+    .wd_content > a { display:block;border-bottom:1px solid #DCDCDC;padding-bottom:20px;}
+    .wd_content .title { font-size:20px;color:#000;overflow: hidden; text-overflow: ellipsis; white-space: nowrap;padding-top:20px;}
+    .wd_content .name { font-size:12px;color:#999;padding-top:5px;}
+    .wd_content .content { font-size: 14px; color: #666666; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;padding-top:10px; }
+    .wd_content .huida { padding-top:5px;}
+    .wd_content .huida > span { display:inline-block;font-size: 12px; color: #666666;padding-left:20px;background:url(../images/wd03.png) no-repeat left center;}
+    .guanzhu { display:inline-block;font-size: 12px; color: #666666;padding-left:22px;background:url(../images/wd04.png) no-repeat left center;position:absolute;bottom:22px;left:110px;cursor:pointer;}
+    .guanzhu.active {background:url(../images/wd05.png) no-repeat left center; }
+    .more_btn { display:block;height:40px;line-height:40px;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;width:350px;text-align:center;font-size:16px;color:#666;margin:auto;margin:30px auto;background-color:#F5F5F6;}
+    .img_detail .img { position:absolute;right:0px;top:16px;}
+    .img_detail .img>img { width: 160px; height: 110px; border-radius: 4px;-webkit-border-radius: 4px;-moz-border-radius: 4px; }
+    .wd_content > a.img_detail{ padding-right:174px;}
+
+    .contents { font-size:14px;color:#666;line-height:28px;padding-top:5px;}
+    .contents>.sz{ color:#2BB0DB;}
+    .sz > img { margin-left:5px;}

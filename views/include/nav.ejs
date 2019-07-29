@@ -47,5 +47,34 @@
                 <a href="http://www.xhj.com/reg" rel="nofollow">注册</a>
             </div>      
         </div>
+        <div id="welcome" class="dlzc guanli login-user" style="color:#ccc; display: none;">
+            您好!
+            <a href="http://www.xhj.com/member/index" target="_blank" id="userName"></a>
+            <a href="javascript:;" class="xh_login_out" rel="nofollow"> 退出</a>
+        </div>
     </div>
     </div>
+
+    <script>
+        require(['jquery', 'util'], function($, t) {
+            var userId = t.cookie.get('xh_userId');
+            var userName = t.cookie.get('xh_userName');
+            var userNameLength = userName ? userName.length : 0;
+            if (userId) {
+                $('.key_no_login').hide();
+                $('#welcome').show();
+                if (userNameLength > 6) {
+                    $('#userName').html(userName.substring(0, 6) + '...');
+                } else {
+                    $('#userName').html(userName.substring(0, 6));
+                }
+            }
+            $(document.body).on("click", ".xh_login_out", function(a) {
+                t.cookie.del("xh_userId", "/", "xhj.com");
+                t.cookie.del("xh_userName", "/", "xhj.com");
+                t.cookie.del("xh_userType", "/", "xhj.com");
+                window.location.href = "http://www.xhj.com/logout";
+            })
+        })
+        
+    </script>

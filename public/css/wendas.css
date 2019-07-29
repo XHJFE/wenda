@@ -270,7 +270,7 @@ i {font-style:normal; }
     .jbfx_wrap > a { margin-left:15px;}
     .btns > span { font-size:12px;color:#666;margin-right:5px;}
 
-    .xiugai_wrap { font-size:14px;color:#2BADD7;padding-left:48px;display:inline-block;cursor:pointer;}
+    .xiugai_wrap { font-size:14px;color:#2BADD7;padding-left:48px;display:inline-block;cursor:pointer; margin-bottom: 15px;}
     .xiugai_wrap img {margin-right:5px; }
     .xiugaineirong_wrap { display:none;padding-left:48px;position:relative;}
     .xiugaineirong_wrap > .niming { position:absolute;top:-30px;right:0px;}

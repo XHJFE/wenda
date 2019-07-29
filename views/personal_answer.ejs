@@ -42,18 +42,20 @@
 <!-- 搜索栏 -->
 <% include include/login %>
 
-<!--面包屑导航-->
-<div class="breadcrumb">
-    <div class="breadcrumb_content">
-        <a href="/"><img src="../images/wd_07.png"/><span>象盒</span></a>&nbsp;>
-        <a href="/latest"><span>问答动态</span></a>&nbsp;>
-        <a href="/"><span>问答详情</span></a>
-    </div>
-</div>
+<!-- 面包屑 -->
+<%- include('include/breadcrumb', {
+    list: [{
+        name: '问答动态',
+        url: '/latest'
+    },{
+        name: '问答详情',
+        url: '#'
+    }]
+}) %>
 
 
 <!--内容-->
-<div class="wrap">
+<div class="wrap" id="wrap">
     <!--左侧---->
     <div class="left_wrap  wddtxq_wrap">
             <p class="title"><%= promblemInfo.problemTitle %></p>
@@ -62,45 +64,56 @@
 				<span><%= item %></span>
 				<% }) %>
 			</p>
-            <p class="content" id="content"><%- promblemInfo.problemContent %></p>
+            <div class="content" id="content"><%- promblemInfo.problemContent %></div>
             <div class="huida">
-                <a href="###"><span>查看全部回答</span></a>
+                <a href="/questions_info/<%= promblemInfo.problemAskId %>"><span>查看全部回答</span></a>
                 <i style="position:relative;top:4px;"><%= promblemInfo.questionerName %> <%= promblemInfo.createDate %>发布</i>
                 <!-- <p class="jbfx_wrap">
                     <a href="###"><img src="../images/wd_16.png"/><span>举报</span></a>
                     <a href="###"><img src="../images/wd_17.png"/><span>分享</span></a>
                 </p> -->
-               </div>
-             <div class="xiangqingpinglun_list" style="border:none">
-                       <a href="###" class="head">
-                           <span><img src="../images/wd_18.png"/></span>
-                           <p class="name"><%= promblemAnswer.answerPersonName %></p>
-                           <p class='time'>发布时间 <%= promblemAnswer.createDate %></p>
-                       </a>
-                       <p class="content"><%- promblemAnswer.answerContent %></p>
-                      <!-- <img src="http://fpoimg.com/190x138"/>-->
-                   </div>
-        
-             
-           <div class="title_da"><%= userName %> 答： 
-			   <!-- <p class="niming"><i>匿名</i><span class="switch_btn"><i></i></span></p> -->
-			</div>
-            
-		<% if (isLogin) {%>
-			<div class="fuwenben" id="editor"></div>
-		<% } else { %>
-		<!-- 未登录时富文本的状态-->
-			<div class="weidenglu_wrap">
-				<p class="wdl_text"><a href="###"><span>登录</span></a><i>后回答TA</i></p>
-			</div>
-		<% } %>
-
-
-
-            <div class="btns">            
-               <a href="###" class="bcsh_btn"><span>提交回答</span></a>
+			   </div>
+			<% if (!isMine) { %>
+            <div class="xiangqingpinglun_list" style="border:none">
+				<a href="#" class="head">
+					<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
+					<p class="name"><%= promblemAnswer.answerPersonName %></p>
+					<p class='time'>发布时间 <%= promblemAnswer.createDate %></p>
+				</a>
+				<div class="content"><%- promblemAnswer.answerContent %></div>
             </div>
+		
+				<% if (isLogin) {%>
+					<div class="title_da"><%= userName %> 答： </div>
+					<div class="fuwenben" id="editor"></div>
+				<% } else { %>
+				<!-- 未登录时富文本的状态-->
+					<div class="weidenglu_wrap">
+						<p class="wdl_text"><a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a><i>后回答TA</i></p>
+					</div>
+				<% } %>
+				<div class="btns">            
+					<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
+				</div>
+			<% } else { %>
 
+			<div class="xiangqingpinglun_list" style="border:none">
+				<a href="#" class="head">
+					<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
+					<p class="name"><%= promblemAnswer.answerPersonName %></p>
+					<p class='time'><%= promblemAnswer.createDate %></p>
+				</a>
+				<div class="content" id="xiugai_content"><%- promblemAnswer.answerContent %></div>
+				</div>    
+				<div class="xiugai_wrap">
+					<span><img src="../images/wd_19.png" />修改回答</span>
+				</div>
+				<div class="fuwenben" id="editor" style="display: none;"></div>
+				<div class="btns" style="display: none;">    
+					<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>', '<%= promblemAnswer.problemAnswerId %>')" class="bcsh_btn"><span>提交回答</span></a>
+				</div>
+			<% } %>
+            
     </div>
 
 
@@ -110,16 +123,19 @@
          <!---热门回答---->
          <div class="remenhuida_right">
              <div class="gzwt_wrap">
-                 <a href="###" class="gzwt_btn"><span>关注问题</span></a>
-                 <a href="###" class="xhd_btn"><span>写回答</span></a>
+				<a href="javascript:void(0);" style="display: <%= promblemInfo.isFocus ? 'none' : 'inline-block' %>" onclick="addFocus('<%= promblemInfo.problemAskId %>', '<%= promblemInfo.questionerId %>')" class="gzwt_btn yes"><span>关注问题</span></a>
+				<a href="javascript:void(0);" style="display: <%= !promblemInfo.isFocus ? 'none' : 'inline-block' %>" onclick="removeFocus('<%= promblemInfo.problemAskId %>')" class="gzwt_btn no"><span>取消关注</span></a>
+				<a href="#wrap" class="xhd_btn"><span>写回答</span></a>
              </div>
 
+			 <% if (alikeProbleAsk && alikeProbleAsk.length > 0) { %>
              <p class="right_title"><span>相关</span>问题<i></i></p>
              <div class="remenhuida_right_content">
-                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
-                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
-                 <a href="###"><span>美国热门税一般为多少？</span><i>1200个回答</i></a>                
-             </div>
+				 <% alikeProbleAsk.forEach(item => { %>
+					<a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>               
+				 <% }) %>
+			 </div>
+			 <% } %>
          </div>
 
     </div>
@@ -127,7 +143,12 @@
 </div>
 
 <script type="text/javascript">
-    require(['jquery', 'wang_editor'], function($, w) {
+	var dialog = null
+	var w = null
+	var login = null
+    require(['jquery', 'wang_editor', 'dialog', 'pc_login_reg'], function($, wd, d, l) {
+		login = l
+		dialog = d
 		$(function () {
 			//回答内容收展
 			var len = 110;
@@ -164,7 +185,14 @@
 				}          
 			})
 
-			initEditor(w)
+			//修改内容
+			$('.xiugai_wrap').click(function () {
+				$('.xiugai_wrap,#xiugai_content').hide();
+				$('#editor,.btns').show();
+				w.txt.html($('#xiugai_content').html())
+			})
+
+			initEditor(wd)
 		});
 	})
 	/**
@@ -202,6 +230,79 @@
 			}
 		}
 		w.create()
+	}
+
+	/**
+	 * 回答问题
+	 * @param {String} id 当前问题id
+	 * @param {String} answerId 当前需要修改的回答id
+	 */
+	 function answerQuestion(id, answerId) {
+		var content = w.txt.html();
+		if (!w.txt.text()) {
+			var d = dialog({
+				title: '温馨提示',
+				content: '请输入回答内容'
+			});
+			d.showModal();
+			return
+		}
+		$.ajax({
+			url: '/savePromblemAnswer',
+			method: 'POST',
+			data: {
+				problemAskId: id,
+				answerContent: content,
+				problemAnswerId: answerId
+			},
+			success: function(data) {
+				if (data.status == 1) {
+					window.location.href = "/personal_answer?id="+id+"&answerId="+data.data+""
+				} else if (data.status == 506) {
+					login.login(function() {
+						answerQuestion(id, answerId)
+					})
+				}
+			}
+		})
+	}
+
+	/**
+	 * 关注问题
+	 * @param {String} id 当前问题id
+	 */
+	 function addFocus(id, userId) {
+		$.ajax({
+			url: '/addFocus',
+			method: 'POST',
+			data: {
+				askId: id,
+				userId: userId
+			},
+			success: function(data) {
+				console.log($('.gzwt_btn.yes'))
+				$('.gzwt_btn.yes').hide()
+				$('.gzwt_btn.no').show()
+			}
+		})
+	}
+
+	/**
+	 * 取消关注
+	 * @param {String} id 当前问题id
+	 */
+	function removeFocus(id) {
+		$.ajax({
+			url: '/removeFocus',
+			method: 'POST',
+			data: {
+				askId: id
+			},
+			success: function(data) {
+				$('.gzwt_btn.yes').show()
+				$('.gzwt_btn.no').hide()
+			}
+		})
 	}
     
 </script>
