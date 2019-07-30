@@ -13,11 +13,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>【长沙楼盘_长沙新房_长沙楼盘价格】—新环境房屋网</title>
+<title><% if (bigLabel) { %><%= bigLabel %>_<%= labelName %><% } else { %><%= problemTitle %><% } %>相关问题集锦-<%= currentCityName %>象盒问答</title>
 <meta http-equiv="Cache-Control" content="no-transform"/>
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
-<meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
-<meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
+<meta name="keywords" content="<% if (bigLabel) { %><%= bigLabel %>，<%= labelName %><% } else { %><%= problemTitle %><% } %>问题解答" />
+<meta name="description" content="房产有疑问，上象盒找答案！象盒<%= currentCityName %>房产问答频道，提供买卖交易流程解答、房价趋势答疑、房产政策、贷款政策、过户流程、房产法律相关、租房、装修问题。" />
 <link href="../css/list.css" rel="stylesheet" />
 <link href="../css/wendas.css" rel="stylesheet" />
 <!--[if lt IE 9]>
@@ -37,7 +37,7 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCityId: currentCityId,
+    currentCityName: currentCityName,
     active: '',
     search: true
 })  %>
@@ -55,7 +55,7 @@
 
 <div class="wddt_big_wrap">
     <div class="wddt_content_wrap">
-        <p class="title">为您找到<%= question.totalElements %>条<% if(isClass){ %> 关于分类的<% } %>问答</p>
+        <p class="title">为您找到<%= question.totalElements %>条<% if(labelName){ %> 关于<%= labelName %>的<% } %>问答</p>
         <div class="zuixinwenti_content">
           <% question.content.forEach(item => { %>
             <a href="/questions_info/<%= item.problemAskId %>" class="zuixinwenti_list">
@@ -77,65 +77,22 @@
            </div>
     </div>
 
-
-    <!---右侧内容---->
-    <div class="wytw_right_wrap">
-        <p class="title">
-            <a href="/ask_questions" target="_blank">
-                <img src="../images/wytw_img.png"/>
-            </a>
-        </p>
-        <div class="wytw_content">
-        <a href="###"><img src="../images/wd_01.png"/><span>我提出的问题</span></a>
-        <a href="###"><img src="../images/wd_02.png"/><span>我回答的问题</span></a>
-        <a href="###"><img src="../images/wd_03.png"/><span>我的关注</span></a>
-        </div>
-
-        <!---问答分类---->
-        <div class="wendafenlei_right">
-            <p class="right_title"><span>问答</span>分类<i></i></p>
-
-            <% classData.forEach(item => { %>
-            <div class="fenlei_list_wrap">
-               <p class="title"><%= item.typeName %></p>
-               <div class="fenlei_list">
-                   <% item.labels.forEach(child => { %>
-                   <a href="/search_result?labelName=<%= child.labelName %>"><span><%= child.labelName %></span></a>
-                   <% }) %>
-                </div>
-              </div>
-            <% }) %>
-            <a href="/classify" target="_blank" class="gdfl_btn"><span>更多分类</span><img src="../images/wd_04.png"/></a>
-        </div>
-
-
-          <!---热门回答---->
-         <div class="remenhuida_right">
-             <!-- <%= JSON.stringify(hotQuestion) %> -->
-             <p class="right_title"><span>热门</span>问答<i></i></p>
-             <div class="remenhuida_right_content">
-                 <% hotQuestion.forEach(item => { %>
-                 <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
-                 <% }) %>
-             </div>
-         </div>
-
-            <!---最新回答---->
-            <div class="remenhuida_right">
-                 <p class="right_title"><span>最新</span>回答<i></i></p>
-                 <div class="remenhuida_right_content">
-                    <% hotQuestion.forEach(item => { %>
-                        <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
-                    <% }) %>            
-                 </div>
-             </div>
-    </div>
+    <!-- 右侧内容 -->
+    <%- include('include/right', {
+        classData: classData,
+        hotQuestion: hotQuestion,
+        newAsk: newAsk,
+        isLogin: isLogin
+    }) %>
     </div>
 
 </div>
+<div id="xh_kj_login"></div>
 </body>
 <script>
-    require(['jquery'], function($) {
+    var login = null;
+    require(['jquery', 'pc_login_reg'], function($, l) {
+        login = l;
         $(function(){
             $('.answer').click(function(){
                 var url = $(this).attr('data-url')

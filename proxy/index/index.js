@@ -15,11 +15,18 @@ const {
     GET_ALIKE_PROBLE_ASK,
     GET_PERSON_ANSWER
 } = require('../base_url');
-const settings = require('../../settings.json')
+const { 
+    getUser, 
+    noPassByMobile, 
+    getStringInImg, 
+    delHtmlTag,
+    timestampToTime
+} = require('../../lib/util');
+const settings = require('../../settings.json');
 const headers = {
     "Content-Type": "application/json;charset=UTF-8",
     "Accept": "application/json, text/javascript, */*; q=0.01"
-}
+};
 
 /**
  * 获取分类列表
@@ -72,8 +79,17 @@ async function getNewQuestion(param = {}) {
             audit,
             ...other
         })
-    });
-    return data;
+    })
+    data = JSON.parse(data)
+    data.data.content.map(item => {
+        let imgs = getStringInImg(item.problemContent)
+        item.problemContent = delHtmlTag(item.problemContent)
+        item.newProblemAnswer && (item.newProblemAnswer.answerContent = delHtmlTag(item.newProblemAnswer.answerContent))
+        item.img = (imgs && imgs.length > 0) ? imgs[0] : ''
+        item.questionerName = noPassByMobile(item.questionerName);
+        return item
+    })
+    return JSON.stringify(data)
 }
 
 /**
@@ -130,6 +146,7 @@ async function saveProblemAsk(req, param) {
         listProblemInvited,
         ...other
     } = param
+    const { userId, userName } = getUser(req.cookies);
     return await proxy({
         uri: SAVE_PROBLEM_ASK,
         method: 'POST',
@@ -137,8 +154,8 @@ async function saveProblemAsk(req, param) {
         body: JSON.stringify({
             ...other,
             listProblemInvited: JSON.parse(listProblemInvited),
-            questionerId: req.cookies.xh_userId,
-            questionerName: req.cookies.xh_userName,
+            questionerId: userId,
+            questionerName: userName,
             cityId: req.cookies.siteid || settings.cityId
         })
     });
@@ -160,11 +177,17 @@ async function findLabelAll() {
  * @param {String} id 问答id
  */
 async function getPromblemInfo(id) {
-    return await proxy({
+    let data = await proxy({
         uri: GET_PROMBLEM_ASK + id,
         method: 'POST',
         headers
     })
+    data = JSON.parse(data)
+    
+    data.data.createDate = timestampToTime(data.data.createDate);
+    data.data.questionerName = noPassByMobile(data.data.questionerName)
+    data.data.newProblemAnswer && (data.data.newProblemAnswer.answerPersonName = noPassByMobile(data.data.newProblemAnswer.answerPersonName))
+    return JSON.stringify(data)
 }
 
 /**
@@ -184,7 +207,7 @@ async function getPromblemAnswerList(param = {}) {
     page = page || 0
     pageSize = pageSize || 20
     audit = audit || 1
-    return await proxy({
+    let data = await proxy({
         uri: GET_PROMBLEM_ANSWER_LIST,
         method: 'POST',
         headers,
@@ -195,6 +218,13 @@ async function getPromblemAnswerList(param = {}) {
             ...other
         })
     })
+    data = JSON.parse(data);
+    data.data.content = data.data.content.map(item => {
+        item.answerPersonName = noPassByMobile(item.answerPersonName)
+        item.createDate = timestampToTime(item.createDate);
+        return item
+    })
+    return JSON.stringify(data)
 }
 
 /**
@@ -231,11 +261,16 @@ async function savePromblemAnswer(param) {
  * @param {String} 回答id
  */
 async function getPromblemAnswer(id) {
-    return await proxy({
+    let data = await proxy({
         uri: GET_PROMBLEM_ANSWER + id,
         method: 'POST',
         headers
     })
+    data = JSON.parse(data)
+
+    data.data.problemAnswer.answerPersonName = noPassByMobile(data.data.problemAnswer.answerPersonName)
+    data.data.problemAnswer.createDate = timestampToTime(data.data.problemAnswer.createDate);
+    return JSON.stringify(data);
 }
 
 /**
@@ -263,7 +298,7 @@ async function getPromblemFocus(param){
         pageSize,
         userId
     } = param
-    return await proxy({
+    let data = await proxy({
         uri: GET_PROMBLEM_FOCUS,
         method: 'POST',
         headers,
@@ -273,6 +308,16 @@ async function getPromblemFocus(param){
             userId
        })
     })
+    data = JSON.parse(data)
+    data.data.content = data.data.content.map(item => {
+        item.problemAsk.questionerName = noPassByMobile(item.problemAsk.questionerName);
+        item.problemAsk.problemContent = delHtmlTag(item.problemAsk.problemContent);
+        if (item.problemAsk.newProblemAnswer) {
+            item.problemAsk.newProblemAnswer.answerContent = delHtmlTag(item.problemAsk.newProblemAnswer.answerContent)
+        }
+        return item
+    })
+    return JSON.stringify(data)
 }
 
 /**
@@ -287,7 +332,7 @@ async function getPersonAnswer(param) {
         pageSize,
         userId
     } = param
-    return await proxy({
+    let data = await proxy({
         uri: GET_PERSON_ANSWER,
         method: 'POST',
         headers,
@@ -297,6 +342,16 @@ async function getPersonAnswer(param) {
             answerPersonId: userId
        })
     }) 
+    data = JSON.parse(data)
+    data.data.content = data.data.content.map(item => {
+        item.answerPersonName = noPassByMobile(item.answerPersonName);
+        item.problemAsk.problemContent = delHtmlTag(item.problemAsk.problemContent);
+        if (item.problemAsk.newProblemAnswer) {
+            item.problemAsk.newProblemAnswer.answerContent = delHtmlTag(item.problemAsk.newProblemAnswer.answerContent)
+        }
+        return item;
+    })
+    return JSON.stringify(data);
 }
 
 

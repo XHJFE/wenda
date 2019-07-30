@@ -14,7 +14,8 @@ const {
 } = require('../proxy/index/index');
 const {
     timestampToTime,
-    delHtmlTag
+    delHtmlTag,
+    getUser
 } = require('../lib/util');
 const _ = require('underscore');
 
@@ -23,7 +24,8 @@ module.exports = (router) => {
      * 关注
      */
     router.post('/addFocus', function (req, res, next) {
-        if (!req.cookies.xh_userId) {
+        const user = getUser(req.cookies);
+        if (!user.userId) {
             res.send({
                 status: 506,
                 msg: '请登录'
@@ -34,6 +36,14 @@ module.exports = (router) => {
             askId,
             userId
         } = req.body
+        // 自己不能关注自己的问题
+        if (user.userId === userId) {
+            res.send({
+                status: 406,
+                msg: '您不能关注自己的问题哦'
+            }) 
+            return
+        }
         if (!askId || !userId) {
             res.send({
                 status: 406,
@@ -41,7 +51,7 @@ module.exports = (router) => {
             }) 
             return
         }
-        addFocus(req.cookies.xh_userId, askId, userId).then(data => {
+        addFocus(user.userId, askId).then(data => {
             res.send(JSON.parse(data))
         })
     })
@@ -50,17 +60,17 @@ module.exports = (router) => {
      * 取消关注
      */
     router.post('/removeFocus', function (req, res, next) {
-        if (!req.cookies.xh_userId) {
+        const { userId } = getUser(req.cookies);
+        if (!userId) {
             res.send({
                 status: 506,
                 msg: '请登录'
             })
             return
-        } else {
-            removeFocus(req.cookies.xh_userId, req.body.askId).then(data => {
-                res.send(JSON.parse(data))
-            })
         }
+        removeFocus(userId, req.body.askId).then(data => {
+            res.send(JSON.parse(data))
+        })
     })
 
     /**
@@ -76,42 +86,43 @@ module.exports = (router) => {
      * 提问
      */
     router.post('/askQuestions', function(req, res) {
-        if (req.cookies.xh_userId) {
-            saveProblemAsk(req, req.body).then(data => {
-                res.send(JSON.parse(data))
-            })
-        } else {
+        const { userId } = getUser(req.cookies);
+        if (!userId) {
             res.send({
                 status: 506,
                 msg: '请登录'
             })
+            return
         }
+        saveProblemAsk(req, req.body).then(data => {
+            res.send(JSON.parse(data))
+        })
     })
 
     /**
      * 回答问题
      */
     router.post('/savePromblemAnswer', (req, res) => {
-        if (req.cookies.xh_userId) {
-            getUserInfo(req.cookies.xh_userId).then(userInfo => {
-                userInfo = JSON.parse(userInfo)
-                savePromblemAnswer({
-                    ...req.body,
-                    headImg: userInfo.thumb,
-                    answerPersonlevel: userInfo.level,
-                    answerPersonId: req.cookies.xh_userId,
-                    answerPersonName: req.cookies.xh_userName
-                }).then(data => {
-                    res.send(JSON.parse(data))
-                })
-            })
-            
-        } else {
+        const { userId, userName } = getUser(req.cookies);
+        if (!userId) {
             res.send({
                 status: 506,
                 msg: '请登录'
             })
+            return
         }
+        getUserInfo(userId).then(userInfo => {
+            userInfo = JSON.parse(userInfo)
+            savePromblemAnswer({
+                ...req.body,
+                headImg: userInfo.thumb,
+                answerPersonlevel: userInfo.level,
+                answerPersonId: userId,
+                answerPersonName: userName
+            }).then(data => {
+                res.send(JSON.parse(data))
+            })
+        })
     })
 
     /**
@@ -132,10 +143,12 @@ module.exports = (router) => {
      * 获取我的问题
      */
     router.get('/myQuestion', (req, res) => {
+        const { userId } = getUser(req.cookies);
         getNewQuestion({
             isAll: true,
             page: req.query.page,
-            questionerId: req.cookies.xh_userId
+            questionerId: userId,
+            pageSize: 10
         }).then(data => {
             data = JSON.parse(data)
             data.data.content = data.data.content.map(item => {
@@ -149,12 +162,20 @@ module.exports = (router) => {
         })
     })
 
-        /**
+    /**
      * 获取我的关注
      */
     router.get('/myFocus', (req, res) => {
+        const { userId } = getUser(req.cookies);
+        if (!userId) {
+            res.send({
+                status: 506,
+                msg: '请登录'
+            })
+            return
+        }
         getPromblemFocus({
-            userId: req.cookies.xh_userId,
+            userId: userId,
             page: req.query.page
         }).then(data => {
             data = JSON.parse(data)
@@ -168,11 +189,15 @@ module.exports = (router) => {
             res.send(data)
         })
     })
-
+    /**
+     * 获取我的回答
+     */
     router.get('/myAnswer', (req, res) => {
+        
+        const { userId } = getUser(req.cookies);
         getPersonAnswer({
             page: req.query.page,
-            userId: req.cookies.xh_userId
+            userId: userId
         }).then(data => {
             data = JSON.parse(data)
             data.data.content = data.data.content.map(item => {
@@ -180,6 +205,27 @@ module.exports = (router) => {
                     item.problemAsk.newProblemAnswer.answerContent = delHtmlTag(item.problemAsk.newProblemAnswer.answerContent)
                 }
                 item.problemAsk.problemContent = delHtmlTag(item.problemAsk.problemContent)
+                return item
+            })
+            res.send(data)
+        })
+    })
+
+    /**
+     * 待回答
+     */
+    router.get('/stayAnswer', (req, res) => {
+        getNewQuestion({
+            inviteeId: req.cookies.belonger_user_id,
+            pageSize: 10,
+            page: req.query.page
+        }).then(data => {
+            data = JSON.parse(data);
+            data.data.content = data.data.content.map(item => {
+                if (item.newProblemAnswer) {
+                    item.newProblemAnswer.answerContent = delHtmlTag(item.newProblemAnswer.answerContent)
+                }
+                item.problemContent = delHtmlTag(item.problemContent)
                 return item
             })
             res.send(data)

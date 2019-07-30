@@ -2,14 +2,14 @@
 <div class="header">
     <div>
         <span><a href="http://www.xhj.com/"><img src="../images/logo.png" class="img01 "/></a></span>
-        <span class="font14 place place01"><img src="../images/sy12.png"/><i id="cityName"></i></span> 
+        <span class="font14 place place01"><img src="../images/sy12.png"/><i id="cityName"><%= currentCityName %></i></span> 
         <div class="narbar pull-right narbar01">
             <ul class="list-unstyled list-inline listxinfang">
                 <li class="tabs <%= active === 'home' ? 'active' : '' %>"><a href="/">首页</a></li>
                 <li class="tabs <%= active === 'dynamic' ? 'active' : '' %>">
-                    <a href="/latest">问答动态</a>
+                    <a href="/wentiku">问答动态</a>
                     <!-- <div class="wd_nav">
-                        <a href="/ask_questions"><span>我要提问</span></a>
+                        <a href="/tiwen"><span>我要提问</span></a>
                         <a href="###"><span>精选回答</span></a>
                     </div> -->
                 </li>        
@@ -21,7 +21,8 @@
             <input 
                 type="text" 
                 placeholder="房产问题与疑问，一搜即答" 
-                id="searchInput"/>
+                id="searchInput"
+                maxlength="20"/>
             <a href="javascript:void(0);" onclick="submitSearch()"><img src="../images/wd_06.png"/></a>
         </div>
         <% } %>
@@ -93,14 +94,6 @@
 <script>
     require(['jquery'], function($) {
         $(function(){
-            var cityNames = $('.cityName')
-            var currentId = "<%= currentCityId %>"
-            $.each(cityNames, function(index, item) {
-                var id = $(item).attr('data-id')
-                if (currentId === id) {
-                    $('#cityName').html($(item).html())
-                }
-            })
             //城市切换
             $('.place').click(function () {
                 $('.city-change, .overlayBg').show();

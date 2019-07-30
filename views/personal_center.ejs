@@ -46,11 +46,11 @@
             <div class="myQuestion">
                 <% myQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/questions_info/<%= item.problemAskId %>">
+                    <a href="/questions_info/<%= item.problemAskId %>" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
-                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.answerNum %>条回答</span></p>
                     </a>
@@ -67,11 +67,11 @@
             <div class="personAnswer">
                 <% personAnswer.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>">
+                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
                         <% if (item.problemAsk.newProblemAnswer) { %>
-                            <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
+                            <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
                     </a>
@@ -90,11 +90,11 @@
             <div class="focusPromblems">
                 <% focusPromblems.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>">
+                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
                         <% if (item.problemAsk.newProblemAnswer) { %>
-                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
                     </a>
@@ -110,20 +110,29 @@
        <% if (userType == 1) { %>
         <!---待回答--->
        <div class="wenda_content" style="display:none">
-            <% stayAnswerQuestion.content.forEach(item => { %>
-                <%= JSON.stringify(item) %>
-           <div class="wd_content">
-               <a href="###" class="img_detail">
-                   <p class="title">长沙的520买房政策是什么？</p>
-                   <p class="name">张桂玉 Sonia Chang Harris</p>
-                   <div class="content">昨天，中消协公布了今年第一季度的投诉情况，房屋家居领域被指存在虚假宣传、误导消费者、虚假宣传改增”最新政改增”最新政策5月1策5月1日起...</div>
-                   <p class="huida"><span>633条回答</span></p>
-                   <span class="img"><img src="http://fpoimg.com/190x138"/></span>
-               </a>
-               <span class="guanzhu active">关注</span>
-           </div>
-           <% }) %>
-           <a href="###" class="more_btn"><span>加载更多>></span></a>
+            <div class="stayAnswer">
+                <% stayAnswerQuestion.content.forEach(item => { %>
+                <div class="wd_content">
+                        <a href="/questions_info/<%= item.problemAskId %>" target="_blank">
+                        <p class="title"><%= item.problemTitle %></p>
+                        <p class="name"><%= item.questionerName %></p>
+                        <% if (item.newProblemAnswer) { %>
+                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.newProblemAnswer.answerContent %></div>
+                        <% } %>
+                        <p class="huida"><span><%= item.answerNum %>条回答</span></p>
+                    </a>
+                    <% if (item.isFocus) { %>
+                    <span class="guanzhu" onclick="removeFocus('<%= item.problemAskId %>')">取消关注</span>
+                    <% } else { %>
+                    <span class="guanzhu active" onclick="addFocus('<%= item.problemAskId %>', '<%= item.questionerId %>')">关注</span>
+                    <% } %>
+                    
+                </div>
+                <% }) %>
+            </div>
+           <% if (!stayAnswerQuestion.last) { %>
+           <a href="javascript:void(0);" onclick="loadMore('/stayAnswer', 'stayAnswer', loadStayAnswer)" class="more_btn stayAnswer_btn"><span>加载更多>></span></a>
+           <% } %>
        </div>
        <% } %>
 
@@ -136,8 +145,17 @@
 </div>
 
 <script>
-    require(['jquery'], function($) {
+    var dialog = null;
+    require(['jquery', 'dialog'], function($, d) {
+        dialog = d;
         $(function () {
+            var tab = '<%= tab %>';
+            if (tab) {
+                tab = Number(tab);
+                $('.wenda_tab>p').eq(tab).addClass('active').siblings().removeClass('active');
+                $('.wenda_content').hide();
+                $('.wenda_content_wrap').find('.wenda_content').eq(tab).show();
+            }
             //tab切换
             $('.wenda_tab>p').click(function () {
                 $(this).addClass('active').siblings().removeClass('active');
@@ -215,6 +233,11 @@
         personAnswer: {
             page: 1,
             load: false
+        },
+        // 待回答
+        stayAnswer: {
+            page: 1,
+            load: false
         }
     }
 
@@ -237,8 +260,20 @@
                 pageSize: 10
             },
             success: function(data) {
-                param.page++;
-                cb(data)
+                if (data.status == 1) {
+                    param.page++;
+                    cb(data)
+                } else {
+                    var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
+                
             },
             complete: function() {
                 param.load = false;
@@ -257,7 +292,7 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="#">'+
+                '<a href="#" target="_blank">'+
                     '<p class="title">'+item.problemTitle+'</p>'+
                     '<p class="name">'+item.questionerName+'</p>'+
                     (item.newProblemAnswer ? ('<p class="content">'+item.newProblemAnswer.answerContent+'</p>') : '')+
@@ -279,7 +314,7 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="#">'+
+                '<a href="#" target="_blank">'+
                     '<p class="title">'+item.problemAsk.problemTitle+'</p>'+
                     '<p class="name">'+item.problemAsk.questionerName+'</p>'+
                     (item.problemAsk.newProblemAnswer ? ('<p class="content">'+item.problemAsk.newProblemAnswer.answerContent+'</p>') : '')+
@@ -302,7 +337,7 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="#">'+
+                '<a href="#" target="_blank">'+
                     '<p class="title">'+item.problemAsk.problemTitle+'</p>'+
                     '<p class="name">'+item.problemAsk.questionerName+'</p>'+
                     (item.problemAsk.newProblemAnswer ? ('<p class="content">'+item.problemAsk.newProblemAnswer.answerContent+'</p>') : '')+
@@ -314,21 +349,86 @@
     }
 
     /**
+     * 待回答获取更多
+     */
+    function loadStayAnswer(data) {
+        var res = data.data;
+        var content = res.content;
+        res.last && ($('.more_btn.stayAnswer_btn').hide());
+        var html = ''
+        for (var i = 0, len = content.length; i < len; i++) {
+            var item = content[i];
+            html += '<div class="wd_content">'+
+                '<a href="#" target="_blank">'+
+                    '<p class="title">'+item.problemTitle+'</p>'+
+                    '<p class="name">'+item.questionerName+'</p>'+
+                    (item.newProblemAnswer ? ('<p class="content">'+item.newProblemAnswer.answerContent+'</p>') : '')+
+                    '<p class="huida"><span>'+item.answerNum+'条回答</span></p>'+
+                '</a>'+
+            '</div>';
+        }
+        $('.stayAnswer').append(html)
+    }
+
+    /**
      * 取消关注
      * @param {String} askId 需要取消的问题id
      */
-    function removeFocus(askId) {
+     function removeFocus(askId) {
         $.ajax({
             url: '/removeFocus',
             method: 'POST',
             data: {
                 askId: askId
             },
-            success: function() {
-                window.location.reload();
+            success: function(data) {
+                if (data.status == 1) {
+                    window.location.reload();
+                } else {
+                    var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
             }
         })
     }
+
+    /**
+     * 添加关注
+     * @param {String} askId 需要取消的问题id
+     * @param {String} userId 当前问题发布者id
+     */
+     function addFocus(askId, userId) {
+        $.ajax({
+            url: '/addFocus',
+            method: 'POST',
+            data: {
+                askId: askId,
+                userId: userId
+            },
+            success: function(data) {
+                if (data.status == 1) {
+                    window.location.reload();
+                } else {
+                    var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
+            }
+        })
+    }
+
+
 </script>
 
 </body>

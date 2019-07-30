@@ -10,11 +10,12 @@ const { getCityAndMenus } = require('./base');
 
 
 module.exports = (req, id) => {
+    const { userId } = util.getUser(req.cookies);
     // 公用导航栏和城市数据
     const baseData = getCityAndMenus(req.cookies.siteid);
     const promblemInfo = getPromblemInfo(id)
     // 当前用户已关注的问题id
-    const promblemFocusIds = getPromblemFocusIds(req.cookies.xh_userId)
+    const promblemFocusIds = getPromblemFocusIds(userId)
     // 获取相似问题
     const alikeProbleAsk = getAlikeProbleAsk(id)
     const answerList = getPromblemAnswerList({

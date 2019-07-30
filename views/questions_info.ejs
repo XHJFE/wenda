@@ -13,11 +13,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>【长沙楼盘_长沙新房_长沙楼盘价格】—新环境房屋网</title>
+<title><%= promblemInfo.problemTitle %>_<%= currentCityName %>象盒问答</title>
 <meta http-equiv="Cache-Control" content="no-transform"/>
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
-<meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
-<meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
+<meta name="keywords" content="<%= promblemInfo.problemTitle %>" />
+<meta name="description" content="象盒<%= currentCityName %>问答平台为您解答：<%= promblemInfo.problemTitle %>，房产有疑问，上象盒找答案！" />
 <link href="../css/list.css" rel="stylesheet" />
 <link href="../css/wendas.css" rel="stylesheet" />
 <link rel="stylesheet" href="../css/dialog.css">
@@ -35,7 +35,7 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCityId: currentCityId,
+    currentCityName: currentCityName,
     active: '',
     search: true
 })  %>
@@ -46,7 +46,7 @@
 <%- include('include/breadcrumb', {
     list: [{
         name: '问答动态',
-        url: '/latest'
+        url: '/wentiku'
     },{
         name: '问答详情',
         url: '#'
@@ -255,6 +255,15 @@
 					login.login(function() {
 						answerQuestion(id)
 					})
+				} else {
+					var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
 				}
 			}
 		})
@@ -296,6 +305,15 @@
 						'</div>'
 					})
 					$('.xiangqingpinglun_content').append(html)
+				} else {
+					var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
 				}
 			},
 			error: function(data) {
@@ -317,9 +335,23 @@
 				userId: userId
 			},
 			success: function(data) {
-				console.log($('.gzwt_btn.yes'))
-				$('.gzwt_btn.yes').hide()
-				$('.gzwt_btn.no').show()
+				if (data.status == 1) {
+					$('.gzwt_btn.yes').hide()
+					$('.gzwt_btn.no').show()
+				} else if (data.status == 506) {
+					login.login(function() {
+						addFocus(id, userId)
+					})
+				} else {
+					var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
 			}
 		})
 	}
@@ -336,8 +368,24 @@
 				askId: id
 			},
 			success: function(data) {
-				$('.gzwt_btn.yes').show()
-				$('.gzwt_btn.no').hide()
+
+				if (data.status == 1) {
+					$('.gzwt_btn.yes').show()
+					$('.gzwt_btn.no').hide()
+				} else if (data.status == 506) {
+					login.login(function() {
+						removeFocus(id)
+					})
+				} else {
+					var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
 			}
 		})
 	}

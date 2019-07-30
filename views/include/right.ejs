@@ -1,0 +1,68 @@
+<!---右侧内容---->
+<div class="wytw_right_wrap">
+    <p class="title">
+        <a href="/tiwen" target="_blank">
+            <img src="../images/wytw_img.png"/>
+        </a>
+    </p>
+    <div class="wytw_content">
+        <a href="javascript:void(0);" data-index="0" class="content-item"><img src="../images/wd_01.png"/><span>我提出的问题</span></a>
+        <a href="javascript:void(0);" data-index="1" class="content-item"><img src="../images/wd_02.png"/><span>我回答的问题</span></a>
+        <a href="javascript:void(0);" data-index="2" class="content-item"><img src="../images/wd_03.png"/><span>我的关注</span></a>
+    </div>
+
+    <!---问答分类---->
+    <div class="wendafenlei_right">
+        <p class="right_title"><span>问答</span>分类<i></i></p>
+
+        <% classData.forEach(item => { %>
+        <div class="fenlei_list_wrap">
+            <p class="title"><%= item.typeName %></p>
+            <div class="fenlei_list">
+                <% item.labels.forEach(child => { %>
+                <a href="/search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
+                <% }) %>
+            </div>
+            </div>
+        <% }) %>
+        <a href="/juhe" target="_blank" class="gdfl_btn"><span>更多分类</span><img src="../images/wd_04.png"/></a>
+    </div>
+
+
+    <!---热门回答---->
+    <div class="remenhuida_right">
+        <!-- <%= JSON.stringify(hotQuestion) %> -->
+        <p class="right_title"><span>热门</span>问答<i></i></p>
+        <div class="remenhuida_right_content">
+            <% hotQuestion.forEach(item => { %>
+            <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+            <% }) %>
+        </div>
+    </div>
+
+    <!---最新回答---->
+    <div class="remenhuida_right">
+        <p class="right_title"><span>最新</span>回答<i></i></p>
+        <div class="remenhuida_right_content">
+        <% newAsk.forEach(item => { %>
+            <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+        <% }) %>            
+        </div>
+    </div>
+</div>
+
+<script>
+    require(['pc_login_reg'], function(login) {
+        var isLogin = '<%= isLogin %>';
+        $('.content-item').click(function() {
+            if (isLogin == 'false') {
+                login.login(function(){
+                    isLogin = true;
+                })
+                return
+            }
+            var tabIndex = $(this).attr('data-index');
+            window.open('/personal_center?tab='+tabIndex+'')
+        })
+    })
+</script>

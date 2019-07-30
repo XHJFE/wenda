@@ -1,24 +1,17 @@
 const {
     getNewQuestion,
     getPersonAnswer,
-    getPromblemFocus
+    getPromblemFocus,
+    getPromblemFocusIds
 } = require('../proxy/index/index');
 const util = require('../lib/util');    
 
 module.exports = (req) => {
-    const {
-        // 经纪人id
-        belonger_user_id,
-        // 普通用户id
-        user_id,
-        xh_userId
-    } = req.cookies;
-    // 当前用户id
-    const userId = belonger_user_id || user_id || xh_userId;
+    const { userId } = util.getUser(req.cookies);
     // 获取待回答问题
     const stayAnswerQuestion = getNewQuestion({
         inviteeId: userId,
-        pageSize: 10
+        pageSize: 10,
     })
     // 我提出的问题
     const myQuestion = getNewQuestion({
@@ -35,10 +28,12 @@ module.exports = (req) => {
     const focusPromblems = getPromblemFocus({
         userId
     })
+    // 我关注的所有问题id
+    const focusPromblemIds = getPromblemFocusIds(userId)
 
-    const keys = ['stayAnswerQuestion', 'myQuestion', 'personAnswer', 'focusPromblems'];
+    const keys = ['stayAnswerQuestion', 'myQuestion', 'personAnswer', 'focusPromblems', 'focusPromblemIds'];
     return new Promise((resolve, reject) => {
-        Promise.all([stayAnswerQuestion, myQuestion, personAnswer, focusPromblems]).then(result => {
+        Promise.all([stayAnswerQuestion, myQuestion, personAnswer, focusPromblems, focusPromblemIds]).then(result => {
             resolve(util.getResult(keys, result));
         }).catch(e => {
             reject(e);

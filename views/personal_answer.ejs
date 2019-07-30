@@ -13,11 +13,11 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>【长沙楼盘_长沙新房_长沙楼盘价格】—新环境房屋网</title>
+<title><%= promblemInfo.problemTitle %>_<%= currentCityName %>象盒问答</title>
 <meta http-equiv="Cache-Control" content="no-transform"/>
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
-<meta name="keywords" content="长沙新房，长沙楼盘，长沙房价" />
-<meta name="description" content="新环境新房频道为您精选长沙新房、提供长沙楼盘信息及房价，更多长沙楼盘信息尽在新环境房屋网。" />
+<meta name="keywords" content="<%= promblemInfo.problemTitle %>" />
+<meta name="description" content="象盒<%= currentCityName %>问答平台为您解答：<%= promblemInfo.problemTitle %>，房产有疑问，上象盒找答案！" />
 <link href="../css/list.css" rel="stylesheet" />
 <link href="../css/wendas.css" rel="stylesheet" />
 <!--[if lt IE 9]>
@@ -35,7 +35,7 @@
 <!-- 顶部菜单栏 -->
 <%- include('include/header', {
     city: city, 
-    currentCityId: currentCityId,
+    currentCityName: currentCityName,
     active: '',
     search: true
 })  %>
@@ -46,7 +46,7 @@
 <%- include('include/breadcrumb', {
     list: [{
         name: '问答动态',
-        url: '/latest'
+        url: '/wentiku'
     },{
         name: '问答详情',
         url: '#'
@@ -58,12 +58,14 @@
 <div class="wrap" id="wrap">
     <!--左侧---->
     <div class="left_wrap  wddtxq_wrap">
-            <p class="title"><%= promblemInfo.problemTitle %></p>
+			<p class="title"><%= promblemInfo.problemTitle %></p>
+			<% if (promblemInfo.listLabelName && promblemInfo.listLabelName.length > 0) { %>
             <p class="bq">
 				<% promblemInfo.listLabelName.forEach(item => { %>
 				<span><%= item %></span>
 				<% }) %>
 			</p>
+			<% } %>
             <div class="content" id="content"><%- promblemInfo.problemContent %></div>
             <div class="huida">
                 <a href="/questions_info/<%= promblemInfo.problemAskId %>"><span>查看全部回答</span></a>
@@ -257,14 +259,41 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					window.location.href = "/personal_answer?id="+id+"&answerId="+data.data+""
+					window.location.href = "/personal_answer?id="+id+"&answerId="+data.data+"&entry="+GetRequest().entry+""
 				} else if (data.status == 506) {
 					login.login(function() {
 						answerQuestion(id, answerId)
 					})
-				}
+				} else {
+					var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
 			}
 		})
+	}
+
+	/**
+	 * 获取链接上面的参数
+	 */
+	function GetRequest() {
+		//获取url中"?"符后的字串   
+		var url = location.search;   
+		var theRequest = new Object();
+		if (url.indexOf("?") != -1) {
+			var str = url.substr(1);
+			strs = str.split("&");
+			for (var i = 0; i < strs.length; i++) 
+			{
+				theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+			}
+		}
+		return theRequest;
 	}
 
 	/**
@@ -280,9 +309,23 @@
 				userId: userId
 			},
 			success: function(data) {
-				console.log($('.gzwt_btn.yes'))
-				$('.gzwt_btn.yes').hide()
-				$('.gzwt_btn.no').show()
+				if (data.status == 1) {
+					$('.gzwt_btn.yes').hide()
+					$('.gzwt_btn.no').show()
+				} else if (data.status == 506) {
+					login.login(function() {
+						addFocus(id, userId)
+					})
+				} else {
+					var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
 			}
 		})
 	}
@@ -299,8 +342,23 @@
 				askId: id
 			},
 			success: function(data) {
-				$('.gzwt_btn.yes').show()
-				$('.gzwt_btn.no').hide()
+				if (data.status == 1) {
+					$('.gzwt_btn.yes').show()
+					$('.gzwt_btn.no').hide()
+				} else if (data.status == 506) {
+					login.login(function() {
+						removeFocus(id)
+					})
+				} else {
+					var d = dialog({
+						content: data.msg,
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+					}, 1000);
+                }
 			}
 		})
 	}
