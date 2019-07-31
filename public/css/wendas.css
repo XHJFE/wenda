@@ -159,7 +159,7 @@ i {font-style:normal; }
     .pager > span { margin-right:10px;}
 
      /*我的提问*/
-    .wrap { overflow:hidden;}
+    .wrap { overflow:hidden;min-height: 600px;}
     .left_wrap { width:810px;float:left;}
     .right_wrap { width:350px;float:right;}
 
@@ -295,3 +295,8 @@ i {font-style:normal; }
 
     .right_wrap.active { float:none;position:fixed;top:0px;left:50%;height:1px;width:1200px;margin-left:-600px;}
     .right_wrap.active .remenhuida_right { width:350px;float:right;}
+
+    .toutiao_content_wrap > a > .title { bottom:0px;padding-bottom:10px;background-color:rgba(0,0,0,0.2);max-height: 99px;padding-top: 5px;filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#66000000, endcolorstr=#66000000);}
+    .wenda_content_common .wd_content > a { min-height:132px;}
+    .wendafenlei_list > p { top: 50%;margin-top:-20px;}
+    .img_detail .guanzhu{position: relative;bottom: 0px;left: 50px;}

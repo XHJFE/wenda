@@ -62,10 +62,12 @@ async function getNewQuestion(param = {}) {
         pageSize,
         audit,
         isAll,
+        problemTitle,
         ...other
     } = param;
-    page = page ? page - 1 : 0
-    pageSize = pageSize || 20
+    problemTitle = problemTitle ? unescape(problemTitle) : '';
+    page = page ? page - 1 : 0;
+    pageSize = pageSize || 20;
     audit = audit || 1
     // 当前是查询所有问题
     isAll && (audit = '')
@@ -77,6 +79,7 @@ async function getNewQuestion(param = {}) {
             page,
             pageSize,
             audit,
+            problemTitle,
             ...other
         })
     })

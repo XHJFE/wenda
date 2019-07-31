@@ -53,52 +53,49 @@
     }]
 }) %>
 
-
 <!--内容-->
 <div class="wrap" id="wrap">
     <!--左侧---->
     <div class="left_wrap  wddtxq_wrap">
-			<p class="title"><%= promblemInfo.problemTitle %></p>
-			<% if (promblemInfo.listLabelName && promblemInfo.listLabelName.length > 0) { %>
-            <p class="bq">
+		<p class="title"><%= promblemInfo.problemTitle %></p>
+		<% if (promblemInfo.listLabelName && promblemInfo.listLabelName.length > 0) { %>
+			<p class="bq">
 				<% promblemInfo.listLabelName.forEach(item => { %>
-				<span><%= item %></span>
+					<span><%= item %></span>
 				<% }) %>
 			</p>
-			<% } %>
-            <div class="content" id="content"><%- promblemInfo.problemContent %></div>
-            <div class="huida">
-                <a href="/questions_info/<%= promblemInfo.problemAskId %>"><span>查看全部回答</span></a>
-                <i style="position:relative;top:4px;"><%= promblemInfo.questionerName %> <%= promblemInfo.createDate %>发布</i>
-                <!-- <p class="jbfx_wrap">
-                    <a href="###"><img src="../images/wd_16.png"/><span>举报</span></a>
-                    <a href="###"><img src="../images/wd_17.png"/><span>分享</span></a>
-                </p> -->
-			   </div>
-			<% if (!isMine) { %>
-            <div class="xiangqingpinglun_list" style="border:none">
-				<a href="#" class="head">
-					<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
-					<p class="name"><%= promblemAnswer.answerPersonName %></p>
-					<p class='time'>发布时间 <%= promblemAnswer.createDate %></p>
-				</a>
-				<div class="content"><%- promblemAnswer.answerContent %></div>
-            </div>
-		
-				<% if (isLogin) {%>
-					<div class="title_da"><%= userName %> 答： </div>
-					<div class="fuwenben" id="editor"></div>
-				<% } else { %>
-				<!-- 未登录时富文本的状态-->
-					<div class="weidenglu_wrap">
-						<p class="wdl_text"><a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a><i>后回答TA</i></p>
-					</div>
-				<% } %>
-				<div class="btns">            
-					<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
-				</div>
-			<% } else { %>
-
+		<% } %>
+		<div class="content" id="content"><%- promblemInfo.problemContent %></div>
+		<div class="huida">
+			<a href="/xq/<%= promblemInfo.problemAskId %>.html"><span>查看全部回答</span></a>
+			<i style="position:relative;top:4px;"><%= promblemInfo.questionerName %> <%= promblemInfo.createDate %>发布</i>
+			<!-- <p class="jbfx_wrap">
+				<a href="###"><img src="../images/wd_16.png"/><span>举报</span></a>
+				<a href="###"><img src="../images/wd_17.png"/><span>分享</span></a>
+			</p> -->
+		</div>
+		<% if (!isMine) { %>
+		<div class="xiangqingpinglun_list" style="border:none">
+			<a href="#" class="head">
+				<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
+				<p class="name"><%= promblemAnswer.answerPersonName %></p>
+				<p class='time'>发布时间 <%= promblemAnswer.createDate %></p>
+			</a>
+			<div class="content"><%- promblemAnswer.answerContent %></div>
+		</div>
+	
+		<% if (isLogin) {%>
+			<div class="title_da"><%= userName %> 答： </div>
+			<div class="fuwenben" id="editor"></div>
+		<% } else { %>
+			<!-- 未登录时富文本的状态-->
+			<div class="weidenglu_wrap">
+				<p class="wdl_text"><a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a><i>后回答TA</i></p>
+			</div>
+			<div class="btns">            
+				<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
+			</div>
+		<% } else { %>
 			<div class="xiangqingpinglun_list" style="border:none">
 				<a href="#" class="head">
 					<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
@@ -106,19 +103,16 @@
 					<p class='time'><%= promblemAnswer.createDate %></p>
 				</a>
 				<div class="content" id="xiugai_content"><%- promblemAnswer.answerContent %></div>
-				</div>    
-				<div class="xiugai_wrap">
-					<span><img src="../images/wd_19.png" />修改回答</span>
-				</div>
-				<div class="fuwenben" id="editor" style="display: none;"></div>
-				<div class="btns" style="display: none;">    
-					<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>', '<%= promblemAnswer.problemAnswerId %>')" class="bcsh_btn"><span>提交回答</span></a>
-				</div>
-			<% } %>
-            
+			</div>    
+			<div class="xiugai_wrap">
+				<span><img src="../images/wd_19.png" />修改回答</span>
+			</div>
+			<div class="fuwenben" id="editor" style="display: none;"></div>
+			<div class="btns" style="display: none;">    
+				<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>', '<%= promblemAnswer.problemAnswerId %>')" class="bcsh_btn"><span>提交回答</span></a>
+			</div>
+		<% } %>
     </div>
-
-
 
     <!--右侧---->
     <div class="right_wrap">
@@ -129,19 +123,16 @@
 				<a href="javascript:void(0);" style="display: <%= !promblemInfo.isFocus ? 'none' : 'inline-block' %>" onclick="removeFocus('<%= promblemInfo.problemAskId %>')" class="gzwt_btn no"><span>取消关注</span></a>
 				<a href="#wrap" class="xhd_btn"><span>写回答</span></a>
              </div>
-
 			 <% if (alikeProbleAsk && alikeProbleAsk.length > 0) { %>
-             <p class="right_title"><span>相关</span>问题<i></i></p>
-             <div class="remenhuida_right_content">
-				 <% alikeProbleAsk.forEach(item => { %>
-					<a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>               
-				 <% }) %>
-			 </div>
+				<p class="right_title"><span>相关</span>问题<i></i></p>
+				<div class="remenhuida_right_content">
+					<% alikeProbleAsk.forEach(item => { %>
+						<a href="/xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>               
+					<% }) %>
+				</div>
 			 <% } %>
          </div>
-
     </div>
-
 </div>
 
 <script type="text/javascript">
@@ -259,7 +250,7 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					window.location.href = "/personal_answer?id="+id+"&answerId="+data.data+"&entry="+GetRequest().entry+""
+					window.location.href = "/personal_answer?answerId="+data.data+"&entry="+GetRequest().entry+""
 				} else if (data.status == 506) {
 					login.login(function() {
 						answerQuestion(id, answerId)

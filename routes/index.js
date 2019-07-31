@@ -2,9 +2,9 @@ const express = require('express');
 const router = express.Router();
 const apiRouter = require('./api');
 const indexController = require('../controller/index');
-const classifyController = require('../controller/classify');
-const latestController = require('../controller/latest');
-const askQuestionsController = require('../controller/ask_questions');
+const juheController = require('../controller/juhe');
+const wentikuController = require('../controller/wentiku');
+const tiwenController = require('../controller/tiwen');
 const searchResultController = require('../controller/search_result');
 const questionsInfoController = require('../controller/questions_info');
 const personalAnswerController = require('../controller/personal_answer');
@@ -46,7 +46,7 @@ router.get('/',  (req, res, next) => {
  * 分类页面
  */
 router.get('/juhe',  (req, res, next) => {
-    classifyController(req).then(data => {
+    juheController(req).then(data => {
         let {
             classData,
             menus,
@@ -70,7 +70,7 @@ router.get('/juhe',  (req, res, next) => {
  */
 router.get('/wentiku',  (req, res, next) => {
     const {userId} = getUser(req.cookies);
-    latestController(req, {
+    wentikuController(req, {
         ...req.query,
         userId
     }).then(data => {
@@ -120,7 +120,7 @@ router.get('/wentiku',  (req, res, next) => {
  * 提问
  */
 router.get('/tiwen', (req, res) => {
-    askQuestionsController(req).then(data => {
+    tiwenController(req).then(data => {
         let {
             menus,
             city,
@@ -165,7 +165,7 @@ router.get('/search_result', (req, res) => {
             newAsk: newAsk.data.content,
             bigLabel: req.query.bigLabel,
             labelName: req.query.label,
-            problemTitle: req.query.problemTitle,
+            problemTitle: unescape(req.query.problemTitle),
             isLogin: !!userId
         })
     }).catch((e) => {
@@ -178,14 +178,15 @@ router.get('/search_result', (req, res) => {
 /**
  * 问答详情
  */
-router.get('/questions_info/:id', (req, res) => {
+router.get('/xq/:id', (req, res) => {
     if (!req.params.id) {
         res.render('error', {
             message: '缺少参数'
         })
         return;
     }
-    questionsInfoController(req, req.params.id).then(data => {
+    id = req.params.id.replace('.html', '');
+    questionsInfoController(req, id).then(data => {
         let {
             menus,
             city,

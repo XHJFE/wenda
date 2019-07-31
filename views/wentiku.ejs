@@ -62,13 +62,28 @@
             <% questionList.content.forEach((item, index) => { %>
             <div class="wd_content">
                <!------------------右边有图片的时候就在这里加个img_detail类名---->
-               <a href="/questions_info/<%= item.problemAskId %>" class="<%= item.img ? 'img_detail': ''  %>">
+               <a href="/xq/<%= item.problemAskId %>.html" class="<%= item.img ? 'img_detail': ''  %>">
                    <p class="title"><%= item.problemTitle %></p>
                    <p class="name"><%= item.questionerName %></p>
                    <% if (item.newProblemAnswer) { %>
-                    <p class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
+                    <p class="content answer" data-url="/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
                     <% } %>
-                   <p class="huida"><span><%= item.answerNum %>条回答</span></p>
+                   <p class="huida">
+                       <span><%= item.answerNum %>条回答</span>
+                       <% if (item.isFocus) { %>
+                        <span 
+                            class="guanzhu" 
+                            onclick="removeFocus('<%= item.problemAskId %>', '<%= index %>', '<%= item.questionerId %>')">
+                            取消关注
+                        </span>
+                        <% } else { %>
+                        <span 
+                            class="guanzhu active" 
+                            onclick="addFocus('<%= item.problemAskId %>', '<%= index %>', '<%= item.questionerId %>')">
+                            关注
+                        </span>
+                        <% } %>
+                    </p>
                    <% if (item.img) {%>
                     <span class="img">
                         <img src="<%= item.img %>"/>
@@ -76,19 +91,7 @@
                     <% } %>
                </a>
 
-               <% if (item.isFocus) { %>
-                <span 
-                    class="guanzhu" 
-                    onclick="removeFocus('<%= item.problemAskId %>', '<%= index %>', '<%= item.questionerId %>')">
-                    取消关注
-                </span>
-                <% } else { %>
-                <span 
-                    class="guanzhu active" 
-                    onclick="addFocus('<%= item.problemAskId %>', '<%= index %>', '<%= item.questionerId %>')">
-                    关注
-                </span>
-                <% } %>
+               
            </div>
            <% }) %>
            <!---分页---->
@@ -138,6 +141,9 @@
      * @param {String} userId 提问者id
      */
      function addFocus(askId, index, userId) {
+        console.log(event)
+        event.stopPropagation();
+        event.preventDefault()
         $.ajax({
             url: '/addFocus/',
             type: 'POST',
@@ -167,6 +173,7 @@
                 }
             }
         })
+        return false
     }
 
     /**
@@ -174,6 +181,9 @@
      * @param {String} askId 问题id 
      */
      function removeFocus(askId, index, userId) {
+        console.log(event)
+        event.stopPropagation();
+        event.preventDefault()
         $.ajax({
             url: '/removeFocus/',
             type: 'POST',
@@ -202,6 +212,7 @@
                 }
             },
         })
+        return false
     }
 
 

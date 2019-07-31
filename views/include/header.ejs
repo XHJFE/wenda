@@ -110,6 +110,6 @@
         if (!search) {
             return
         }
-        window.location.href = '/search_result?problemTitle='+search+''
+        window.location.href = '/search_result?problemTitle='+escape(search)+''
     }
 </script>

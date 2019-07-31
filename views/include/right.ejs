@@ -12,6 +12,7 @@
     </div>
 
     <!---问答分类---->
+    <% if (classData && classData.length > 0) { %>
     <div class="wendafenlei_right">
         <p class="right_title"><span>问答</span>分类<i></i></p>
 
@@ -27,28 +28,33 @@
         <% }) %>
         <a href="/juhe" target="_blank" class="gdfl_btn"><span>更多分类</span><img src="../images/wd_04.png"/></a>
     </div>
+    <% } %>
 
 
     <!---热门回答---->
+    <% if (hotQuestion && hotQuestion.length > 0) { %>
     <div class="remenhuida_right">
         <!-- <%= JSON.stringify(hotQuestion) %> -->
         <p class="right_title"><span>热门</span>问答<i></i></p>
         <div class="remenhuida_right_content">
             <% hotQuestion.forEach(item => { %>
-            <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+            <a href="/xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
             <% }) %>
         </div>
     </div>
+    <% } %>
 
+    <% if (newAsk &&newAsk.length > 0) { %>
     <!---最新回答---->
     <div class="remenhuida_right">
         <p class="right_title"><span>最新</span>回答<i></i></p>
         <div class="remenhuida_right_content">
         <% newAsk.forEach(item => { %>
-            <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
+            <a href="/xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>
         <% }) %>            
         </div>
     </div>
+    <% } %>
 </div>
 
 <script>

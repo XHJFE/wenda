@@ -46,11 +46,11 @@
             <div class="myQuestion">
                 <% myQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/questions_info/<%= item.problemAskId %>" target="_blank">
+                    <a href="/xq/<%= item.problemAskId %>.html" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
-                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.answerNum %>条回答</span></p>
                     </a>
@@ -67,11 +67,11 @@
             <div class="personAnswer">
                 <% personAnswer.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>" target="_blank">
+                    <a href="/xq/<%= item.problemAsk.problemAskId %>.html" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
                         <% if (item.problemAsk.newProblemAnswer) { %>
-                            <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
+                            <div class="content answer" data-url="/personal_answer?answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
                     </a>
@@ -90,11 +90,11 @@
             <div class="focusPromblems">
                 <% focusPromblems.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/questions_info/<%= item.problemAsk.problemAskId %>" target="_blank">
+                    <a href="/xq/<%= item.problemAsk.problemAskId %>.html" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
                         <% if (item.problemAsk.newProblemAnswer) { %>
-                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAsk.problemAskId %>&answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="/personal_answer?answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
                     </a>
@@ -113,11 +113,11 @@
             <div class="stayAnswer">
                 <% stayAnswerQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                        <a href="/questions_info/<%= item.problemAskId %>" target="_blank">
+                        <a href="/xq/<%= item.problemAskId %>.html" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
-                        <div class="content answer" data-url="/personal_answer?id=<%= item.problemAskId %>&answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.answerNum %>条回答</span></p>
                     </a>

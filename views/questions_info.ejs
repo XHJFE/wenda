@@ -20,7 +20,6 @@
 <meta name="description" content="象盒<%= currentCityName %>问答平台为您解答：<%= promblemInfo.problemTitle %>，房产有疑问，上象盒找答案！" />
 <link href="../css/list.css" rel="stylesheet" />
 <link href="../css/wendas.css" rel="stylesheet" />
-<link rel="stylesheet" href="../css/dialog.css">
 <!--[if lt IE 9]>
   <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
   <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
@@ -127,7 +126,7 @@
              <p class="right_title"><span>相关</span>问题<i></i></p>
              <div class="remenhuida_right_content">
 				 <% alikeProbleAsk.forEach(item => { %>
-				 <a href="/questions_info/<%= item.problemAskId %>"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>              
+				 <a href="/xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>              
 				 <% }) %>
 			 </div>
 			 <% } %>
@@ -138,13 +137,13 @@
 </div>
 
 <script type="text/javascript">
-	var login = null
-	var dialog = null
-	var page = 0
-	var isLoad = false
+	var login = null;
+	var dialog = null;
+	var page = 0;
+	var isLoad = false;
     require(['pc_login_reg', 'wang_editor', 'dialog'], function(l, wangEditor, d) {
-		login = l
-		dialog = d
+		login = l;
+		dialog = d;
 		$(function () {
 			//加精
 			$('.switch_btn').click(function () {
@@ -186,7 +185,7 @@
 				}          
 			})
 
-			initEditor(wangEditor)
+			initEditor(wangEditor);
 		});
 	})
 
@@ -210,21 +209,21 @@
 			uploadFileName: 'file',
 			uploadImgHooks: {
 				fail: function(xhr, editor, result) {
-					editor.uploadImg.insertLinkImg(result)
+					editor.uploadImg.insertLinkImg(result);
 				}
 			},
 			customAlert: function (info) {
-				return
+				return;
 			},
 			onchange: function() {
-				var text = w.txt.text()
-				var html = w.txt.html()
+				var text = w.txt.text();
+				var html = w.txt.html();
 				if (text.length > 300) {
-					console.log(html)
+					console.log(html);
 				}
 			}
 		}
-		w.create()
+		w.create();
 	}
 
 	/**
@@ -250,10 +249,10 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					window.location.reload()
+					window.location.reload();
 				} else if (data.status == 506) {
 					login.login(function() {
-						answerQuestion(id)
+						answerQuestion(id);
 					})
 				} else {
 					var d = dialog({
@@ -278,8 +277,8 @@
 		if (isLoad) {
 			return
 		}
-		page++
-		isLoad = true
+		page++;
+		isLoad = true;
 		$.ajax({
 			url: '/answerList',
 			data: {
@@ -287,13 +286,13 @@
 				problemAskId: id
 			},
 			success: function(data) {
-				isLoad = false
+				isLoad = false;
 				if (data.status == 1) {
-					var res = data.data
-					var content = res.content
+					var res = data.data;
+					var content = res.content;
 					// 没有更多隐藏加载更多按钮
-					res.last && $('.more_btn').hide()
-					var html = ''
+					res.last && $('.more_btn').hide();
+					var html = '';
 					$.each(content, function(index, item) {
 						html += '<div class="xiangqingpinglun_list">'+
 							'<a href="#" class="head">'+
@@ -302,9 +301,9 @@
 								'<p class="time">发布时间 '+item.createDate+'</p>'+
 							'</a>'+
 							'<div class="content">'+item.answerContent+'</div>'+
-						'</div>'
+						'</div>';
 					})
-					$('.xiangqingpinglun_content').append(html)
+					$('.xiangqingpinglun_content').append(html);
 				} else {
 					var d = dialog({
 						content: data.msg,
@@ -317,7 +316,7 @@
 				}
 			},
 			error: function(data) {
-				isLoad = false
+				isLoad = false;
 			}
 		})
 	}
@@ -336,11 +335,11 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					$('.gzwt_btn.yes').hide()
-					$('.gzwt_btn.no').show()
+					$('.gzwt_btn.yes').hide();
+					$('.gzwt_btn.no').show();
 				} else if (data.status == 506) {
 					login.login(function() {
-						addFocus(id, userId)
+						addFocus(id, userId);
 					})
 				} else {
 					var d = dialog({
@@ -370,11 +369,11 @@
 			success: function(data) {
 
 				if (data.status == 1) {
-					$('.gzwt_btn.yes').show()
-					$('.gzwt_btn.no').hide()
+					$('.gzwt_btn.yes').show();
+					$('.gzwt_btn.no').hide();
 				} else if (data.status == 506) {
 					login.login(function() {
-						removeFocus(id)
+						removeFocus(id);
 					})
 				} else {
 					var d = dialog({
