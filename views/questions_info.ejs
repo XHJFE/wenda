@@ -245,7 +245,8 @@
 			method: 'POST',
 			data: {
 				problemAskId: id,
-				answerContent: content
+				answerContent: content,
+				answerText: w.txt.text()
 			},
 			success: function(data) {
 				if (data.status == 1) {

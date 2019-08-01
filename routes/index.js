@@ -18,7 +18,7 @@ const _ = require('underscore');
 /**
  * 首页
  */
-router.get('/',  (req, res, next) => {
+router.get('/',  (req, res) => {
     indexController(req).then(data => {
         let {
             classData,
@@ -45,7 +45,7 @@ router.get('/',  (req, res, next) => {
 /**
  * 分类页面
  */
-router.get('/juhe',  (req, res, next) => {
+router.get('/juhe',  (req, res) => {
     juheController(req).then(data => {
         let {
             classData,
@@ -68,7 +68,7 @@ router.get('/juhe',  (req, res, next) => {
 /**
  * 问答动态
  */
-router.get('/wentiku',  (req, res, next) => {
+router.get('/wentiku',  (req, res) => {
     const {userId} = getUser(req.cookies);
     wentikuController(req, {
         ...req.query,

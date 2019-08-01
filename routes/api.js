@@ -23,7 +23,7 @@ module.exports = (router) => {
     /**
      * 关注
      */
-    router.post('/addFocus', function (req, res, next) {
+    router.post('/addFocus', function (req, res) {
         const user = getUser(req.cookies);
         if (!user.userId) {
             res.send({
@@ -59,7 +59,7 @@ module.exports = (router) => {
     /**
      * 取消关注
      */
-    router.post('/removeFocus', function (req, res, next) {
+    router.post('/removeFocus', function (req, res) {
         const { userId } = getUser(req.cookies);
         if (!userId) {
             res.send({
