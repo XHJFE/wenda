@@ -68,36 +68,46 @@
                         
            
 
-			<% if (isLogin) { %>
-				<div class="title_da"><%= userName %> 答： 
-					<!-- <p class="niming"><i>匿名</i><span class="switch_btn"><i></i></span></p> -->
-				 </div>
-           		 <div class="fuwenben" id="editor"></div>
-			<% } %>
+			
 
         <!-- 未登录时富文本的状态-->
-        <% if (!isLogin) { %>
-        <div class="weidenglu_wrap">
-            <p class="wdl_text">
-              <a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a>
-              <i>后回答TA</i>
-            </p>
-        </div>
-        <% } %>
-
-            <div class="btns">              
-               <a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
-            </div>
+		<% if (!isLogin) { %>
+			<!-- <div class="tiwen-content" style="display: none;">
+				<div class="weidenglu_wrap">
+					<p class="wdl_text">
+					<a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a>
+					<i>后回答TA</i>
+					</p>
+				</div>
+				<div class="btns">              
+					<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
+				</div>
+			</div> -->
+		<% } else { %>
+			<div class="tiwen-content" style="display: none;">
+				<div class="title_da"><%= userName %> 答： </div>
+				<div class="fuwenben" id="editor"></div>
+				<div class="btns">              
+				<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
+				</div>
+			</div>
+			
+		<% } %>
+            
    
            <!--评论-->
            <div class="xiangqingpinglun_wrap">
-               <p class="title"><%= answerList.totalElements %>条评论<i></i></p>
+               <p class="title"><%= answerList.totalElements %>条回答<i></i></p>
                <div class="xiangqingpinglun_content">
 				   <% answerList.content.forEach(item => { %>
                    <div class="xiangqingpinglun_list">
                        <a href="#" class="head">
                            <span><img src="<%= item.headImg || '../images/wd_18.png' %>"/></span>
-                           <p class="name"><%= item.answerPersonName %></p>
+						   <p class="name"><%= item.answerPersonName %>  
+							<% if (item.answerPersonlevel) { %>
+							<span class="jingjirenjibie"><%= item.answerPersonlevel %></span>
+							<% } %>
+						</p>
                            <p class='time'>发布时间 <%= item.createDate %></p>
                        </a>
                        <div class="content"><%- item.answerContent %></div>
@@ -185,6 +195,17 @@
 				}          
 			})
 
+			$('.xhd_btn').click(function() {
+				var status = '<%= isLogin %>'
+				if (status === 'false') {
+					login.login(function() {
+						window.location.reload();		
+					})
+					return
+				}
+				$('.tiwen-content').show()
+			})
+
 			initEditor(wangEditor);
 		});
 	})
@@ -250,7 +271,16 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					window.location.reload();
+					var d = dialog({
+						content: '回答提交成功',
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+						window.location.reload();
+					}, 1000);
+					
 				} else if (data.status == 506) {
 					login.login(function() {
 						answerQuestion(id);

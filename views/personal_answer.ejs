@@ -78,28 +78,41 @@
 		<div class="xiangqingpinglun_list" style="border:none">
 			<a href="#" class="head">
 				<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
-				<p class="name"><%= promblemAnswer.answerPersonName %></p>
+				<p class="name"><%= promblemAnswer.answerPersonName %> 
+					<% if(promblemAnswer.answerPersonlevel) {%>
+					<span class="jingjirenjibie"><%= promblemAnswer.answerPersonlevel %></span>
+					<% } %>
+				</p>
 				<p class='time'>发布时间 <%= promblemAnswer.createDate %></p>
 			</a>
 			<div class="content"><%- promblemAnswer.answerContent %></div>
 		</div>
 	
-		<% if (isLogin) {%>
-			<div class="title_da"><%= userName %> 答： </div>
-			<div class="fuwenben" id="editor"></div>
-		<% } else { %>
-			<!-- 未登录时富文本的状态-->
-			<div class="weidenglu_wrap">
-				<p class="wdl_text"><a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a><i>后回答TA</i></p>
-			</div>
-			<div class="btns">            
-				<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
-			</div>
+			<% if (isLogin) {%>
+				<div class="title_da"><%= userName %> 答： </div>
+				<div class="fuwenben" id="editor"></div>
+				<div class="btns">            
+					<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
+				</div>
+			<% } else { %>
+				<!-- 未登录时富文本的状态-->
+				<div class="weidenglu_wrap">
+					<p class="wdl_text"><a href="javascript:void(0)" onclick="login.login(function(){window.location.reload()})"><span>登录</span></a><i>后回答TA</i></p>
+				</div>
+				<div class="btns">            
+					<a href="javascript:void(0)" onclick="answerQuestion('<%= promblemInfo.problemAskId %>')" class="bcsh_btn"><span>提交回答</span></a>
+				</div>
+			<% } %>
 		<% } else { %>
 			<div class="xiangqingpinglun_list" style="border:none">
 				<a href="#" class="head">
 					<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
-					<p class="name"><%= promblemAnswer.answerPersonName %></p>
+					<p class="name"><%= promblemAnswer.answerPersonName %>  
+						
+						<% if(promblemAnswer.answerPersonlevel) {%>
+						<span class="jingjirenjibie"><%= promblemAnswer.answerPersonlevel %></span>
+						<% } %>
+					</p>
 					<p class='time'><%= promblemAnswer.createDate %></p>
 				</a>
 				<div class="content" id="xiugai_content"><%- promblemAnswer.answerContent %></div>
@@ -251,7 +264,7 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					window.location.href = "/personal_answer?answerId="+data.data+"&entry="+GetRequest().entry+""
+					window.location.href = "/personal_answer?answerId="+data.data+"&entry="+(GetRequest().entry || '')+""
 				} else if (data.status == 506) {
 					login.login(function() {
 						answerQuestion(id, answerId)

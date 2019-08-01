@@ -67,12 +67,10 @@
             <div class="personAnswer">
                 <% personAnswer.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/xq/<%= item.problemAsk.problemAskId %>.html" target="_blank">
+                    <a href="/personal_answer?answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
-                        <% if (item.problemAsk.newProblemAnswer) { %>
-                            <div class="content answer" data-url="/personal_answer?answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
-                        <% } %>
+                        <div class="content"><%= item.answerText %></div>
                         <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
                     </a>
                 </div>

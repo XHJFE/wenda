@@ -84,8 +84,7 @@
         .chosen-container .chosen-results li.highlighted:before {
           background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='white' d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/%3E%3C/svg%3E"); }
         .chosen-container .chosen-results li.highlighted em {
-          background: transparent;
-          color: rgba(255, 255, 255, 0.8); }
+          background: transparent;color: #2BADD7; }
       .chosen-container .chosen-results li.disabled-result {
         display: list-item;
         color: #ced4da; }

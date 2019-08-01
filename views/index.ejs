@@ -105,19 +105,24 @@
         <div class="wenda_content wenda_content_common">
             <% newQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="/xq/<%= item.problemAskId %>.html" class="<%= item.img ? 'img_detail': ''  %>">
+                        <!-- class="<%= item.img ? 'img_detail': ''  %>" -->
+                    <a href="/xq/<%= item.problemAskId %>.html">
                         <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
                         <p class="title"><%= item.problemTitle %></p>
-                        <p class="name"><%= item.questionerName %></p>
+                        <p class="name"><%= item.questionerName %> 
+                            <% if (item.askPersonlevel) { %>
+                            <span class="jingjirenjibie"><%= item.askPersonlevel %></span> 
+                            <% } %>
+                        </p>
                         <% if (item.newProblemAnswer) { %>
                             <p data-url="/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>" class="content answer"><%= item.newProblemAnswer.answerContent %></p>
                         <% } %>
 
-                        <% if (item.img) {%>
+                        <!-- <% if (item.img) {%>
                         <span class="img">
                             <img src="<%= item.img %>"/>
                         </span>
-                        <% } %>
+                        <% } %> -->
                     </a>
                 </div>
             <% }) %>

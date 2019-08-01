@@ -86,7 +86,7 @@ module.exports = (router) => {
      * 提问
      */
     router.post('/askQuestions', function(req, res) {
-        const { userId } = getUser(req.cookies);
+        const { userId, type } = getUser(req.cookies);
         if (!userId) {
             res.send({
                 status: 506,
@@ -94,8 +94,14 @@ module.exports = (router) => {
             })
             return
         }
-        saveProblemAsk(req, req.body).then(data => {
-            res.send(JSON.parse(data))
+        getUserInfo(userId, type).then(userInfo => {
+            userInfo = JSON.parse(userInfo)
+            saveProblemAsk(req, {
+                ...req.body,
+                askPersonlevel: userInfo.level
+            }).then(data => {
+                res.send(JSON.parse(data))
+            })
         })
     })
 
@@ -103,7 +109,7 @@ module.exports = (router) => {
      * 回答问题
      */
     router.post('/savePromblemAnswer', (req, res) => {
-        const { userId, userName } = getUser(req.cookies);
+        const { userId, userName, type } = getUser(req.cookies);
         if (!userId) {
             res.send({
                 status: 506,
@@ -111,11 +117,11 @@ module.exports = (router) => {
             })
             return
         }
-        getUserInfo(userId).then(userInfo => {
+        getUserInfo(userId, type).then(userInfo => {
             userInfo = JSON.parse(userInfo)
             savePromblemAnswer({
                 ...req.body,
-                headImg: userInfo.thumb,
+                headImg: userInfo.portrait || userInfo.thumb,
                 answerPersonlevel: userInfo.level,
                 answerPersonId: userId,
                 answerPersonName: userName

@@ -22,7 +22,8 @@
                 type="text" 
                 placeholder="房产问题与疑问，一搜即答" 
                 id="searchInput"
-                maxlength="20"/>
+                maxlength="20"
+                onkeydown="keydownFn()"/>
             <a href="javascript:void(0);" onclick="submitSearch()"><img src="../images/wd_06.png"/></a>
         </div>
         <% } %>
@@ -104,6 +105,12 @@
         })
         
     });
+
+    function keydownFn() {
+        if (event.keyCode === 13) {
+            submitSearch()
+        }
+    }
 
     function submitSearch() {
         var search = $('#searchInput').val()

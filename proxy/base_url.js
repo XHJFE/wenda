@@ -45,4 +45,7 @@ module.exports = {
     GET_PROMBLEM_FOCUS: config.base_server_url[env] + `/web/problemAsk/getProblemFocus/`,
     // 我的回答
     GET_PERSON_ANSWER: config.base_server_url[env] + `/web/problemAnswer/getProblemAskByAnswerPersonId/`,
+    // 获取经纪人用户信息
+    GET_BELONGER_BY_ID: config.proxy_server_url[env] + '/web/belonger/find/'
+    
 }

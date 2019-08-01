@@ -3,7 +3,8 @@ const {
     HEADER,
     ADD_FOCUS,
     REMOVE_FOCUS,
-    FIND_BY_ID
+    FIND_BY_ID,
+    GET_BELONGER_BY_ID
 } = require('../base_url')
 /**
  * 关注问题
@@ -36,10 +37,12 @@ async function removeFocus(userId, askId) {
 /**
  * 获取用户信息
  * @param {String} userId 当前需要查询的用户id
+ * @param {String} type 当前用户类型1：经纪人 2：普通客户
  */
-async function getUserInfo(userId) {
+async function getUserInfo(userId, type) {
+    let url = type == 1 ? GET_BELONGER_BY_ID : FIND_BY_ID;
     let data = await proxy({
-        uri: FIND_BY_ID + userId,
+        uri: url + userId,
         method: 'GET',
         headers: HEADER
     });

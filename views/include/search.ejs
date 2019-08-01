@@ -3,7 +3,12 @@
 <div class="wd_search_wrap">
     <div>
         <div class="input_wrap">
-            <input type="text" placeholder="房产问题与疑问，一搜即答" id="searchInput" maxlength="20"/>
+            <input 
+                type="text" 
+                placeholder="房产问题与疑问，一搜即答" 
+                id="searchInput" 
+                maxlength="20"
+                onkeydown="keydownFn()"/>
             <a href="javascript:void(0);" onclick="submitSearch()"><img src="../images/wd_ss_btn.png" /></a>
         </div>
 
@@ -12,6 +17,11 @@
 </div>
 
 <script>
+    function keydownFn() {
+        if (event.keyCode === 13) {
+            submitSearch()
+        }
+    }
     function submitSearch() {
         var search = $('#searchInput').val()
         if (!search) {

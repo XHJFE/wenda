@@ -57,8 +57,8 @@
 
     <script>
         require(['jquery', 'util'], function($, t) {
-            var userId = t.cookie.get('xh_userId');
-            var userName = t.cookie.get('xh_userName');
+            var userId = t.cookie.get('belonger_user_id') || t.cookie.get('xh_userId');
+            var userName = t.cookie.get('belonger_user_name') || t.cookie.get('xh_userName');
             var userNameLength = userName ? userName.length : 0;
             if (userId) {
                 $('.key_no_login').hide();
