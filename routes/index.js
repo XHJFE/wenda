@@ -9,11 +9,19 @@ const searchResultController = require('../controller/search_result');
 const questionsInfoController = require('../controller/questions_info');
 const personalAnswerController = require('../controller/personal_answer');
 const personalCenterController = require('../controller/personal_center');
+var config = require('../config.json');
 const { 
     getUser,
     noPassByMobile
 } = require('../lib/util');
 const _ = require('underscore');
+
+
+router.use((req, res, next) => {
+  const { type } = getUser(req.cookies);
+  res.locals.member = type == 1 ? config.belonger[config.env] : config.member[config.env];
+  next();
+})
 
 /**
  * 首页
@@ -271,6 +279,22 @@ router.get('/personal_answer', (req, res) => {
  * 个人中心
  */
 router.get('/personal_center', (req, res) => {
+    let {
+        belonger_user_id,
+        belonger_user_name,
+        xh_userId,
+        xh_userName
+    } = req.query;
+    // 跳转到个人中心有带经纪人id，则把经纪人信息存到cookies
+    if (belonger_user_id) {
+        res.cookie("belonger_user_id",belonger_user_id,{maxAge: 900000, httpOnly: true});
+        res.cookie("belonger_user_name",belonger_user_name,{maxAge: 900000, httpOnly: true});
+    // 跳转到个人中心有带客户id，则把客户信息存到cookies
+    } else if (xh_userId) {
+        res.cookie("xh_userId",xh_userId,{maxAge: 900000, httpOnly: true});
+        res.cookie("xh_userName",xh_userName,{maxAge: 900000, httpOnly: true});
+    }
+
     const { type } = getUser(req.cookies);
     personalCenterController(req).then(data => {
         let {

@@ -5,8 +5,15 @@
     "production": "http://console.xhj.com"
   },
   "base_server_url": {
-    "dev": "http://192.168.1.10:88",
+    "dev": "http://192.168.1.185:88",
+    "dev1": "http://192.168.1.10:88",
     "production": "http://console.xhj.com"
+  },
+  "member": {
+    "dev": "http://192.168.1.13:8181/member/qa/"
+  },
+  "belonger": {
+    "dev": "http://192.168.1.13:8181/member/qa/"
   }
 }
 
