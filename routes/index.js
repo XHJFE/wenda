@@ -289,12 +289,15 @@ router.get('/personal_center', (req, res) => {
     if (belonger_user_id) {
         res.cookie("belonger_user_id",belonger_user_id,{maxAge: 900000, httpOnly: true});
         res.cookie("belonger_user_name",belonger_user_name,{maxAge: 900000, httpOnly: true});
+        req.cookies.belonger_user_id = belonger_user_id
+        req.cookies.belonger_user_name = belonger_user_name
     // 跳转到个人中心有带客户id，则把客户信息存到cookies
     } else if (xh_userId) {
         res.cookie("xh_userId",xh_userId,{maxAge: 900000, httpOnly: true});
         res.cookie("xh_userName",xh_userName,{maxAge: 900000, httpOnly: true});
+        req.cookies.xh_userId = xh_userId
+        req.cookies.xh_userName = xh_userName
     }
-
     const { type } = getUser(req.cookies);
     personalCenterController(req).then(data => {
         let {

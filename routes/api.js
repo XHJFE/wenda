@@ -95,6 +95,13 @@ module.exports = (router) => {
             return
         }
         getUserInfo(userId, type).then(userInfo => {
+            if (!userInfo) {
+                res.send({
+                    status: 507,
+                    msg: '用户信息错误'
+                })
+                return
+            }
             userInfo = JSON.parse(userInfo)
             saveProblemAsk(req, {
                 ...req.body,
@@ -118,6 +125,13 @@ module.exports = (router) => {
             return
         }
         getUserInfo(userId, type).then(userInfo => {
+            if (!userInfo) {
+                res.send({
+                    status: 507,
+                    msg: '用户信息错误'
+                })
+                return
+            }
             userInfo = JSON.parse(userInfo)
             savePromblemAnswer({
                 ...req.body,

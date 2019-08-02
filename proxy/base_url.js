@@ -47,5 +47,6 @@ module.exports = {
     GET_PERSON_ANSWER: config.base_server_url[env] + `/web/problemAnswer/getProblemAskByAnswerPersonId/`,
     // 获取经纪人用户信息
     GET_BELONGER_BY_ID: config.proxy_server_url[env] + '/web/belonger/find/',
-    
+    // 获取城市信息
+    GET_CITY_INFO: config.proxy_server_url[env] + '/web/city/findById/'
 }

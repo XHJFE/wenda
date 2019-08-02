@@ -4,13 +4,14 @@ const {
 } = require('../proxy/index/index');
 const util = require('../lib/util');
 const { 
-    getCityAndMenus,
+    getCityAndMenus
  } = require('./base');
 
 module.exports = (req) => {
     // 公用导航栏和城市数据
-    const baseData = getCityAndMenus(req.cookies.siteid)
+    const baseData = getCityAndMenus(req.cookies.siteid);
     let keys = ['classData', 'newQuestion', 'hotQuestion', ...baseData.keys];
+
     // 获取分类数据
     let classData = getClassData();
     // 获取最热的数据

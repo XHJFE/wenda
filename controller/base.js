@@ -11,6 +11,8 @@ const getCityAndMenus = (id = cityId) => {
     let menus = proxyBase.getMenus(id);
     // 获取城市数据
     let city = proxyBase.getCity(id);
+    // let cityInfo = proxyBase.getCityInfo(id)
+    // , 'cityInfo', cityInfo
     return {
         keys: ["menus", "city"],
         values: [menus, city]
