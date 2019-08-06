@@ -101,7 +101,7 @@
                <div class="xiangqingpinglun_content">
 				   <% answerList.content.forEach(item => { %>
                    <div class="xiangqingpinglun_list">
-                       <a href="#" class="head">
+                       <a href="javascript:void(0);" class="head">
                            <span><img src="<%= item.headImg || '../images/wd_18.png' %>"/></span>
 						   <p class="name"><%= item.answerPersonName %>  
 							<% if (item.answerPersonlevel) { %>
@@ -326,7 +326,7 @@
 					var html = '';
 					$.each(content, function(index, item) {
 						html += '<div class="xiangqingpinglun_list">'+
-							'<a href="#" class="head">'+
+							'<a href="javascript:void(0);" class="head">'+
 								'<span><img src="../images/wd_18.png"/></span>'+
 								'<p class="name">'+item.answerPersonName+'</p>'+
 								'<p class="time">发布时间 '+item.createDate+'</p>'+

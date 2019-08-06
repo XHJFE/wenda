@@ -427,7 +427,15 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					window.location.href = '/wentiku'
+					var d = dialog({
+						content: '问题提交成功，请在个人中心查看',
+						quickClose: true
+					});
+					d.showModal();
+					setTimeout(function () {
+						d.close().remove();
+						window.location.href = '/wentiku'
+					}, 1000);
 				} else if (data.status == '506') {
 					login.login(function() {
 						var d = dialog({
