@@ -1,5 +1,5 @@
 {
-  "env": "dev",
+  "env": "production",
   "proxy_server_url": {
     "dev": "http://192.168.1.185:88", 
     "dev1": "http://console.xhj.com", 
@@ -11,10 +11,12 @@
     "production": "http://console.xhj.com"
   },
   "member": {
-    "dev": "http://192.168.1.13:8181/member/qa/"
+    "dev": "http://192.168.1.13:8181/member/qa/",
+    "production": "http://www.xhj.com/member/index"
   },
   "belonger": {
-    "dev": "http://192.168.1.13:8282/broker/qa/index"
+    "dev": "http://192.168.1.13:8282/broker/qa/index",
+    "production": ["http://belonger.xhj.com", "http://fz.belonger.xhj.com/"]
   }
 }
 
