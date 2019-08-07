@@ -18,7 +18,8 @@ const _ = require('underscore');
 
 
 router.use((req, res, next) => {
-  	const { type } = getUser(req.cookies);
+	const { type } = getUser(req.cookies);
+	res.locals.root = config.root[config.env];
   	// 如果当前是经纪人
   	if (type == 1) {
       	// 如果当前是长沙的经纪人 

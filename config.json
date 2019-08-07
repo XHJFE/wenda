@@ -1,5 +1,9 @@
 {
   "env": "production",
+  "root": {
+    "dev": "",
+    "production": "/wenda"
+  },
   "proxy_server_url": {
     "dev": "http://192.168.1.185:88", 
     "dev1": "http://console.xhj.com", 
