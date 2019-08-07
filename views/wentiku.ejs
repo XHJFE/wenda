@@ -63,7 +63,7 @@
             <% questionList.content.forEach((item, index) => { %>
             <div class="wd_content">
                <!------------------右边有图片的时候就在这里加个img_detail类名---->
-               <a href="/xq/<%= item.problemAskId %>.html" class="<%= item.img ? 'img_detail': ''  %>">
+               <a href="<%= root %>/xq/<%= item.problemAskId %>.html" class="<%= item.img ? 'img_detail': ''  %>">
                    <p class="title"><%= item.problemTitle %></p>
                    <p class="name"><%= item.questionerName %> 
                     <% if (item.askPersonlevel) { %>
@@ -71,7 +71,7 @@
                     <% } %>
                 </p>
                    <% if (item.newProblemAnswer) { %>
-                    <p class="content answer" data-url="/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
+                    <p class="content answer" data-url="<%= root %>/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
                     <% } %>
                    <p class="huida">
                        <span><%= item.answerNum %>条回答</span>

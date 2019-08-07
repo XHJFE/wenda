@@ -53,12 +53,12 @@
                 <p class="title"><%= item.typeName %></p>
                 <div class="fenlei_list">
                     <% item.labels.forEach(child => { %>
-                        <a href="/search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
+                        <a href="<%= root %>/search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
                     <% }) %>
                 </div>
             </div>
         <% }) %>
-        <a href="/juhe" target="_blank" class="more_type"><span>更多分类</span><img src="../images/wd_fl.png" /></a>
+        <a href="<%= root %>/juhe" target="_blank" class="more_type"><span>更多分类</span><img src="<%= root %>/images/wd_fl.png" /></a>
     </div>
 </div>
 
@@ -67,25 +67,25 @@
     <!--今日头条----->
     <% if (hotQuestion && hotQuestion.length > 0) { %>
     <div class="jinritoutiao_wrap">
-        <p class="title"><img src="../images/wd_tt.png"/></p>
+        <p class="title"><img src="<%= root %>/images/wd_tt.png"/></p>
         <div class="toutiao_content_wrap">
             <% if (hotQuestion[0]) { %>
-            <a href="/xq/<%= hotQuestion[0].problemAskId %>.html">
-                <img src="<%= hotQuestion[0].img || '../images/wd_banner.jpg' %>"/>
+            <a href="<%= root %>/xq/<%= hotQuestion[0].problemAskId %>.html">
+                <img src="<%= hotQuestion[0].img || '<%= root %>/images/wd_banner.jpg' %>"/>
                 <p class="title"><%= hotQuestion[0].problemTitle %></p>
             </a>
             <% } %>
             
             <div class="toutiao_wrap">
                 <% if (hotQuestion[1]) { %>
-                <a href="/xq/<%= hotQuestion[1].problemAskId %>.html" class="zhu_content">
+                <a href="<%= root %>/xq/<%= hotQuestion[1].problemAskId %>.html" class="zhu_content">
                     <p class="title"><%= hotQuestion[1].problemTitle %></p>
                     <p class="content" id="content"><%= hotQuestion[1].problemContent %></p>
                 </a>
                 <% } %>
                 <% if (hotQuestion.length > 2) { %>
                     <% for(var i = 2, len = hotQuestion.length; i < len; i++){ %>
-                    <a href="/xq/<%= hotQuestion[i].problemAskId %>.html" class="title"><i></i><span><%= hotQuestion[i].problemTitle %></span></a>
+                    <a href="<%= root %>/xq/<%= hotQuestion[i].problemAskId %>.html" class="title"><i></i><span><%= hotQuestion[i].problemTitle %></span></a>
                     <% } %>
                 <% } %>
             </div>
@@ -95,8 +95,8 @@
 
     <% if (newQuestion.content && newQuestion.content.length > 0) { %>
     <div class="more_wrap">
-        <span><img src="../images/wd_fjx.png"/></span>
-        <a href="/wentiku"><i>查看</i><span>更多>></span></a>
+        <span><img src="<%= root %>/images/wd_fjx.png"/></span>
+        <a href="<%= root %>/wentiku"><i>查看</i><span>更多>></span></a>
     </div>
     
     <!--最新问题----->
@@ -106,7 +106,7 @@
             <% newQuestion.content.forEach(item => { %>
                 <div class="wd_content">
                         <!-- class="<%= item.img ? 'img_detail': ''  %>" -->
-                    <a href="/xq/<%= item.problemAskId %>.html">
+                    <a href="<%= root %>/xq/<%= item.problemAskId %>.html">
                         <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %> 
@@ -115,7 +115,7 @@
                             <% } %>
                         </p>
                         <% if (item.newProblemAnswer) { %>
-                            <p data-url="/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>" class="content answer"><%= item.newProblemAnswer.answerContent %></p>
+                            <p data-url="<%= root %>/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>" class="content answer"><%= item.newProblemAnswer.answerContent %></p>
                         <% } %>
 
                         <!-- <% if (item.img) {%>

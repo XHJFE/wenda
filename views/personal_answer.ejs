@@ -67,7 +67,7 @@
 		<% } %>
 		<div class="content" id="content"><%- promblemInfo.problemContent %></div>
 		<div class="huida">
-			<a href="/xq/<%= promblemInfo.problemAskId %>.html"><span>查看全部回答</span></a>
+			<a href="<%= root %>/xq/<%= promblemInfo.problemAskId %>.html"><span>查看全部回答</span></a>
 			<i style="position:relative;top:4px;"><%= promblemInfo.questionerName %> <%= promblemInfo.createDate %>发布</i>
 			<!-- <p class="jbfx_wrap">
 				<a href="###"><img src="../images/wd_16.png"/><span>举报</span></a>
@@ -77,7 +77,7 @@
 		<% if (!isMine) { %>
 		<div class="xiangqingpinglun_list" style="border:none">
 			<a href="javascript:void(0);" class="head">
-				<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
+				<span><img src="<%= promblemAnswer.headImg || '<%= root %>/images/wd_18.png' %>"/></span>
 				<p class="name"><%= promblemAnswer.answerPersonName %> 
 					<% if(promblemAnswer.answerPersonlevel) {%>
 					<span class="jingjirenjibie"><%= promblemAnswer.answerPersonlevel %></span>
@@ -106,7 +106,7 @@
 		<% } else { %>
 			<div class="xiangqingpinglun_list" style="border:none">
 				<a href="javascript:void(0);" class="head">
-					<span><img src="<%= promblemAnswer.headImg || '../images/wd_18.png' %>"/></span>
+					<span><img src="<%= promblemAnswer.headImg || '<%= root %>/images/wd_18.png' %>"/></span>
 					<p class="name"><%= promblemAnswer.answerPersonName %>  
 						
 						<% if(promblemAnswer.answerPersonlevel) {%>
@@ -118,7 +118,7 @@
 				<div class="content" id="xiugai_content"><%- promblemAnswer.answerContent %></div>
 			</div>    
 			<div class="xiugai_wrap">
-				<span><img src="../images/wd_19.png" />修改回答</span>
+				<span><img src="<%= root %>/images/wd_19.png" />修改回答</span>
 			</div>
 			<div class="fuwenben" id="editor" style="display: none;"></div>
 			<div class="btns" style="display: none;">    
@@ -140,7 +140,7 @@
 				<p class="right_title"><span>相关</span>问题<i></i></p>
 				<div class="remenhuida_right_content">
 					<% alikeProbleAsk.forEach(item => { %>
-						<a href="/xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>               
+						<a href="<%= root %>/xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>               
 					<% }) %>
 				</div>
 			 <% } %>
@@ -164,15 +164,15 @@
 			var a = document.createElement("a");
 			span.innerHTML = content.substring(0, len);
 
-			a.innerHTML = content.length > len ? "展开全文<img src='../images/wd_11.png'/>" : "";
+			a.innerHTML = content.length > len ? "展开全文<img src='<%= root %>/images/wd_11.png'/>" : "";
 			a.href = "javascript:void(0)";
 
 			a.onclick = function () {
 				if (a.innerHTML.indexOf("展开全文") == 0) {
-					a.innerHTML = "&nbsp;&nbsp;收起全文<img src='../images/wd_12.png'/>";
+					a.innerHTML = "&nbsp;&nbsp;收起全文<img src='<%= root %>/images/wd_12.png'/>";
 					span.innerHTML = content;
 				} else {
-					a.innerHTML = "展开全文<img src='../images/wd_11.png'/>";
+					a.innerHTML = "展开全文<img src='<%= root %>/images/wd_11.png'/>";
 					span.innerHTML = content.substring(0, len);
 				}
 			}

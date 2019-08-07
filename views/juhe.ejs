@@ -50,7 +50,7 @@
             <p><%= item.typeName %></p>
             <div class="fenlei_right">
                 <% item.labels.forEach(child => { %>
-                <a href="/search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
+                <a href="<%= root %>/search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
                 <% }) %>
             </div>
         </div>
