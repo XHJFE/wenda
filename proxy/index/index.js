@@ -63,6 +63,7 @@ async function getNewQuestion(param = {}) {
         audit,
         isAll,
         problemTitle,
+        cityId,
         ...other
     } = param;
     problemTitle = problemTitle ? unescape(problemTitle) : '';
@@ -80,6 +81,7 @@ async function getNewQuestion(param = {}) {
             pageSize,
             audit,
             problemTitle,
+            cityId,
             ...other
         })
     })

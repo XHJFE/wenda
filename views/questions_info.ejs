@@ -278,8 +278,8 @@
 					d.showModal();
 					setTimeout(function () {
 						d.close().remove();
-						window.location.reload();
-					}, 1000);
+						window.location.href = "/personal_answer?answerId="+data.data+""
+					}, 2000);
 					
 				} else if (data.status == 506) {
 					login.login(function() {

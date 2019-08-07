@@ -251,7 +251,5 @@ module.exports = (router) => {
             res.send(data)
         })
     })
-
-
 }
 

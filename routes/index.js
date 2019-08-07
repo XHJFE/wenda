@@ -27,7 +27,7 @@ router.use((req, res, next) => {
  * 首页
  */
 router.get('/',  (req, res) => {
-    indexController(req).then(data => {
+    return indexController(req).then(data => {
         let {
             classData,
             newQuestion,
@@ -35,7 +35,7 @@ router.get('/',  (req, res) => {
             city,
             hotQuestion
         } = data;
-        res.render('index', {
+        return res.render('index', {
             classData: classData.data,
             newQuestion: newQuestion.data,
             hotQuestion: hotQuestion.data.content,
@@ -44,7 +44,7 @@ router.get('/',  (req, res) => {
             menus
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })
@@ -54,20 +54,20 @@ router.get('/',  (req, res) => {
  * 分类页面
  */
 router.get('/juhe',  (req, res) => {
-    juheController(req).then(data => {
+    return juheController(req).then(data => {
         let {
             classData,
             menus,
             city
         } = data
-        res.render('juhe', {
+        return res.render('juhe', {
             classData: classData.data,
             city: city.city,
             currentCityName: city.name,
             menus
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })
@@ -78,7 +78,7 @@ router.get('/juhe',  (req, res) => {
  */
 router.get('/wentiku',  (req, res) => {
     const {userId} = getUser(req.cookies);
-    wentikuController(req, {
+    return wentikuController(req, {
         ...req.query,
         userId
     }).then(data => {
@@ -106,7 +106,7 @@ router.get('/wentiku',  (req, res) => {
         })
         
             
-        res.render('wentiku', {
+        return res.render('wentiku', {
             questionList: newQuestion.data,
             classData: classData.data,
             menus,
@@ -118,7 +118,7 @@ router.get('/wentiku',  (req, res) => {
             isLogin: !!userId
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })
@@ -128,14 +128,14 @@ router.get('/wentiku',  (req, res) => {
  * 提问
  */
 router.get('/tiwen', (req, res) => {
-    tiwenController(req).then(data => {
+    return tiwenController(req).then(data => {
         let {
             menus,
             city,
             belongerList,
             allBabel
         } = data
-        res.render('tiwen', {
+        return res.render('tiwen', {
             city: city.city,
             currentCityName: city.name,
             menus,
@@ -143,7 +143,7 @@ router.get('/tiwen', (req, res) => {
             belongerList: belongerList.data
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })
@@ -153,7 +153,7 @@ router.get('/tiwen', (req, res) => {
  * 搜索结果
  */
 router.get('/search_result', (req, res) => {
-    searchResultController(req, req.query).then(data => {
+    return searchResultController(req, req.query).then(data => {
         let {
             menus,
             city,
@@ -163,7 +163,7 @@ router.get('/search_result', (req, res) => {
             classData
         } = data
         const {userId} = getUser(req.cookies);
-        res.render('search_result', {
+        return res.render('search_result', {
             city: city.city,
             currentCityName: city.name,
             menus,
@@ -177,7 +177,7 @@ router.get('/search_result', (req, res) => {
             isLogin: !!userId
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })
@@ -188,13 +188,16 @@ router.get('/search_result', (req, res) => {
  */
 router.get('/xq/:id', (req, res) => {
     if (!req.params.id) {
-        res.render('error', {
+        return res.render('error', {
             message: '缺少参数'
         })
-        return;
+    }
+    if (req.query.city) {
+        res.cookie("siteid", req.query.city,{maxAge: 900000});
+        req.cookies.siteid = req.query.city
     }
     id = req.params.id.replace('.html', '');
-    questionsInfoController(req, id).then(data => {
+    return questionsInfoController(req, id).then(data => {
         let {
             menus,
             city,
@@ -213,7 +216,7 @@ router.get('/xq/:id', (req, res) => {
             });
         }
         promblemInfo.data.isFocus = promblemInfo.data.isFocus || false;        
-        res.render('questions_info', {
+        return res.render('questions_info', {
             city: city.city,
             currentCityName: city.name,
             menus,
@@ -222,13 +225,9 @@ router.get('/xq/:id', (req, res) => {
             answerList: answerList.data,
             userName: noPassByMobile(userName),
             alikeProbleAsk: alikeProbleAsk.data
-        }).catch((e) => {
-            res.render('error', {
-                message: JSON.stringify(e.message)
-            })
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })
@@ -238,7 +237,11 @@ router.get('/xq/:id', (req, res) => {
  * 个人回答
  */
 router.get('/personal_answer', (req, res) => {
-    personalAnswerController(req, req.query).then(data => {
+    if (req.query.city) {
+        res.cookie("siteid", req.query.city,{maxAge: 900000});
+        req.cookies.siteid = req.query.city
+    }
+    return personalAnswerController(req, req.query).then(data => {
         let {
             menus,
             city,
@@ -257,7 +260,7 @@ router.get('/personal_answer', (req, res) => {
         }
         
         promblemAnswer.data.problemAnswer.problemAsk.isFocus = promblemAnswer.data.problemAnswer.problemAsk.isFocus || false;
-        res.render('personal_answer', {
+        return res.render('personal_answer', {
             city: city.city,
             currentCityName: city.name,
             menus,
@@ -269,7 +272,7 @@ router.get('/personal_answer', (req, res) => {
             isMine: req.query.entry === 'center'
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })
@@ -299,7 +302,7 @@ router.get('/personal_center', (req, res) => {
         req.cookies.xh_userName = xh_userName
     }
     const { type } = getUser(req.cookies);
-    personalCenterController(req).then(data => {
+    return personalCenterController(req).then(data => {
         let {
             stayAnswerQuestion,
             myQuestion,
@@ -320,7 +323,7 @@ router.get('/personal_center', (req, res) => {
             child.isFocus = child.isFocus || false
             return child
         })
-        res.render('personal_center', {
+        return res.render('personal_center', {
             stayAnswerQuestion: stayAnswerQuestion.data,
             myQuestion: myQuestion.data,
             personAnswer: personAnswer.data, 
@@ -329,7 +332,7 @@ router.get('/personal_center', (req, res) => {
             tab: req.query.tab
         })
     }).catch((e) => {
-        res.render('error', {
+        return res.render('error', {
             message: JSON.stringify(e.message)
         })
     })

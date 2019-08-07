@@ -4,14 +4,14 @@ const {
     getPromblemFocus,
     getPromblemFocusIds
 } = require('../proxy/index/index');
-const util = require('../lib/util');    
+const util = require('../lib/util');   
 
 module.exports = (req) => {
     const { userId } = util.getUser(req.cookies);
     // 获取待回答问题
     const stayAnswerQuestion = getNewQuestion({
         inviteeId: userId,
-        pageSize: 10,
+        pageSize: 10
     })
     // 我提出的问题
     const myQuestion = getNewQuestion({
