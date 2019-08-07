@@ -96,50 +96,11 @@
 
     </div>
 
-
-
-    <!--右侧---->
-    <!-- <div class="right_wrap">
-       <div class="wytw_content">
-        <a href="###"><img src="../images/wd_01.png"/><span>我提出的问题</span></a>
-        <a href="###"><img src="../images/wd_02.png"/><span>我回答的问题</span></a>
-        <a href="###"><img src="../images/wd_03.png"/><span>我的关注</span></a>
-       </div>
-
-
-        
-         <div class="remenhuida_right">
-             <p class="right_title"><span>热门</span>回答<i></i></p>
-             <div class="remenhuida_right_content">
-                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
-                 <a href="###"><span>美国热门税一般为多少？</span><i>120个回答</i></a>
-                 <a href="###"><span>美国热门税一般为多少？</span><i>1200个回答</i></a>                
-             </div>
-         </div>
-
-    </div> -->
-
 </div>
 
 
 
 <div class="back_model" style="display:none"></div>
-<!---回答弹窗--->
-<!-- 
-<div class="huida_model" style="display:none">
-    <span class="close_btn"><img src="../images/wd_10.png"/></span>
-    <p class="title">如果你无法简洁的表达你的想法，那只说明你还不够了解它。阿尔伯特·爱因斯坦</p>
-    <p class="bq"><span>买房</span><span>交易流程</span></p>
-    <p class="content" id="content">曼哈顿的房产平均价格，一房一厅我父亲2018年买了房子曼哈顿的房产平均价格，一房一厅我父亲2018年买了房子曼哈顿的房产平均价格，一房一厅我父亲2018年买了房子，写的是父亲的名字，已经给了首付，由于年龄问题，只能供15年。如果房子改成我的</p>
-    <p class="title_da">王大锤 答：</p>
-    <div class="fuwenben">
-        <img src="../images/w.jpg"/>
-    </div>
-    <div class="btns">
-        <p class="jiajing"><i>加精</i><span class="switch_btn"><i></i></span></p>
-        <a href="###" class="bcsh_btn"><span>保存审核</span></a>
-    </div>
-</div> -->
 
 
 <!---邀请作答弹窗--->
@@ -185,35 +146,6 @@
 		dialog = d
 		login = l
 		$(function () {
-			//加精
-			// $('.switch_btn').click(function () {
-			// 	$(this).toggleClass('active');
-			// })
-
-			// //回答内容收展
-			// var len = 65;     
-			// var ctn = document.getElementById("content"); 
-			// var content = ctn.innerHTML;                  
-			// var span = document.createElement("span");     
-			// var a = document.createElement("a");         
-			// span.innerHTML = content.substring(0, len); 
-
-			// a.innerHTML = content.length > len ? "展开全文<img src='../images/wd_11.png'/>" : "";
-			// a.href = "javascript:void(0)";
-
-			// a.onclick = function () {
-			// 	if (a.innerHTML.indexOf("展开全文") == 0) {
-			// 		a.innerHTML = "&nbsp;&nbsp;收起全文<img src='../images/wd_12.png'/>";
-			// 		span.innerHTML = content;
-			// 	} else {
-			// 		a.innerHTML = "展开全文<img src='../images/wd_11.png'/>";
-			// 		span.innerHTML = content.substring(0, len);
-			// 	}
-			// }     
-			// ctn.innerHTML = "";
-			// ctn.appendChild(span);
-			// ctn.appendChild(a);
-
 			//邀请作答
 			$('.yaoqingzuoda>p').click(function () {
 				$('.back_model,.yaoqingzuoda_model').show();
@@ -237,10 +169,6 @@
 			}).change(function(data) {
 				console.log(data)
 			})
-			//提交审核
-			// $('.yaoqingzuoda > a').click(function () {
-			// 	$('.back_model,.huida_model').show();
-			// })
 			initEditor(wangEditor)
 
 			// 删除选中的邀请人
@@ -436,7 +364,7 @@
 					d.showModal();
 					setTimeout(function () {
 						d.close().remove();
-						window.location.href = '/xq/'+data.data+'.html'
+						window.location.href = '<%= root %>/xq/'+data.data+'.html'
 					}, 2000);
 				} else if (data.status == '506') {
 					login.login(function() {

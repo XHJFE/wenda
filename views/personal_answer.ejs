@@ -69,10 +69,6 @@
 		<div class="huida">
 			<a href="<%= root %>/xq/<%= promblemInfo.problemAskId %>.html"><span>查看全部回答</span></a>
 			<i style="position:relative;top:4px;"><%= promblemInfo.questionerName %> <%= promblemInfo.createDate %>发布</i>
-			<!-- <p class="jbfx_wrap">
-				<a href="###"><img src="../images/wd_16.png"/><span>举报</span></a>
-				<a href="###"><img src="../images/wd_17.png"/><span>分享</span></a>
-			</p> -->
 		</div>
 		<% if (!isMine) { %>
 		<div class="xiangqingpinglun_list" style="border:none">
@@ -264,7 +260,7 @@
 			},
 			success: function(data) {
 				if (data.status == 1) {
-					window.location.href = "/personal_answer?answerId="+data.data+"&entry="+(GetRequest().entry || '')+""
+					window.location.href = "<%= root %>/personal_answer?answerId="+data.data+"&entry="+(GetRequest().entry || '')+""
 				} else if (data.status == 506) {
 					login.login(function() {
 						answerQuestion(id, answerId)
