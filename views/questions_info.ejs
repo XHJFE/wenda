@@ -18,8 +18,8 @@
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
 <meta name="keywords" content="<%= promblemInfo.problemTitle %>" />
 <meta name="description" content="象盒<%= currentCityName %>问答平台为您解答：<%= promblemInfo.problemTitle %>，房产有疑问，上象盒找答案！" />
-<link href="<%= root %>/css/list.css" rel="stylesheet" />
-<link href="<%= root %>/css/wendas.css" rel="stylesheet" />
+<link href="<%= root %>css/list.css" rel="stylesheet" />
+<link href="<%= root %>css/wendas.css" rel="stylesheet" />
 <!--[if lt IE 9]>
   <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
   <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
@@ -102,7 +102,7 @@
 				   <% answerList.content.forEach(item => { %>
                    <div class="xiangqingpinglun_list">
                        <a href="javascript:void(0);" class="head">
-                           <span><img src="<%= item.headImg || '<%= root %>/images/wd_18.png' %>"/></span>
+                           <span><img src="<%= item.headImg || root + 'images/wd_18.png' %>"/></span>
 						   <p class="name"><%= item.answerPersonName %>  
 							<% if (item.answerPersonlevel) { %>
 							<span class="jingjirenjibie"><%= item.answerPersonlevel %></span>
@@ -136,7 +136,7 @@
              <p class="right_title"><span>相关</span>问题<i></i></p>
              <div class="remenhuida_right_content">
 				 <% alikeProbleAsk.forEach(item => { %>
-				 <a href="<%= root %>/xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>              
+				 <a href="<%= root %>xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>              
 				 <% }) %>
 			 </div>
 			 <% } %>
@@ -168,15 +168,15 @@
 			var a = document.createElement("a");
 			span.innerHTML = content.substring(0, len);
 
-			a.innerHTML = content.length > len ? "展开全文<img src='<%= root %>/images/wd_11.png'/>" : "";
+			a.innerHTML = content.length > len ? "展开全文<img src='<%= root %>images/wd_11.png'/>" : "";
 			a.href = "javascript:void(0)";
 
 			a.onclick = function () {
 				if (a.innerHTML.indexOf("展开全文") ==0) {
-					a.innerHTML = "&nbsp;&nbsp;收起全文<img src='<%= root %>/images/wd_12.png'/>";
+					a.innerHTML = "&nbsp;&nbsp;收起全文<img src='<%= root %>images/wd_12.png'/>";
 					span.innerHTML = content;
 				} else {
-					a.innerHTML = "展开全文<img src='<%= root %>/images/wd_11.png'/>";
+					a.innerHTML = "展开全文<img src='<%= root %>images/wd_11.png'/>";
 					span.innerHTML = content.substring(0, len);
 				}
 			}
@@ -278,7 +278,7 @@
 					d.showModal();
 					setTimeout(function () {
 						d.close().remove();
-						window.location.href = "<%= root %>/personal_answer?answerId="+data.data+""
+						window.location.href = "<%= root %>personal_answer?answerId="+data.data+""
 					}, 2000);
 					
 				} else if (data.status == 506) {
@@ -327,7 +327,7 @@
 					$.each(content, function(index, item) {
 						html += '<div class="xiangqingpinglun_list">'+
 							'<a href="javascript:void(0);" class="head">'+
-								'<span><img src="<%= root %>/images/wd_18.png"/></span>'+
+								'<span><img src="<%= root %>images/wd_18.png"/></span>'+
 								'<p class="name">'+item.answerPersonName+'</p>'+
 								'<p class="time">发布时间 '+item.createDate+'</p>'+
 							'</a>'+

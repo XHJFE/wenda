@@ -18,8 +18,8 @@
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
 <meta name="keywords" content="<%= currentCityName %>房产问答，<%= currentCityName %>房地产知识，<%= currentCityName %>房产常见问题解读" />
 <meta name="description" content="象盒<%= currentCityName %>房产问答频道，提供买卖交易流程解答、房价趋势答疑、房产政策、贷款政策、过户流程、房产法律相关、租房、装修问题。有房产疑问，上象盒就够了！" />
-<link href="<%= root %>/css/list.css" rel="stylesheet" />
-<link href="<%= root %>/css/wendas.css" rel="stylesheet" />
+<link href="<%= root %>css/list.css" rel="stylesheet" />
+<link href="<%= root %>css/wendas.css" rel="stylesheet" />
 <!--[if lt IE 9]>
   <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
   <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
@@ -53,12 +53,12 @@
                 <p class="title"><%= item.typeName %></p>
                 <div class="fenlei_list">
                     <% item.labels.forEach(child => { %>
-                        <a href="<%= root %>/search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
+                        <a href="<%= root %>search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
                     <% }) %>
                 </div>
             </div>
         <% }) %>
-        <a href="<%= root %>/juhe" target="_blank" class="more_type"><span>更多分类</span><img src="<%= root %>/images/wd_fl.png" /></a>
+        <a href="<%= root %>juhe" target="_blank" class="more_type"><span>更多分类</span><img src="<%= root %>images/wd_fl.png" /></a>
     </div>
 </div>
 
@@ -67,25 +67,25 @@
     <!--今日头条----->
     <% if (hotQuestion && hotQuestion.length > 0) { %>
     <div class="jinritoutiao_wrap">
-        <p class="title"><img src="<%= root %>/images/wd_tt.png"/></p>
+        <p class="title"><img src="<%= root %>images/wd_tt.png"/></p>
         <div class="toutiao_content_wrap">
             <% if (hotQuestion[0]) { %>
-            <a href="<%= root %>/xq/<%= hotQuestion[0].problemAskId %>.html">
-                <img src="<%= hotQuestion[0].img || '<%= root %>/images/wd_banner.jpg' %>"/>
+            <a href="<%= root %>xq/<%= hotQuestion[0].problemAskId %>.html">
+                <img src="<%= hotQuestion[0].img || root+'images/wd_banner.jpg' %>"/>
                 <p class="title"><%= hotQuestion[0].problemTitle %></p>
             </a>
             <% } %>
             
             <div class="toutiao_wrap">
                 <% if (hotQuestion[1]) { %>
-                <a href="<%= root %>/xq/<%= hotQuestion[1].problemAskId %>.html" class="zhu_content">
+                <a href="<%= root %>xq/<%= hotQuestion[1].problemAskId %>.html" class="zhu_content">
                     <p class="title"><%= hotQuestion[1].problemTitle %></p>
                     <p class="content" id="content"><%= hotQuestion[1].problemContent %></p>
                 </a>
                 <% } %>
                 <% if (hotQuestion.length > 2) { %>
                     <% for(var i = 2, len = hotQuestion.length; i < len; i++){ %>
-                    <a href="<%= root %>/xq/<%= hotQuestion[i].problemAskId %>.html" class="title"><i></i><span><%= hotQuestion[i].problemTitle %></span></a>
+                    <a href="<%= root %>xq/<%= hotQuestion[i].problemAskId %>.html" class="title"><i></i><span><%= hotQuestion[i].problemTitle %></span></a>
                     <% } %>
                 <% } %>
             </div>
@@ -95,8 +95,8 @@
 
     <% if (newQuestion.content && newQuestion.content.length > 0) { %>
     <div class="more_wrap">
-        <span><img src="<%= root %>/images/wd_fjx.png"/></span>
-        <a href="<%= root %>/wentiku"><i>查看</i><span>更多>></span></a>
+        <span><img src="<%= root %>images/wd_fjx.png"/></span>
+        <a href="<%= root %>wentiku"><i>查看</i><span>更多>></span></a>
     </div>
     
     <!--最新问题----->
@@ -106,7 +106,7 @@
             <% newQuestion.content.forEach(item => { %>
                 <div class="wd_content">
                         <!-- class="<%= item.img ? 'img_detail': ''  %>" -->
-                    <a href="<%= root %>/xq/<%= item.problemAskId %>.html">
+                    <a href="<%= root %>xq/<%= item.problemAskId %>.html">
                         <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %> 
@@ -115,14 +115,8 @@
                             <% } %>
                         </p>
                         <% if (item.newProblemAnswer) { %>
-                            <p data-url="<%= root %>/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>" class="content answer"><%= item.newProblemAnswer.answerContent %></p>
+                            <p data-url="<%= root %>personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>" class="content answer"><%= item.newProblemAnswer.answerContent %></p>
                         <% } %>
-
-                        <!-- <% if (item.img) {%>
-                        <span class="img">
-                            <img src="<%= item.img %>"/>
-                        </span>
-                        <% } %> -->
                     </a>
                 </div>
             <% }) %>

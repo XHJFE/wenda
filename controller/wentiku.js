@@ -12,7 +12,7 @@ module.exports = (req, param) => {
     const baseData = getCityAndMenus(req.cookies.siteid);
     let keys = ['newQuestion', 'classData', 'hotQuestion', 'newAsk', 'promblemFocusIds', ...baseData.keys];
     const newQuestion = getNewQuestion({
-        param,   
+        ...param,   
         cityId: req.cookies.siteid || setting.cityId
     })
     // 当前用户已关注的问题id

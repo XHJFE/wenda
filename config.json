@@ -1,8 +1,8 @@
 {
-  "env": "production",
+  "env": "dev",
   "root": {
-    "dev": "",
-    "production": "/wenda"
+    "dev": "/",
+    "production": "/"
   },
   "proxy_server_url": {
     "dev": "http://192.168.1.185:88", 

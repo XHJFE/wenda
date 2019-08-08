@@ -18,8 +18,8 @@
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
 <meta name="keywords" content="<% if (bigLabel) { %><%= bigLabel %>，<%= labelName %><% } else { %><%= problemTitle %><% } %>问题解答" />
 <meta name="description" content="房产有疑问，上象盒找答案！象盒<%= currentCityName %>房产问答频道，提供买卖交易流程解答、房价趋势答疑、房产政策、贷款政策、过户流程、房产法律相关、租房、装修问题。" />
-<link href="<%= root %>/css/list.css" rel="stylesheet" />
-<link href="<%= root %>/css/wendas.css" rel="stylesheet" />
+<link href="<%= root %>css/list.css" rel="stylesheet" />
+<link href="<%= root %>css/wendas.css" rel="stylesheet" />
 <!--[if lt IE 9]>
   <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
   <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
@@ -58,7 +58,7 @@
         <p class="title">为您找到<%= question.totalElements %>条<% if(labelName){ %> 关于<%= labelName %>的<% } %>问答</p>
         <div class="zuixinwenti_content">
           <% question.content.forEach(item => { %>
-            <a href="<%= root %>/xq/<%= item.problemAskId %>.html" class="zuixinwenti_list">
+            <a href="<%= root %>xq/<%= item.problemAskId %>.html" class="zuixinwenti_list">
                 <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
                 <p class="title"><%= item.problemTitle %></p>
                 <p class="name"><%= item.questionerName %> 
@@ -67,7 +67,7 @@
                     <% } %>
                 </p>
                 <% if (item.newProblemAnswer) { %>
-                    <p class="content answer" data-url="<%= root %>/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
+                    <p class="content answer" data-url="<%= root %>personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
                 <% } %>
             </a>
             <% }) %>

@@ -18,8 +18,8 @@
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
 <meta name="keywords" content="<%= currentCityName %>房产问答大全，<%= currentCityName %>房地产问答" />
 <meta name="description" content="房产有疑问，上象盒找答案！象盒让天下没有难找的房！象盒<%= currentCityName %>房产问答频道，专业的房地产互动问答平台，<%= currentCityName %>房产问题在线咨询，千万用户在这里交流经验解答疑惑，内容涵盖新房、二手房、租房、装修、商业地产、贷款公积金等全方位的房地产知识。" />
-<link href="<%= root %>/css/list.css" rel="stylesheet" />
-<link href="<%= root %>/css/wendas.css" rel="stylesheet" />
+<link href="<%= root %>css/list.css" rel="stylesheet" />
+<link href="<%= root %>css/wendas.css" rel="stylesheet" />
 <!--[if lt IE 9]>
   <script src="http://libs.furong.gov.cn/html5/html5.js"></script>
   <script src="http://libs.furong.gov.cn/selectivizr/selectivizr.js"></script>
@@ -63,7 +63,7 @@
             <% questionList.content.forEach((item, index) => { %>
             <div class="wd_content">
                <!------------------右边有图片的时候就在这里加个img_detail类名---->
-               <a href="<%= root %>/xq/<%= item.problemAskId %>.html" class="<%= item.img ? 'img_detail': ''  %>">
+               <a href="<%= root %>xq/<%= item.problemAskId %>.html" class="<%= item.img ? 'img_detail': ''  %>">
                    <p class="title"><%= item.problemTitle %></p>
                    <p class="name"><%= item.questionerName %> 
                     <% if (item.askPersonlevel) { %>
@@ -71,7 +71,7 @@
                     <% } %>
                 </p>
                    <% if (item.newProblemAnswer) { %>
-                    <p class="content answer" data-url="<%= root %>/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
+                    <p class="content answer" data-url="<%= root %>personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>"><%= item.newProblemAnswer.answerContent %></p>
                     <% } %>
                    <p class="huida">
                        <span><%= item.answerNum %>条回答</span>

@@ -72,18 +72,19 @@ async function getNewQuestion(param = {}) {
     audit = audit || 1
     // 当前是查询所有问题
     isAll && (audit = '')
+    let parms = JSON.stringify({
+        page,
+        pageSize,
+        audit,
+        problemTitle,
+        cityId,
+        ...other
+    })
     let data = await proxy({
         uri: GET_PROBLEM_ASK_LIST,
         method: 'POST',
         headers,
-        body: JSON.stringify({
-            page,
-            pageSize,
-            audit,
-            problemTitle,
-            cityId,
-            ...other
-        })
+        body: parms
     })
     data = JSON.parse(data)
     data.data.content.map(item => {

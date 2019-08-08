@@ -1,13 +1,13 @@
 
 <div class="header">
     <div>
-        <span><a href="http://www.xhj.com/"><img src="<%= root %>/images/logo.png" class="img01 "/></a></span>
-        <span class="font14 place place01"><img src="<%= root %>/images/sy12.png"/><i id="cityName"><%= currentCityName %></i></span> 
+        <span><a href="http://www.xhj.com/"><img src="<%= root %>images/logo.png" class="img01 "/></a></span>
+        <span class="font14 place place01"><img src="<%= root %>images/sy12.png"/><i id="cityName"><%= currentCityName %></i></span> 
         <div class="narbar pull-right narbar01">
             <ul class="list-unstyled list-inline listxinfang">
                 <li class="tabs <%= active === 'home' ? 'active' : '' %>"><a href="<%= root %>">首页</a></li>
                 <li class="tabs <%= active === 'dynamic' ? 'active' : '' %>">
-                    <a href="<%= root %>/wentiku">问答动态</a>
+                    <a href="<%= root %>wentiku">问答动态</a>
                 </li>        
             </ul>
         </div>
@@ -20,7 +20,7 @@
                 id="searchInput"
                 maxlength="20"
                 onkeydown="keydownFn()"/>
-            <a href="javascript:void(0);" onclick="submitSearch()"><img src="<%= root %>/images/wd_06.png"/></a>
+            <a href="javascript:void(0);" onclick="submitSearch()"><img src="<%= root %>images/wd_06.png"/></a>
         </div>
         <% } %>
     </div>
@@ -113,6 +113,6 @@
         if (!search) {
             return
         }
-        window.location.href = '<%= root %>/search_result?problemTitle='+escape(search)+''
+        window.location.href = '<%= root %>search_result?problemTitle='+escape(search)+''
     }
 </script>

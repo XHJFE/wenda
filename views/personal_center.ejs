@@ -13,8 +13,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>我的问答</title>
-<link href="<%= root %>/css/header_bottom.css" rel="stylesheet" />
-<link href="<%= root %>/css/huida.css" rel="stylesheet" />
+<link href="<%= root %>css/header_bottom.css" rel="stylesheet" />
+<link href="<%= root %>css/huida.css" rel="stylesheet" />
 
 <!--[if lt IE 9]>
 	<script src="http://libs.furong.gov.cn/html5/html5.js"></script>
@@ -46,11 +46,11 @@
             <div class="myQuestion">
                 <% myQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="<%= root %>/xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
+                    <a href="<%= root %>xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
-                        <div class="content answer" data-url="<%= root %>/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center&&city=<%= item.cityId %>"><%= item.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="<%= root %>personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center&&city=<%= item.cityId %>"><%= item.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.answerNum %>条回答</span></p>
                     </a>
@@ -67,7 +67,7 @@
             <div class="personAnswer">
                 <% personAnswer.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="<%= root %>/personal_answer?answerId=<%= item.problemAnswerId %>&?city=<%= item.problemAsk.cityId %>" target="_blank">
+                    <a href="<%= root %>personal_answer?answerId=<%= item.problemAnswerId %>&?city=<%= item.problemAsk.cityId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
                         <div class="content"><%= item.answerText %></div>
@@ -88,11 +88,11 @@
             <div class="focusPromblems">
                 <% focusPromblems.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="<%= root %>/xq/<%= item.problemAsk.problemAskId %>.html?city=<%= item.problemAsk.cityId %>" target="_blank">
+                    <a href="<%= root %>xq/<%= item.problemAsk.problemAskId %>.html?city=<%= item.problemAsk.cityId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
                         <% if (item.problemAsk.newProblemAnswer) { %>
-                        <div class="content answer" data-url="<%= root %>/personal_answer?answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center&city=<%= item.problemAsk.cityId %>"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="<%= root %>personal_answer?answerId=<%= item.problemAsk.newProblemAnswer.problemAnswerId %>&entry=center&city=<%= item.problemAsk.cityId %>"><%= item.problemAsk.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.problemAsk.answerNum %>条回答</span></p>
                     </a>
@@ -111,11 +111,11 @@
             <div class="stayAnswer">
                 <% stayAnswerQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                        <a href="<%= root %>/xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
+                    <a href="<%= root %>xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
-                        <div class="content answer" data-url="<%= root %>/personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center&city=<%= item.cityId %>"><%= item.newProblemAnswer.answerContent %></div>
+                        <div class="content answer" data-url="<%= root %>personal_answer?answerId=<%= item.newProblemAnswer.problemAnswerId %>&entry=center&city=<%= item.cityId %>"><%= item.newProblemAnswer.answerContent %></div>
                         <% } %>
                         <p class="huida"><span><%= item.answerNum %>条回答</span></p>
                     </a>
@@ -186,7 +186,7 @@
                 var htmls = content.substring(0, 100);
                 if (length > 100) {
                     var i = $('<i class="sz"><i>').html('...展开');
-                    i.append('<img src="<%= root %>/images/zk_01.png">');
+                    i.append('<img src="<%= root %>images/zk_01.png">');
                     var htmls = content.substring(0, 100);                              
                     $(this).html('');
                     var span=$('<span></span>').html(htmls);
@@ -203,11 +203,11 @@
                     var a = $(this).html().indexOf("展开");               
                     if (a > 0) {
                         $(this).html('&nbsp;收起');
-                        $(this).append('<img src="<%= root %>/images/zk_02.png">');
+                        $(this).append('<img src="<%= root %>images/zk_02.png">');
                         $(this).parent('.contents').find('span').html(content);
                     } else {
                         $(this).html("... 展开");
-                        $(this).append('<img src="<%= root %>/images/zk_01.png">');
+                        $(this).append('<img src="<%= root %>images/zk_01.png">');
                         $(this).parent('.contents').find('span').html(htmls);
                     }
                 })
@@ -290,10 +290,12 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="javascript:void(0);" target="_blank">'+
+                '<a href="<%= root %>xq/'+item.problemAskId+'.html?city='+item.cityId+'" target="_blank">'+
                     '<p class="title">'+item.problemTitle+'</p>'+
                     '<p class="name">'+item.questionerName+'</p>'+
-                    (item.newProblemAnswer ? ('<p class="content">'+item.newProblemAnswer.answerContent+'</p>') : '')+
+                    (item.newProblemAnswer ? ('<div class="content answer" data-url="<%= root %>personal_answer?answerId='+item.newProblemAnswer.problemAnswerId+'&entry=center&&city='+item.cityId+'">'+item.newProblemAnswer.answerContent+'</div>') : '')+
+
+                    
                     '<p class="huida"><span>'+item.answerNum+'条回答</span></p>'+
                 '</a>'+
             '</div>';
@@ -312,10 +314,10 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="javascript:void(0);" target="_blank">'+
+                '<a href="<%= root %>xq/'+item.problemAsk.problemAskId+'.html?city='+ item.problemAsk.cityId +'" target="_blank">'+
                     '<p class="title">'+item.problemAsk.problemTitle+'</p>'+
                     '<p class="name">'+item.problemAsk.questionerName+'</p>'+
-                    (item.problemAsk.newProblemAnswer ? ('<p class="content">'+item.problemAsk.newProblemAnswer.answerContent+'</p>') : '')+
+                    (item.problemAsk.newProblemAnswer ? ('<div class="content answer" data-url="<%= root %>personal_answer?answerId='+item.problemAsk.newProblemAnswer.problemAnswerId+'&entry=center&city='+item.problemAsk.cityId+'">'+item.problemAsk.newProblemAnswer.answerContent+'</div>') : '')+
                     '<p class="huida"><span>'+item.problemAsk.answerNum+'条回答</span></p>'+
                 '</a>'+
                 '<span class="guanzhu">取消关注</span>'+
@@ -335,10 +337,10 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="javascript:void(0);" target="_blank">'+
+                '<a href="<%= root %>personal_answer?answerId='+item.problemAnswerId+'&?city='+item.problemAsk.cityId+'" target="_blank">'+
                     '<p class="title">'+item.problemAsk.problemTitle+'</p>'+
                     '<p class="name">'+item.problemAsk.questionerName+'</p>'+
-                    (item.problemAsk.newProblemAnswer ? ('<p class="content">'+item.problemAsk.newProblemAnswer.answerContent+'</p>') : '')+
+                    (item.problemAsk.newProblemAnswer ? ('<div class="content">'+item.problemAsk.newProblemAnswer.answerContent+'</div>') : '')+
                     '<p class="huida"><span>'+item.problemAsk.answerNum+'条回答</span></p>'+
                 '</a>'+
             '</div>';
@@ -357,10 +359,11 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="javascript:void(0);" target="_blank">'+
+                '<a href="<%= root %>xq/'+item.problemAskId+'.html?city='+item.cityId+'" target="_blank">'+
                     '<p class="title">'+item.problemTitle+'</p>'+
                     '<p class="name">'+item.questionerName+'</p>'+
-                    (item.newProblemAnswer ? ('<p class="content">'+item.newProblemAnswer.answerContent+'</p>') : '')+
+                    (item.newProblemAnswer ? (
+                    '<div class="content answer" data-url="<%= root %>personal_answer?answerId='+item.newProblemAnswer.problemAnswerId+'&entry=center&city='+item.cityId+'">'+item.newProblemAnswer.answerContent+'</div>') : '')+
                     '<p class="huida"><span>'+item.answerNum+'条回答</span></p>'+
                 '</a>'+
             '</div>';
