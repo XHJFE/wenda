@@ -150,7 +150,7 @@
         event.stopPropagation();
         event.preventDefault()
         $.ajax({
-            url: '/addFocus/',
+            url: '<%= root %>addFocus/',
             type: 'POST',
             data: {
                 askId: askId,
@@ -190,7 +190,7 @@
         event.stopPropagation();
         event.preventDefault()
         $.ajax({
-            url: '/removeFocus/',
+            url: '<%= root %>removeFocus/',
             type: 'POST',
             data: {
                 askId: askId,

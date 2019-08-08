@@ -19,12 +19,13 @@ const {
 } = require('../lib/util');
 const _ = require('underscore');
 const config = require('../config.json')
-
+const PATH = config.root[config.env]
 module.exports = (router) => {
+    console.log(PATH)
     /**
      * 关注
      */
-    router.post(config.root[config.env]+'addFocus', function (req, res) {
+    router.post(PATH+'addFocus', function (req, res) {
         const user = getUser(req.cookies);
         if (!user.userId) {
             res.send({
@@ -60,7 +61,7 @@ module.exports = (router) => {
     /**
      * 取消关注
      */
-    router.post(config.root[config.env]+'removeFocus', function (req, res) {
+    router.post(PATH+'removeFocus', function (req, res) {
         const { userId } = getUser(req.cookies);
         if (!userId) {
             res.send({
@@ -77,7 +78,7 @@ module.exports = (router) => {
     /**
      * 获取经纪人列表
      */
-    router.post(config.root[config.env]+'getBelongerList', function(req, res) {
+    router.post(PATH+'getBelongerList', function(req, res) {
         getBelongerByPage(req.body.page, req.body.name).then(data => {
             res.send(JSON.parse(data))
         })
@@ -86,7 +87,7 @@ module.exports = (router) => {
     /**
      * 提问
      */
-    router.post(config.root[config.env]+'askQuestions', function(req, res) {
+    router.post(PATH+'askQuestions', function(req, res) {
         const { userId, type } = getUser(req.cookies);
         if (!userId) {
             res.send({
@@ -116,7 +117,7 @@ module.exports = (router) => {
     /**
      * 回答问题
      */
-    router.post(config.root[config.env]+'savePromblemAnswer', (req, res) => {
+    router.post(PATH+'savePromblemAnswer', (req, res) => {
         const { userId, userName, type } = getUser(req.cookies);
         if (!userId) {
             res.send({
@@ -149,7 +150,7 @@ module.exports = (router) => {
     /**
      * 获取问题列表
      */
-    router.get(config.root[config.env]+'answerList', (req, res) => {
+    router.get(PATH+'answerList', (req, res) => {
         getPromblemAnswerList(req.query).then(data => {
             data = JSON.parse(data)
             data.data.content = _.map(data.data.content, item => {
@@ -163,7 +164,7 @@ module.exports = (router) => {
     /**
      * 获取我的问题
      */
-    router.get(config.root[config.env]+'myQuestion', (req, res) => {
+    router.get(PATH+'myQuestion', (req, res) => {
         const { userId } = getUser(req.cookies);
         getNewQuestion({
             isAll: true,
@@ -186,7 +187,7 @@ module.exports = (router) => {
     /**
      * 获取我的关注
      */
-    router.get(config.root[config.env]+'myFocus', (req, res) => {
+    router.get(PATH+'myFocus', (req, res) => {
         const { userId } = getUser(req.cookies);
         if (!userId) {
             res.send({
@@ -213,7 +214,7 @@ module.exports = (router) => {
     /**
      * 获取我的回答
      */
-    router.get(config.root[config.env]+'myAnswer', (req, res) => {
+    router.get(PATH+'myAnswer', (req, res) => {
         
         const { userId } = getUser(req.cookies);
         getPersonAnswer({
@@ -235,7 +236,7 @@ module.exports = (router) => {
     /**
      * 待回答
      */
-    router.get(config.root[config.env]+'stayAnswer', (req, res) => {
+    router.get(PATH+'stayAnswer', (req, res) => {
         getNewQuestion({
             inviteeId: req.cookies.belonger_user_id,
             pageSize: 10,

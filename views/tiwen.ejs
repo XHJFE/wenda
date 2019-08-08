@@ -239,7 +239,7 @@
 	 */
 	function getBelongerList(name) {
 		$.ajax({
-			url: '/getBelongerList',
+			url: '<%= root %>getBelongerList',
 			data: {
 				page: page,
 				name: name
@@ -347,7 +347,7 @@
 			tags.push($(item).val()) 
 		})
 		$.ajax({
-			url: '/askQuestions',
+			url: '<%= root %>askQuestions',
 			method: 'POST',
 			data: {
 				problemTitle: title,

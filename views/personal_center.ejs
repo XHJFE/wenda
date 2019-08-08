@@ -58,7 +58,7 @@
                 <% }) %>
             </div>
             <% if (!myQuestion.last) { %>
-            <a href="javascript:void(0);" onclick="loadMore('/myQuestion', 'myQuestion', loadMyQuestion)" class="more_btn myQuestion_btn"><span>加载更多>></span></a>
+            <a href="javascript:void(0);" onclick="loadMore('<%= root %>myQuestion', 'myQuestion', loadMyQuestion)" class="more_btn myQuestion_btn"><span>加载更多>></span></a>
             <% } %>
        </div>
 
@@ -77,7 +77,7 @@
                 <% }) %>
             </div>
             <% if (!personAnswer.last) { %>
-            <a href="javascript:void(0);" onclick="loadMore('/myAnswer', 'personAnswer', loadPersonAnswer)" class="more_btn personAnswer_btn"><span>加载更多>></span></a>
+            <a href="javascript:void(0);" onclick="loadMore('<%= root %>myAnswer', 'personAnswer', loadPersonAnswer)" class="more_btn personAnswer_btn"><span>加载更多>></span></a>
             <% } %>
        </div>
 
@@ -101,7 +101,7 @@
                 <% }) %>
             </div>
            <% if (!focusPromblems.last) { %>
-            <a href="javascript:void(0);" onclick="loadMore('/myFocus', 'focusPromblems', loadFocusPromblems)" class="more_btn focusPromblems_btn"><span>加载更多>></span></a>
+            <a href="javascript:void(0);" onclick="loadMore('<%= root %>myFocus', 'focusPromblems', loadFocusPromblems)" class="more_btn focusPromblems_btn"><span>加载更多>></span></a>
             <% } %>
        </div>
 
@@ -129,7 +129,7 @@
                 <% }) %>
             </div>
            <% if (!stayAnswerQuestion.last) { %>
-           <a href="javascript:void(0);" onclick="loadMore('/stayAnswer', 'stayAnswer', loadStayAnswer)" class="more_btn stayAnswer_btn"><span>加载更多>></span></a>
+           <a href="javascript:void(0);" onclick="loadMore('<%= root %>stayAnswer', 'stayAnswer', loadStayAnswer)" class="more_btn stayAnswer_btn"><span>加载更多>></span></a>
            <% } %>
        </div>
        <% } %>
@@ -377,7 +377,7 @@
      */
      function removeFocus(askId) {
         $.ajax({
-            url: '/removeFocus',
+            url: '<%= root %>removeFocus',
             method: 'POST',
             data: {
                 askId: askId
@@ -406,7 +406,7 @@
      */
      function addFocus(askId, userId) {
         $.ajax({
-            url: '/addFocus',
+            url: '<%= root %>addFocus',
             method: 'POST',
             data: {
                 askId: askId,

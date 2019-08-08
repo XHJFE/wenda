@@ -250,7 +250,7 @@
 			return
 		}
 		$.ajax({
-			url: '/savePromblemAnswer',
+			url: '<%= root %>savePromblemAnswer',
 			method: 'POST',
 			data: {
 				problemAskId: id,
@@ -303,7 +303,7 @@
 	 */
 	 function addFocus(id, userId) {
 		$.ajax({
-			url: '/addFocus',
+			url: '<%= root %>addFocus',
 			method: 'POST',
 			data: {
 				askId: id,
@@ -337,7 +337,7 @@
 	 */
 	function removeFocus(id) {
 		$.ajax({
-			url: '/removeFocus',
+			url: '<%= root %>removeFocus',
 			method: 'POST',
 			data: {
 				askId: id
