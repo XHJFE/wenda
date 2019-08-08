@@ -12,7 +12,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title><%= currentCityName %>房产问答_<%= currentCityName %>二手房,租房,新房,买房,卖房,家居,装修问题</title>
+<title><%= currentCityName %>房产问答_<%= currentCityName %>二手房,租房,新房,买房,卖房,家居,装修问题提交-<%= currentCityName %>象盒问答</title>
 <meta http-equiv="Cache-Control" content="no-transform"/>
 <meta http-equiv="Cache-Control" content="no-siteapp"/>
 <meta name="keywords" content="<%= currentCityName %>房产问答,<%= currentCityName %>二手房问题,<%= currentCityName %>租房问题,<%= currentCityName %>新房问题,<%= currentCityName %>买房问题,<%= currentCityName %>卖房问题,<%= currentCityName %>象盒问答" />
@@ -364,7 +364,7 @@
 					d.showModal();
 					setTimeout(function () {
 						d.close().remove();
-						window.location.href = '<%= root %>xq/'+data.data+'.html'
+						window.location.href = '<%= root %>xq/'+data.data+'.html/'
 					}, 2000);
 				} else if (data.status == '506') {
 					login.login(function() {
