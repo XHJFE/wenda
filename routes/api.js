@@ -19,9 +19,8 @@ const {
 } = require('../lib/util');
 const _ = require('underscore');
 const config = require('../config.json')
-const PATH = config.root[config.env]
+const PATH = '/'
 module.exports = (router) => {
-    console.log(PATH)
     /**
      * 关注
      */
