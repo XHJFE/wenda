@@ -45,11 +45,11 @@
 <div class="wrap wrap_two">
     <p class="title">问答分类</p>
     <div class="wendafenlei_list_wrap">
-        <% classData.forEach(item => { %>
+        <% classData && classData.forEach(item => { %>
         <div class="wendafenlei_list active">
             <p><%= item.typeName %></p>
             <div class="fenlei_right">
-                <% item.labels.forEach(child => { %>
+                <% item.labels && item.labels.forEach(child => { %>
                 <a href="<%= root %>search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
                 <% }) %>
             </div>

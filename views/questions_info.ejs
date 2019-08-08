@@ -59,7 +59,7 @@
     <div class="left_wrap  wddtxq_wrap">
             <p class="title"><%= promblemInfo.problemTitle %></p>
             <p class="bq">
-				<% promblemInfo.listLabelName.forEach(item => { %>
+				<% promblemInfo.listLabelName && promblemInfo.listLabelName.forEach(item => { %>
 				<span><%= item %></span>
 				<% }) %>
 			</p>
@@ -99,7 +99,7 @@
            <div class="xiangqingpinglun_wrap">
                <p class="title"><%= answerList.totalElements %>条回答<i></i></p>
                <div class="xiangqingpinglun_content">
-				   <% answerList.content.forEach(item => { %>
+				   <% answerList.content && answerList.content.forEach(item => { %>
                    <div class="xiangqingpinglun_list">
                        <a href="javascript:void(0);" class="head">
                            <span><img src="<%= item.headImg || root + 'images/wd_18.png' %>"/></span>

@@ -60,7 +60,7 @@
         
         <% if (questionList) { %>
         <div class="wenda_content">
-            <% questionList.content.forEach((item, index) => { %>
+            <% questionList.content && questionList.content.forEach((item, index) => { %>
             <div class="wd_content">
                <!------------------右边有图片的时候就在这里加个img_detail类名---->
                <a href="<%= root %>xq/<%= item.problemAskId %>.html/" class="<%= item.img ? 'img_detail': ''  %>">

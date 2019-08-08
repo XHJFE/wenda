@@ -57,9 +57,9 @@
     <div class="wddt_content_wrap">
         <p class="title">为您找到<%= question.totalElements %>条<% if(labelName){ %> 关于<%= labelName %>的<% } %>问答</p>
         <div class="zuixinwenti_content">
-          <% question.content.forEach(item => { %>
+          <% question.content &&question.content.forEach(item => { %>
             <a href="<%= root %>xq/<%= item.problemAskId %>.html/" class="zuixinwenti_list">
-                <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
+                <p class="liulanliang"><span><%= item.viewNum %></span><i>浏览量</i></p>
                 <p class="title"><%= item.problemTitle %></p>
                 <p class="name"><%= item.questionerName %> 
                     <% if (item.askPersonlevel) { %>

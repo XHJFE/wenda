@@ -44,7 +44,7 @@
         <!---我的问题--->
         <div class="wenda_content">
             <div class="myQuestion">
-                <% myQuestion.content.forEach(item => { %>
+                <% myQuestion && myQuestion.content && myQuestion.content.forEach(item => { %>
                 <div class="wd_content">
                     <a href="<%= root %>xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
@@ -65,7 +65,7 @@
        <!---我的回答--->
        <div class="wenda_content" style="display:none">
             <div class="personAnswer">
-                <% personAnswer.content.forEach(item => { %>
+                <% personAnswer.content && personAnswer.content.forEach(item => { %>
                 <div class="wd_content">
                     <a href="<%= root %>personal_answer?answerId=<%= item.problemAnswerId %>&?city=<%= item.problemAsk.cityId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
@@ -86,7 +86,7 @@
        <!---我的关注--->
        <div class="wenda_content" style="display:none">
             <div class="focusPromblems">
-                <% focusPromblems.content.forEach(item => { %>
+                <% focusPromblems.content && focusPromblems.content.forEach(item => { %>
                 <div class="wd_content">
                     <a href="<%= root %>xq/<%= item.problemAsk.problemAskId %>.html?city=<%= item.problemAsk.cityId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
@@ -109,7 +109,7 @@
         <!---待回答--->
        <div class="wenda_content" style="display:none">
             <div class="stayAnswer">
-                <% stayAnswerQuestion.content.forEach(item => { %>
+                <% stayAnswerQuestion.content && stayAnswerQuestion.content.forEach(item => { %>
                 <div class="wd_content">
                     <a href="<%= root %>xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>

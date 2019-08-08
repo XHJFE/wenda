@@ -20,7 +20,7 @@
         <div class="fenlei_list_wrap">
             <p class="title"><%= item.typeName %></p>
             <div class="fenlei_list">
-                <% item.labels.forEach(child => { %>
+                <% item.labels && item.labels.forEach(child => { %>
                 <a href="<%= root %>search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
                 <% }) %>
             </div>

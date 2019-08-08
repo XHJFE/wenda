@@ -2,7 +2,7 @@
 <div class="breadcrumb">
     <div class="breadcrumb_content">
         <a href="<%= root %>"><img src="<%= root %>images/wd_07.png"/><span>象盒</span></a>&nbsp;>
-        <% list.forEach((item, index) => { %>
+        <% list && list.forEach((item, index) => { %>
             <% if (index > 0 ) { %>
                 &nbsp;>
             <% } %>

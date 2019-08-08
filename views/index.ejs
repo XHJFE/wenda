@@ -48,11 +48,11 @@
     <div class="fendafenlei_wrap">
     <p class="title">问答分类</p>
     <div class="fenlei_type">
-        <% classData.forEach(item => {%>
+        <% classData && classData.forEach(item => {%>
             <div class="fenlei_list_wrap" >
                 <p class="title"><%= item.typeName %></p>
                 <div class="fenlei_list">
-                    <% item.labels.forEach(child => { %>
+                    <% item.labels && item.labels.forEach(child => { %>
                         <a href="<%= root %>search_result?labelId=<%= child.labelId %>&bigLabel=<%= item.typeName %>&label=<%= child.labelName %>"><span><%= child.labelName %></span></a>
                     <% }) %>
                 </div>
@@ -107,7 +107,7 @@
                 <div class="wd_content">
                         <!-- class="<%= item.img ? 'img_detail': ''  %>" -->
                     <a href="<%= root %>xq/<%= item.problemAskId %>.html/">
-                        <p class="liulanliang"><span><%= item.answerNum %></span><i>浏览量</i></p>
+                        <p class="liulanliang"><span><%= item.viewNum %></span><i>浏览量</i></p>
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %> 
                             <% if (item.askPersonlevel) { %>
