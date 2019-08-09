@@ -2,7 +2,7 @@
   "env": "production",
   "root": {
     "dev": "/",
-    "production": "/"
+    "production": "/wenda/"
   },
   "proxy_server_url": {
     "dev": "http://console.xhj.com", 
