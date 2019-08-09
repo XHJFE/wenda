@@ -67,7 +67,7 @@
 		<% } %>
 		<div class="content" id="content"><%- promblemInfo.problemContent %></div>
 		<div class="huida">
-			<a href="<%= root %>xq/<%= promblemInfo.problemAskId %>.html/"><span>查看全部回答</span></a>
+			<a href="<%= root %>xq/<%= promblemInfo.problemAskId %>.html"><span>查看全部回答</span></a>
 			<i style="position:relative;top:4px;"><%= promblemInfo.questionerName %> <%= promblemInfo.createDate %>发布</i>
 		</div>
 		<% if (!isMine) { %>
@@ -136,7 +136,7 @@
 				<p class="right_title"><span>相关</span>问题<i></i></p>
 				<div class="remenhuida_right_content">
 					<% alikeProbleAsk.forEach(item => { %>
-						<a href="<%= root %>xq/<%= item.problemAskId %>.html/"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>               
+						<a href="<%= root %>xq/<%= item.problemAskId %>.html"><span><%= item.problemTitle %></span><i><%= item.answerNum %>个回答</i></a>               
 					<% }) %>
 				</div>
 			 <% } %>
