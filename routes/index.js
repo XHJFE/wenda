@@ -195,6 +195,53 @@ router.get('/search_result', (req, res) => {
     })
 })
 
+router.get('/xq_*.html', (req, res) => {
+    let id = req.params[0];
+    if (!id) {
+        return res.render('error', {
+            message: '缺少参数'
+        })
+    }
+    if (req.query.city) {
+        res.cookie("siteid", req.query.city,{maxAge: 900000});
+        req.cookies.siteid = req.query.city
+    }
+    return questionsInfoController(req, id).then(data => {
+        let {
+            menus,
+            city,
+            promblemInfo,
+            answerList,
+            promblemFocusIds,
+            alikeProbleAsk
+        } = data;
+        const focusIds = promblemFocusIds.data;
+        const { userId, userName } = getUser(req.cookies);
+        if (focusIds && focusIds.length > 0) {
+            _.each(focusIds, item => {
+                if (item.problemAskId === promblemInfo.data.problemAskId) {
+                    promblemInfo.data.isFocus = true;
+                }
+            });
+        }
+        promblemInfo.data.isFocus = promblemInfo.data.isFocus || false;        
+        return res.render('questions_info', {
+            city: city.city,
+            currentCityName: city.name,
+            menus,
+            promblemInfo: promblemInfo.data,
+            isLogin: !!userId,
+            answerList: answerList.data,
+            userName: noPassByMobile(userName),
+            alikeProbleAsk: alikeProbleAsk.data
+        })
+    }).catch((e) => {
+        return res.render('error', {
+            message: JSON.stringify(e.message)
+        })
+    })
+})
+
 /**
  * 问答详情
  */

@@ -364,7 +364,7 @@
 					d.showModal();
 					setTimeout(function () {
 						d.close().remove();
-						window.location.href = '<%= root %>xq/'+data.data+'.html'
+						window.location.href = '<%= root %>xq_'+data.data+'.html'
 					}, 2000);
 				} else if (data.status == '506') {
 					login.login(function() {

@@ -46,7 +46,7 @@
             <div class="myQuestion">
                 <% myQuestion && myQuestion.content && myQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="<%= root %>xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
+                    <a href="<%= root %>xq_<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
@@ -88,7 +88,7 @@
             <div class="focusPromblems">
                 <% focusPromblems.content && focusPromblems.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="<%= root %>xq/<%= item.problemAsk.problemAskId %>.html?city=<%= item.problemAsk.cityId %>" target="_blank">
+                    <a href="<%= root %>xq_<%= item.problemAsk.problemAskId %>.html?city=<%= item.problemAsk.cityId %>" target="_blank">
                         <p class="title"><%= item.problemAsk.problemTitle %></p>
                         <p class="name"><%= item.problemAsk.questionerName %></p>
                         <% if (item.problemAsk.newProblemAnswer) { %>
@@ -111,7 +111,7 @@
             <div class="stayAnswer">
                 <% stayAnswerQuestion.content && stayAnswerQuestion.content.forEach(item => { %>
                 <div class="wd_content">
-                    <a href="<%= root %>xq/<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
+                    <a href="<%= root %>xq_<%= item.problemAskId %>.html?city=<%= item.cityId %>" target="_blank">
                         <p class="title"><%= item.problemTitle %></p>
                         <p class="name"><%= item.questionerName %></p>
                         <% if (item.newProblemAnswer) { %>
@@ -290,7 +290,7 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="<%= root %>xq/'+item.problemAskId+'.html?city='+item.cityId+'" target="_blank">'+
+                '<a href="<%= root %>xq_'+item.problemAskId+'.html?city='+item.cityId+'" target="_blank">'+
                     '<p class="title">'+item.problemTitle+'</p>'+
                     '<p class="name">'+item.questionerName+'</p>'+
                     (item.newProblemAnswer ? ('<div class="content answer" data-url="<%= root %>personal_answer?answerId='+item.newProblemAnswer.problemAnswerId+'&entry=center&&city='+item.cityId+'">'+item.newProblemAnswer.answerContent+'</div>') : '')+
@@ -314,7 +314,7 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="<%= root %>xq/'+item.problemAsk.problemAskId+'.html?city='+ item.problemAsk.cityId +'" target="_blank">'+
+                '<a href="<%= root %>xq_'+item.problemAsk.problemAskId+'.html?city='+ item.problemAsk.cityId +'" target="_blank">'+
                     '<p class="title">'+item.problemAsk.problemTitle+'</p>'+
                     '<p class="name">'+item.problemAsk.questionerName+'</p>'+
                     (item.problemAsk.newProblemAnswer ? ('<div class="content answer" data-url="<%= root %>personal_answer?answerId='+item.problemAsk.newProblemAnswer.problemAnswerId+'&entry=center&city='+item.problemAsk.cityId+'">'+item.problemAsk.newProblemAnswer.answerContent+'</div>') : '')+
@@ -359,7 +359,7 @@
         for (var i = 0, len = content.length; i < len; i++) {
             var item = content[i];
             html += '<div class="wd_content">'+
-                '<a href="<%= root %>xq/'+item.problemAskId+'.html?city='+item.cityId+'" target="_blank">'+
+                '<a href="<%= root %>xq_'+item.problemAskId+'.html?city='+item.cityId+'" target="_blank">'+
                     '<p class="title">'+item.problemTitle+'</p>'+
                     '<p class="name">'+item.questionerName+'</p>'+
                     (item.newProblemAnswer ? (
