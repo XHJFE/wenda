@@ -276,6 +276,8 @@ async function getPromblemAnswer(id) {
 
     data.data.problemAnswer.answerPersonName = noPassByMobile(data.data.problemAnswer.answerPersonName)
     data.data.problemAnswer.createDate = timestampToTime(data.data.problemAnswer.createDate);
+    data.data.problemAnswer.problemAsk.createDate = timestampToTime(data.data.problemAnswer.problemAsk.createDate);
+    data.data.problemAnswer.problemAsk.questionerName = noPassByMobile(data.data.problemAnswer.problemAsk.questionerName);
     return JSON.stringify(data);
 }
 

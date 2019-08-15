@@ -72,6 +72,8 @@
             $(document.body).on("click", ".xh_login_out", function(a) {
                 t.cookie.del("xh_userId", "/", "xhj.com");
                 t.cookie.del("xh_userName", "/", "xhj.com");
+                t.cookie.del("belonger_user_id", "/", "xhj.com");
+                t.cookie.del("belonger_user_name", "/", "xhj.com");
                 t.cookie.del("xh_userType", "/", "xhj.com");
                 window.location.href = "http://www.xhj.com/logout/";
             })
