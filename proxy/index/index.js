@@ -87,6 +87,7 @@ async function getNewQuestion(param = {}) {
         body: parms
     })
     data = JSON.parse(data)
+    var bool = false
     data.data.content.map(item => {
         let imgs = getStringInImg(item.problemContent)
         item.problemContent = delHtmlTag(item.problemContent)

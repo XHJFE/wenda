@@ -209,12 +209,25 @@
 				'underline',
 				'undo',
 				'image', 
+				'link'
 			],
 			zIndex: 50,
 			uploadImgServer: window.location.protocol+'//bms.xhj.com/file/upload',
 			uploadImgShowBase64: true,
 			showLinkImg: false,
 			uploadFileName: 'file',
+			pasteFilterStyle: true,
+			pasteTextHandle: function (content) {
+				// content 即粘贴过来的内容（html 或 纯文本），可进行自定义处理然后返回
+				if (content == '' && !content) return ''
+				var str = content
+				str = str.replace(/<xml>[\s\S]*?<\/xml>/ig, '')
+				str = str.replace(/<style>[\s\S]*?<\/style>/ig, '')
+				str = str.replace(/<\/?[^>]*>/g, '')
+				str = str.replace(/[ | ]*\n/g, '\n')
+				str = str.replace(/&nbsp;/ig, '')
+				return str
+			},
 			uploadImgHooks: {
 				fail: function(xhr, editor, result) {
 					editor.uploadImg.insertLinkImg(result)
