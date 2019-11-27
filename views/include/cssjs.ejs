@@ -12,12 +12,19 @@
 </script>
         
 <script>
+    // var url = 'http://192.168.1.82:3000/modules/'
+    var url = 'https://xhjcom.oss-cn-shenzhen.aliyuncs.com/dist/'
     require.config({
-        // baseUrl: 'http://192.168.1.82:3000/modules/',
-        baseUrl: 'https://cdnsz.xhj.com/dist/',
+        baseUrl: url,
         urlArgs: function () {
             return '?t=' + Math.ceil(Date.now() / 1800000)
         },
         waitSeconds: 15
     });
+    require(['shence'], function(shence) {
+        shence.init({
+            platForm: 'PC',
+            platFormDesc: '问答'
+        })
+    })
 </script>
