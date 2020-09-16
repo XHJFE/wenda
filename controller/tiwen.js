@@ -4,11 +4,15 @@ const {
 } = require('../proxy/index/index');
 const util = require('../lib/util');
 const { getCityAndMenus } = require('./base');
+const {
+    getCityId
+} = require('../proxy/base/header');
 
 
-module.exports = (req, param) => {
+module.exports = async (req, param) => {
+    const cityId = await getCityId(req.hostname);
     // 公用导航栏和城市数据
-    const baseData = getCityAndMenus(req.cookies.siteid);
+    const baseData = getCityAndMenus(cityId, req.hostname);
     const keys = ['belongerList', 'allBabel', ...baseData.keys];
     const belongerList = getBelongerByPage(param)
     const allBabel = findLabelAll()

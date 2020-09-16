@@ -2,15 +2,20 @@ const {
     getClassData,
     getNewQuestion
 } = require('../proxy/index/index');
+const {
+    getCityId
+} = require('../proxy/base/header');
 const util = require('../lib/util');
 const { 
-    getCityAndMenus
+    getCityAndMenus,
  } = require('./base');
  const setting = require('../settings.json');
 
-module.exports = (req) => {
-    // 公用导航栏和城市数据
-    const baseData = getCityAndMenus(req.cookies.siteid);
+module.exports = async (req) => {
+    // 公用导航栏和城市数据    
+    const cityId = await getCityId(req.hostname);
+    const baseData = getCityAndMenus(cityId);
+    
     let keys = ['classData', 'newQuestion', 'hotQuestion', ...baseData.keys];
 
     // 获取分类数据
@@ -19,11 +24,11 @@ module.exports = (req) => {
     let hotQuestion = getNewQuestion({
         pageSize: 5,
         sortViewNum: 'desc',
-        cityId: req.cookies.siteid || setting.cityId
+        cityId: cityId || setting.cityId
     })
     // 获取最新问答数据
     let newQuestion = getNewQuestion({
-        cityId: req.cookies.siteid || setting.cityId
+        cityId: cityId || setting.cityId
     });
     return new Promise((resolve, reject) => {
         Promise.all([classData, newQuestion, hotQuestion, ...baseData.values]).then(result => {

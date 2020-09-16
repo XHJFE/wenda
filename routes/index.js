@@ -15,15 +15,20 @@ const {
     noPassByMobile
 } = require('../lib/util');
 const _ = require('underscore');
+const {
+    getCityId
+} = require('../proxy/base/header');
 
 
-router.use((req, res, next) => {
-	const { type } = getUser(req.cookies);
+router.use(async (req, res, next) => {
+    const { type } = getUser(req.cookies);
+    
+    const cityId = await getCityId(req.hostname);
 	res.locals.root = config.root[config.env];
   	// 如果当前是经纪人
   	if (type == 1) {
       	// 如果当前是长沙的经纪人 
-        if (req.cookies.siteid || req.cookies.siteid == 1) {
+        if (cityId || cityId == 1) {
 			res.locals.member = config.belonger[config.env][0]
 		// 其他城市的经纪人
         } else {
@@ -202,10 +207,7 @@ router.get('/xq_*.html', (req, res) => {
             message: '缺少参数'
         })
     }
-    if (req.query.city) {
-        res.cookie("siteid", req.query.city,{maxAge: 900000});
-        req.cookies.siteid = req.query.city
-    }
+
     return questionsInfoController(req, id).then(data => {
         let {
             menus,
@@ -251,10 +253,6 @@ router.get('/xq/:id', (req, res) => {
             message: '缺少参数'
         })
     }
-    if (req.query.city) {
-        res.cookie("siteid", req.query.city,{maxAge: 900000});
-        req.cookies.siteid = req.query.city
-    }
     id = req.params.id.replace('.html', '');
     return questionsInfoController(req, id).then(data => {
         let {
@@ -296,10 +294,6 @@ router.get('/xq/:id', (req, res) => {
  * 个人回答
  */
 router.get('/personal_answer', (req, res) => {
-    if (req.query.city) {
-        res.cookie("siteid", req.query.city,{maxAge: 900000});
-        req.cookies.siteid = req.query.city
-    }
     return personalAnswerController(req, req.query).then(data => {
         let {
             menus,

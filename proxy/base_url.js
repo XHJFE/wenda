@@ -9,6 +9,8 @@ module.exports = {
     },
     // 城市列表
     CITY: config.proxy_server_url[env] + '/web/city/findSort/',
+    // 城市id
+    CITY_ID: config.proxy_server_url[env] + '/api/city/getCityByDomain/',
     // 分类
     FIND_TYPE_ALL: config.base_server_url[env] + '/web/problemType/findTypeAll/',
     // 获取最新问题

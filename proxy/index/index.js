@@ -22,6 +22,9 @@ const {
     delHtmlTag,
     timestampToTime
 } = require('../../lib/util');
+const {
+    getCityId
+} = require('../base/header');
 const settings = require('../../settings.json');
 const headers = {
     "Content-Type": "application/json;charset=UTF-8",
@@ -154,6 +157,8 @@ async function saveProblemAsk(req, param) {
         ...other
     } = param
     const { userId, userName } = getUser(req.cookies);
+
+    const cityId = await getCityId(req.hostname);
     return await proxy({
         uri: SAVE_PROBLEM_ASK,
         method: 'POST',
@@ -163,7 +168,7 @@ async function saveProblemAsk(req, param) {
             listProblemInvited: JSON.parse(listProblemInvited),
             questionerId: userId,
             questionerName: userName,
-            cityId: req.cookies.siteid || settings.cityId
+            cityId: cityId || settings.cityId
         })
     });
 }

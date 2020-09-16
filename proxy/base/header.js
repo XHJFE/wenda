@@ -3,7 +3,8 @@ const {
     SITE_CHALLEL,
     CITY,
     GET_CITY_INFO,
-    HEADER
+    HEADER,
+    CITY_ID,
 } = require('../base_url');
 
 /**
@@ -18,6 +19,25 @@ async function getMenus(cityId) {
         headers: HEADER
     });
     return data;
+}
+
+/**
+ * 获取城市id
+ * @param url 链接地址
+ * @returns {Promise.<*>}
+ */
+async function getCityId(url) {
+    let data = await proxy({
+        uri: CITY_ID + '?domain='+url,
+        method: 'GET',
+        headers: HEADER
+    });
+    data = JSON.parse(data);
+    if (data.status == 200 && data.obj) {
+        return data.obj.cityId || '1';
+    } else {
+        return '1';
+    }
 }
 
 /**
@@ -69,5 +89,6 @@ async function getCityInfo(cityId) {
 module.exports = {
     getMenus,
     getCity,
-    getCityInfo
+    getCityInfo,
+    getCityId,
 };

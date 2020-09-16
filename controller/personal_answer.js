@@ -6,10 +6,15 @@ const {
 } = require('../proxy/index/index');
 const util = require('../lib/util');
 const { getCityAndMenus } = require('./base');
+const {
+    getCityId
+} = require('../proxy/base/header');
 module.exports = async (req, param) => {
     const { userId } = util.getUser(req.cookies);
     // 公用导航栏和城市数据
-    const baseData = getCityAndMenus(req.cookies.siteid);
+
+    const cityId = await getCityId(req.hostname);
+    const baseData = getCityAndMenus(cityId);
     return new Promise((resolve, reject) => {
         // 问题回答
         getPromblemAnswer(param.answerId).then(data => {

@@ -7,12 +7,17 @@ const {
 } = require('../proxy/index/index');
 const util = require('../lib/util');
 const { getCityAndMenus } = require('./base');
+const {
+    getCityId
+} = require('../proxy/base/header');
 
 
-module.exports = (req, id) => {
+module.exports = async (req, id) => {
     const { userId } = util.getUser(req.cookies);
+
+    const cityId = await getCityId(req.hostname);
     // 公用导航栏和城市数据
-    const baseData = getCityAndMenus(req.cookies.siteid);
+    const baseData = getCityAndMenus(cityId);
     const promblemInfo = getPromblemInfo(id)
     // 当前用户已关注的问题id
     const promblemFocusIds = getPromblemFocusIds(userId)
